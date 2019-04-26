@@ -22,5 +22,7 @@ namespace Slutprojekt
                 .UseStartup<Startup>();
 
         // Runas kommentar
+
+        //Malins kommentar
     }
 }
