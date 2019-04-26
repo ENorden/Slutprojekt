@@ -20,10 +20,5 @@ namespace Slutprojekt
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
-
-        // Elsas kommentar
-        // Runas kommentar
-
-        //Malins kommentar
     }
 }
