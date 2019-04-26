@@ -21,6 +21,6 @@ namespace Slutprojekt
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
 
-        // Runas kommentar
+        // Elsas kommentar
     }
 }
