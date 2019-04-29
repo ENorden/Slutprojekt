@@ -39,9 +39,10 @@ namespace Slutprojekt.Models
                 lockoutOnFailure: false);
         }
 
-        public string GetAllCategories()
+        public VeganRecipeVM GetAllCategories()
         {
-            throw new NotImplementedException();
+            VeganRecipeVM test = new VeganRecipeVM();
+            return test;
         }
     }
 }
