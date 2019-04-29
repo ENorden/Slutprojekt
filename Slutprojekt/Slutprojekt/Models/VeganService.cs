@@ -11,20 +11,16 @@ namespace Slutprojekt.Models
     {
         UserManager<VeganIdentityUser> userManager;
         SignInManager<VeganIdentityUser> signInManager;
+        readonly VeganIdentityContext context;
 
         public VeganService(
             UserManager<VeganIdentityUser> userManager,
-            SignInManager<VeganIdentityUser> signInManager
+            SignInManager<VeganIdentityUser> signInManager,
+            VeganIdentityContext context
             )
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-        }
-
-        readonly VeganIdentityContext context;
-
-        public VeganService(VeganIdentityContext context)
-        {
             this.context = context;
         }
 
