@@ -12,11 +12,11 @@ namespace Slutprojekt.Controllers
     [Authorize]
     public class VeganController : Controller
     {
-        VeganService veganService;
+        VeganService service;
 
-        public VeganController(VeganService veganService)
+        public VeganController(VeganService service)
         {
-            this.veganService = veganService;
+            this.service = service;
         }
 
         [HttpGet]
@@ -36,7 +36,7 @@ namespace Slutprojekt.Controllers
                 return View(viewModel);
 
             // Try to register user
-            var result = await veganService.TryRegisterAsync(viewModel);
+            var result = await service.TryRegisterAsync(viewModel);
             if (!result.Succeeded)
             {
                 // Show error
@@ -66,7 +66,7 @@ namespace Slutprojekt.Controllers
                 return View(viewModel);
 
             // Check if credentials is valid (and set auth cookie)
-            var result = await veganService.TryLoginAsync(viewModel);
+            var result = await service.TryLoginAsync(viewModel);
             if (!result.Succeeded)
             {
                 // Show error
@@ -92,7 +92,7 @@ namespace Slutprojekt.Controllers
         [Route("followers")]
         public IActionResult Followers(VeganFollowersVM followersVM)
         {
-            return View(followersVM);
+            return View(service.);
         }
     }
 }
