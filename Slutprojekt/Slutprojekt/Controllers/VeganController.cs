@@ -85,14 +85,14 @@ namespace Slutprojekt.Controllers
         [Route("recipes")]
         public IActionResult Recipes()
         {
-            return View();
+            return View(service.GetAllCategories());
         }
 
         [HttpGet]
         [Route("followers")]
         public IActionResult Followers(VeganFollowersVM followersVM)
         {
-            return View(service.);
+            return View();
         }
     }
 }
