@@ -10,11 +10,11 @@ using Slutprojekt.Models.ViewModels;
 namespace Slutprojekt.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class VeganController : Controller
     {
         VeganService accountService;
 
-        public HomeController(VeganService accountService)
+        public VeganController(VeganService accountService)
         {
             this.accountService = accountService;
         }
@@ -79,6 +79,13 @@ namespace Slutprojekt.Controllers
                 return RedirectToAction(nameof(Register));
             else
                 return Redirect(viewModel.ReturnUrl);
+        }
+
+        [HttpGet]
+        [Route("recipes")]
+        public IActionResult Recipes()
+        {
+            return View();
         }
     }
 }
