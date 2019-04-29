@@ -92,7 +92,7 @@ namespace Slutprojekt.Controllers
         [Route("followers")]
         public IActionResult Followers(VeganFollowersVM followersVM)
         {
-            return View(service.);
+            return View(service.GetAllFollowers(followersVM));
         }
     }
 }

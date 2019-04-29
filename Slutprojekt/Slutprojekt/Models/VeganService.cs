@@ -38,5 +38,10 @@ namespace Slutprojekt.Models
                 isPersistent: false,
                 lockoutOnFailure: false);
         }
+
+        internal string GetAllFollowers(VeganFollowersVM followersVM)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
