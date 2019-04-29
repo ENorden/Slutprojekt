@@ -5,17 +5,14 @@ using System.Threading.Tasks;
 
 namespace Slutprojekt.Models.ViewModels
 {
-    public class VeganRecipesVM
+    public class VeganRecipeVM
     {
         public List<string> Categories { get; set; } = new List<string>
         {
             "Breakfast",
             "Lunch",
-            "Dinner",
+            "Dinner"
         };
-
-        public string Pasta { get; set; }
-
 
     }
 }

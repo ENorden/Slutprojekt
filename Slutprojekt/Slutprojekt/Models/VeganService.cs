@@ -46,6 +46,8 @@ namespace Slutprojekt.Models
                 lockoutOnFailure: false);
         }
 
+        
+
         internal VeganFollowersVM[] GetAllFollowers(VeganFollowersVM followersVM)
         {
             return context.Users
@@ -58,9 +60,10 @@ namespace Slutprojekt.Models
                 .ToArray();
         }
 
-        public string GetAllCategories()
-        {
-            throw new NotImplementedException();
+            public VeganRecipeVM GetAllCategories()
+            {
+            VeganRecipeVM test = new VeganRecipeVM();
+            return test;
         }
     }
 }
