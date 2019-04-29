@@ -39,11 +39,7 @@ namespace Slutprojekt.Models
                 lockoutOnFailure: false);
         }
 
-        public VeganRecipeVM GetAllCategories()
-        internal string GetAllFollowers(VeganFollowersVM followersVM)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public string GetAllCategories()
         {
