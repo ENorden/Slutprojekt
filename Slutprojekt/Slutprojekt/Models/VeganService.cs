@@ -48,5 +48,9 @@ namespace Slutprojekt.Models
         {
             throw new NotImplementedException();
         }
+        public string DisplayProfile(VeganProfileVM profile)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
