@@ -40,6 +40,12 @@ namespace Slutprojekt.Models
         }
 
         public VeganRecipeVM GetAllCategories()
+        internal string GetAllFollowers(VeganFollowersVM followersVM)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetAllCategories()
         {
             VeganRecipeVM test = new VeganRecipeVM();
             return test;
