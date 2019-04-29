@@ -21,6 +21,13 @@ namespace Slutprojekt.Models
             this.signInManager = signInManager;
         }
 
+        readonly VeganIdentityContext context;
+
+        public VeganService(VeganIdentityContext context)
+        {
+            this.context = context;
+        }
+
         public async Task<IdentityResult> TryRegisterAsync(VeganRegisterVM viewModel)
         {
             // Try to create a new user
@@ -39,9 +46,16 @@ namespace Slutprojekt.Models
                 lockoutOnFailure: false);
         }
 
-        internal string GetAllFollowers(VeganFollowersVM followersVM)
+        internal VeganFollowersVM[] GetAllFollowers(VeganFollowersVM followersVM)
         {
-            throw new NotImplementedException();
+            return context.Users
+                .Select(person => new VeganFollowersVM
+                {
+                    Username = person.UserName,
+                    FirstName = person.FirstName,
+                    Posts = { "Hello", "My recipe" }
+                })
+                .ToArray();
         }
 
         public string GetAllCategories()
