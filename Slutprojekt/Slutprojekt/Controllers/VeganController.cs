@@ -85,7 +85,7 @@ namespace Slutprojekt.Controllers
         [Route("recipes")]
         public IActionResult Recipes()
         {
-            return View();
+            return View(service.GetAllCategories());
         }
 
         [HttpGet]
