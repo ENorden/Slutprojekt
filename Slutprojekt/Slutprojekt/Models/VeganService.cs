@@ -38,5 +38,10 @@ namespace Slutprojekt.Models
                 isPersistent: false,
                 lockoutOnFailure: false);
         }
+
+        public string GetAllCategories()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

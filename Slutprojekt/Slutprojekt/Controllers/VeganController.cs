@@ -12,15 +12,14 @@ namespace Slutprojekt.Controllers
     [Authorize]
     public class VeganController : Controller
     {
-        VeganService accountService;
+        VeganService service;
 
-        public VeganController(VeganService accountService)
+        public VeganController(VeganService service)
         {
-            this.accountService = accountService;
+            this.service = service;
         }
 
         [HttpGet]
-        [Route("")]
         [Route("register")]
         [AllowAnonymous]
         public IActionResult Register(string returnUrl)
@@ -37,7 +36,7 @@ namespace Slutprojekt.Controllers
                 return View(viewModel);
 
             // Try to register user
-            var result = await accountService.TryRegisterAsync(viewModel);
+            var result = await service.TryRegisterAsync(viewModel);
             if (!result.Succeeded)
             {
                 // Show error
@@ -50,6 +49,7 @@ namespace Slutprojekt.Controllers
         }
 
         [HttpGet]
+        [Route("")]
         [Route("login")]
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
@@ -66,7 +66,7 @@ namespace Slutprojekt.Controllers
                 return View(viewModel);
 
             // Check if credentials is valid (and set auth cookie)
-            var result = await accountService.TryLoginAsync(viewModel);
+            var result = await service.TryLoginAsync(viewModel);
             if (!result.Succeeded)
             {
                 // Show error
@@ -84,6 +84,13 @@ namespace Slutprojekt.Controllers
         [HttpGet]
         [Route("recipes")]
         public IActionResult Recipes()
+        {
+            return View(service.GetAllCategories());
+        }
+
+        [HttpGet]
+        [Route("followers")]
+        public IActionResult Followers(VeganFollowersVM followersVM)
         {
             return View();
         }

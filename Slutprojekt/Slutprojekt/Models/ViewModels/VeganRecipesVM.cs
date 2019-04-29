@@ -12,7 +12,10 @@ namespace Slutprojekt.Models.ViewModels
             "Breakfast",
             "Lunch",
             "Dinner",
-        };      
+        };
+
+        public string Pasta { get; set; }
+
 
     }
 }
