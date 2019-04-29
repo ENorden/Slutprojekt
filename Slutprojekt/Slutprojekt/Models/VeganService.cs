@@ -46,8 +46,6 @@ namespace Slutprojekt.Models
                 lockoutOnFailure: false);
         }
 
-        
-
         internal VeganFollowersVM[] GetAllFollowers(VeganFollowersVM followersVM)
         {
             return context.Users
