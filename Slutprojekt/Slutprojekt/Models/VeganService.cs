@@ -25,7 +25,7 @@ namespace Slutprojekt.Models
         {
             // Try to create a new user
             return await userManager.CreateAsync(
-                new VeganIdentityUser { UserName = viewModel.Username },
+                new VeganIdentityUser { UserName = viewModel.Username, Email = viewModel.Email, FirstName =viewModel.FirstName, LastName = viewModel.LastName },
                 viewModel.Password);
         }
 
