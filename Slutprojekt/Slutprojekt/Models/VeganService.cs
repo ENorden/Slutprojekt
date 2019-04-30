@@ -42,6 +42,11 @@ namespace Slutprojekt.Models
                 lockoutOnFailure: false);
         }
 
+        public async Task TryLogOutAsync()
+        {
+            await signInManager.SignOutAsync();
+        }
+
         internal VeganFollowersVM[] GetAllFollowers(VeganFollowersVM followersVM)
         {
             return context.Users

@@ -88,6 +88,14 @@ namespace Slutprojekt.Controllers
         }
 
         [HttpGet]
+        [Route("logout")]
+        public IActionResult LogOut()
+        {
+            service.TryLogOutAsync();
+            return RedirectToAction(nameof(Register));
+        }
+
+        [HttpGet]
         [Route("recipes")]
         public IActionResult Recipes()
         {
