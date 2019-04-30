@@ -70,7 +70,6 @@
     <Build Include="dbo\Tables\AspNetUserRoles.sql" />
     <Build Include="dbo\Tables\AspNetUserTokens.sql" />
     <Build Include="rec.sql" />
-    <Build Include="dbo\Tables\User.sql" />
     <Build Include="Recipe.sql" />
     <Build Include="Ingredient.sql" />
     <Build Include="StepByStep.sql" />
