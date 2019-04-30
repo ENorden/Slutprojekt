@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Slutprojekt.Models;
+using Slutprojekt.Models.Entities;
 
 namespace Slutprojekt
 {
@@ -28,7 +29,10 @@ namespace Slutprojekt
             // Read the connection string (from appsettings.json during dev)
             var connString = configuration.GetConnectionString("DefaultConnection");
 
+            services.AddDbContext<SlutprojektContext>(o => o.UseSqlServer(connString));
             services.AddDbContext<VeganIdentityContext>(o => o.UseSqlServer(connString));
+
+
             services.AddIdentity<VeganIdentityUser, IdentityRole>(o =>
             {
                 o.Password.RequireNonAlphanumeric = false;
