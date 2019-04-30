@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Slutprojekt.Models.Entities;
 using Slutprojekt.Models.ViewModels;
 using System;
@@ -29,7 +30,7 @@ namespace Slutprojekt.Models
         {
             // Try to create a new user
             return await userManager.CreateAsync(
-                new VeganIdentityUser { UserName = viewModel.Username, Email = viewModel.Email, FirstName =viewModel.FirstName, LastName = viewModel.LastName },
+                new VeganIdentityUser { UserName = viewModel.Username, Email = viewModel.Email, FirstName = viewModel.FirstName, LastName = viewModel.LastName },
                 viewModel.Password);
         }
 
@@ -74,8 +75,17 @@ namespace Slutprojekt.Models
 
         public VeganProfileAddVM GetAddedRecipe()
         {
-            VeganProfileAddVM profile = new VeganProfileAddVM();
-            profile.Categories = new List<string> { "Lunch", "Dinner", "Dessert"};
+            
+            VeganProfileAddVM profile = new VeganProfileAddVM()
+            {
+                MeasurementItems = new SelectListItem[]
+                {
+                    new SelectListItem { Value = "1", Text = "Dl" },
+                    new SelectListItem { Value = "2", Text = "Msk", Selected = true },
+                    new SelectListItem { Value = "3", Text = "Tsk" },
+                }
+            };
+            profile.Categories = new List<string> { "Lunch", "Dinner", "Dessert" };
             return profile;
         }
     }

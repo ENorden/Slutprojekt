@@ -20,5 +20,10 @@
     <input asp-for="Img" />
     <span asp-validation-for="Img"></span>
 
-    <input type="submit" value="Register" />
+    <label asp-for="MeasurementItems"></label>
+    <select asp-for="SelectedMeasurementValue"
+            asp-items="Model.MeasurementItems"></select>
+    <span asp-validation-for="SelectedMeasurementValue"></span>
+
+    <input type="submit" value="Save Recipe" />
 </form>
