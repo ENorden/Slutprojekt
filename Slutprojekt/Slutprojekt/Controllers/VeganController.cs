@@ -19,10 +19,11 @@ namespace Slutprojekt.Controllers
             this.service = service;
         }
 
-        [Route("profile")]
-        public IActionResult Profile(VeganProfileVM profile)
+        [Route("profile/add")]
+        [AllowAnonymous]
+        public IActionResult AddRecipe()//VeganProfileVM profile
         {
-            return View(service.DisplayProfile(profile));
+            return View();//service.DisplayProfile(profile)
         }
 
         [HttpGet]
