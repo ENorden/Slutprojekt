@@ -61,14 +61,23 @@ namespace Slutprojekt.Models
             //    .ToArray();
         }
 
-            public VeganRecipeVM GetAllCategories()
-            {
+        public VeganRecipeVM GetAllCategories()
+        {
             VeganRecipeVM test = new VeganRecipeVM();
             return test;
         }
+
         public string DisplayProfile(VeganProfileVM profile)
         {
             throw new NotImplementedException();
+        }
+
+        public VeganProfileAddVM GetAddedRecipe()
+        {
+            VeganProfileAddVM profile = new VeganProfileAddVM();
+            profile.Categories = new List<string> { "Lunch", "Dinner", "Dessert"};
+            profile.Img = "image";
+            return profile;
         }
     }
 }

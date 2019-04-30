@@ -1,24 +1,20 @@
-﻿@model VeganProfileVM
+﻿@model VeganProfileAddVM
 @{ ViewBag.Title = "Profile";}
 @{
     Layout = "_ProfileLayout";
 }
 
-<h1>Add</h1>
+<h1>Add recipe</h1>
 
-@section scripts
-{
-    <script>
-        $("#btnGetPosts").click(function () {
-            var id = $('#input').val();
-            $.ajax({
-                url: "/MovieDesc/" + id,
-                type: "GET",
-                success: function (result) {
-                    $("#divResult").html(result);
-                }
-            });
+<form asp-controller="Home" asp-action="AddRecipe">
+    <label asp-for="Name"></label>
+    <input asp-for="Name" />
+    <span asp-validation-for="Name"></span>
 
-        });
-    </script>
-}
+    @foreach (string item in Model.Categories)
+    {
+        <input type="checkbox" value="@item">@item<br />
+    }
+
+    <input type="submit" value="Register" />
+</form>
