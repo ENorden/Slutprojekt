@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Slutprojekt.Models;
 using Slutprojekt.Models.ViewModels;
@@ -14,17 +16,44 @@ namespace Slutprojekt.Controllers
     {
         VeganService service;
 
-        public VeganController(VeganService service)
+        private IHostingEnvironment _Hostenv { get; }
+
+        public VeganController(VeganService service, IHostingEnvironment _hostenv)
         {
             this.service = service;
+            _Hostenv = _hostenv;
         }
 
+        [HttpGet]
         [Route("profile/add")]
         [AllowAnonymous]
         public IActionResult AddRecipe()//VeganProfileVM profile
         {
             return View(service.GetAddedRecipe());//service.DisplayProfile(profile)
         }
+
+        [HttpPost]
+        [Route("profile/add")]
+        [AllowAnonymous]
+        public IActionResult AddRecipe(VeganProfileAddVM viewModel)
+        {
+            if (viewModel.Img?.Length > 0)
+            {
+                // IHostingEnvironment was injected into the controller
+                var filePath = Path.Combine(_Hostenv.WebRootPath,
+                    "Uploads", viewModel.Img.FileName);
+
+                // Save file to disk
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    viewModel.Img.CopyTo(fileStream);
+                }
+            }
+
+            return RedirectToAction(nameof(Register));
+        }
+
+
 
         [Route("profile/save")]
         [AllowAnonymous]

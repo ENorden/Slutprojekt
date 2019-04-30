@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace Slutprojekt.Models.ViewModels
     {
         public string Name { get; set; }
         public List<string> Categories { get; set; }
-        public string Img { get; set; }
+        public IFormFile Img { get; set; }
         public List<Ingredient> Ingredients { get; set; }
         public List<StepByStep> Steps { get; set; }
 

@@ -76,7 +76,6 @@ namespace Slutprojekt.Models
         {
             VeganProfileAddVM profile = new VeganProfileAddVM();
             profile.Categories = new List<string> { "Lunch", "Dinner", "Dessert"};
-            profile.Img = "image";
             return profile;
         }
     }

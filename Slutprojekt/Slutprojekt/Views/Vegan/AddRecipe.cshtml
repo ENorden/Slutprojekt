@@ -6,7 +6,7 @@
 
 <h1>Add recipe</h1>
 
-<form asp-controller="Home" asp-action="AddRecipe">
+<form asp-controller="Home" asp-action="AddRecipe" enctype="multipart/form-data">
     <label asp-for="Name"></label>
     <input asp-for="Name" />
     <span asp-validation-for="Name"></span>
@@ -15,6 +15,10 @@
     {
         <input type="checkbox" value="@item">@item<br />
     }
+
+    <label asp-for="Img"></label>
+    <input asp-for="Img" />
+    <span asp-validation-for="Img"></span>
 
     <input type="submit" value="Register" />
 </form>
