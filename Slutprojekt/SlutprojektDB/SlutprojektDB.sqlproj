@@ -69,8 +69,14 @@
     <Build Include="dbo\Tables\AspNetUserLogins.sql" />
     <Build Include="dbo\Tables\AspNetUserRoles.sql" />
     <Build Include="dbo\Tables\AspNetUserTokens.sql" />
-    <Build Include="dbo\Tables\Recipe.sql" />
     <Build Include="rec.sql" />
     <Build Include="dbo\Tables\User.sql" />
+    <Build Include="Recipe.sql" />
+    <Build Include="Ingredient.sql" />
+    <Build Include="StepByStep.sql" />
+    <Build Include="Follower.sql" />
+    <Build Include="SavedRecipe.sql" />
+    <Build Include="Category.sql" />
+    <Build Include="Recipe2Category.sql" />
   </ItemGroup>
 </Project>
