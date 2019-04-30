@@ -26,6 +26,20 @@ namespace Slutprojekt.Controllers
             return View();//service.DisplayProfile(profile)
         }
 
+        [Route("profile/save")]
+        [AllowAnonymous]
+        public IActionResult SaveRecipe()//VeganProfileVM profile
+        {
+            return View();//service.DisplayProfile(profile)
+        }
+
+        [Route("profile/post")]
+        [AllowAnonymous]
+        public IActionResult PostRecipe()//VeganProfileVM profile
+        {
+            return View();//service.DisplayProfile(profile)
+        }
+
         [HttpGet]
         [Route("register")]
         [AllowAnonymous]

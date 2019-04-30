@@ -1,0 +1,23 @@
+﻿@{ ViewBag.Title = "Post";}
+@{
+    Layout = "_ProfileLayout";
+}
+
+<h1>Post</h1>
+
+@section scripts
+{
+    <script>
+        $("#btnGetPosts").click(function () {
+            var id = $('#input').val();
+            $.ajax({
+                url: "/MovieDesc/" + id,
+                type: "GET",
+                success: function (result) {
+                    $("#divResult").html(result);
+                }
+            });
+
+        });
+    </script>
+}
