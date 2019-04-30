@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Slutprojekt.Models.Entities;
 using Slutprojekt.Models.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,12 +12,12 @@ namespace Slutprojekt.Models
     {
         UserManager<VeganIdentityUser> userManager;
         SignInManager<VeganIdentityUser> signInManager;
-        readonly VeganIdentityContext context;
+        readonly SlutprojektContext context;
 
         public VeganService(
             UserManager<VeganIdentityUser> userManager,
             SignInManager<VeganIdentityUser> signInManager,
-            VeganIdentityContext context
+            SlutprojektContext context
             )
         {
             this.userManager = userManager;
@@ -44,14 +45,15 @@ namespace Slutprojekt.Models
 
         internal VeganFollowersVM[] GetAllFollowers(VeganFollowersVM followersVM)
         {
-            return context.Users
-                .Select(person => new VeganFollowersVM
-                {
-                    Username = person.UserName,
-                    FirstName = person.FirstName,
-                    Posts = { "Hello", "My recipe" }
-                })
-                .ToArray();
+            return null;
+            //return context.Users
+            //    .Select(person => new VeganFollowersVM
+            //    {
+            //        Username = person.UserName,
+            //        FirstName = person.FirstName,
+            //        Posts = { "Hello", "My recipe" }
+            //    })
+            //    .ToArray();
         }
 
             public VeganRecipeVM GetAllCategories()
