@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<div>
+    <h1>Profile here...</h1>
+</div>
+<div>
+    <a id="btnGetPosts">Posts</a>
+    <a id="btnGetRecipes">Saved Recipes</a>
+    <a id="btnAddRecipes">Add Recipe</a>
+</div>
+<div>
+    @RenderBody()
+</div>
+@section scripts
+{ @RenderSection("scripts", false) }
