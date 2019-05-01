@@ -1,0 +1,20 @@
+﻿body {
+ 
+}
+
+.add-recipe-carousel {
+    border: solid yellow 2px;
+    width: 500px;
+    height: 500px;
+
+}
+
+.carousel-item {
+    border: solid lightgrey 2px;
+    height: 100%;
+    border-radius: 15px;
+}
+
+.hide {
+    display: none;
+}
