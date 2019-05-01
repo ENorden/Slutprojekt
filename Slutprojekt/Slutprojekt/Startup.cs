@@ -57,6 +57,7 @@ namespace Slutprojekt
 
             app.UseAuthentication();
             app.UseMvc();
+            app.UseStaticFiles();
         }
     }
 }
