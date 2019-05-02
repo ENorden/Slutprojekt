@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Slutprojekt.Models;
 using Slutprojekt.Models.ViewModels;
@@ -151,6 +152,19 @@ namespace Slutprojekt.Controllers
         public IActionResult Followers(VeganFollowersVM followersVM)
         {
             return View();
+        }
+
+        [Route("Image/File")]
+        [AllowAnonymous]
+        public IActionResult FileUpload(IFormFile file)
+        {
+            // Always check content length
+            if (file?.Length > 0)
+            {
+                //work
+            }
+
+            return null;
         }
     }
 }

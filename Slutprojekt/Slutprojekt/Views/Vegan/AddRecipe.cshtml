@@ -4,70 +4,85 @@
     Layout = "_ProfileLayout";
 }
 
-<form asp-controller="Home" asp-action="AddRecipe" enctype="multipart/form-data">
+<div class="add-recipe-carousel">
 
-    <div class="add-recipe-carousel">
+    <div id="carousel-item-1" class="carousel-item">
+        item 1
 
-        <div id="carousel-item-1" class="carousel-item">
-            item 1
+        @*<label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>*@
 
-            <label asp-for="Name"></label>
-            <input asp-for="Name" />
-            <span asp-validation-for="Name"></span>
-
-            @foreach (string item in Model.Categories)
+        @*@foreach (string item in Model.Categories)
             {
                 <input type="checkbox" value="@item">@item<br />
-            }
+            }*@
 
-            <label asp-for="Img"></label>
-            <input asp-for="Img" />
-            <span asp-validation-for="Img"></span>
-
-
-            <button type="button" data-item-to-show="2">Next</button>
-
-        </div>
-
-        <div id="carousel-item-2" class="carousel-item hide">
-            item 2
-
-            <label asp-for="MeasurementItems"></label>
-            <select asp-for="SelectedMeasurementValue"
-                    asp-items="Model.MeasurementItems"></select>
-            <span asp-validation-for="SelectedMeasurementValue"></span>
-
-            <button type="button" data-item-to-show="1">Back</button>
-            <button type="button" data-item-to-show="3">Next</button>
+        <form method="post" enctype="multipart/form-data">
+        Select image to upload:
+        <input id="profilePic" name="picture" type="file" size="1" onchange="uploadFile('profilePic');" />
+        </form>
 
 
-        </div>
+        <button data-item-to-show="2">Next</button>
 
-        <div id="carousel-item-3" class="carousel-item hide">
-            item 3
-            <button type="button" data-item-to-show="2">Back</button>
-            <button type="button" data-item-to-show="4">Next</button>
+    </div>
 
+    <div id="carousel-item-2" class="carousel-item hide">
+        item 2
 
-        </div>
+        <label asp-for="MeasurementItems"></label>
+        <select asp-for="SelectedMeasurementValue"
+                asp-items="Model.MeasurementItems"></select>
+        <span asp-validation-for="SelectedMeasurementValue"></span>
 
-        <div id="carousel-item-4" class="carousel-item hide">
-            item 4
-            <button type="button" data-item-to-show="3">Back</button>
-            <input type="submit" value="Publish" />
-
-
-        </div>
+        <button type="button" data-item-to-show="1">Back</button>
+        <button type="button" data-item-to-show="3">Next</button>
 
 
     </div>
-</form>
+
+    <div id="carousel-item-3" class="carousel-item hide">
+        item 3
+        <button type="button" data-item-to-show="2">Back</button>
+        <button type="button" data-item-to-show="4">Next</button>
 
 
+    </div>
+
+    <div id="carousel-item-4" class="carousel-item hide">
+        item 4
+        <button type="button" data-item-to-show="3">Back</button>
+        <input type="submit" value="Publish" />
+
+
+    </div>
+
+
+</div>
 
 
 
 @section scripts
 {
     <script src="~/Scripts/JavaScript.js" type="text/javascript"></script>
+
+    <script>
+        function uploadFile(inputId) {
+            var fileUpload = $("#" + inputId).get(0);
+            var files = fileUpload.files;
+            var formData = new FormData();
+            formData.append('file', files[0]);
+
+            $.ajax({
+                url: '/Image/File',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                }
+            });
+        }
+    </script>
 }
