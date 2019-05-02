@@ -12,6 +12,7 @@ namespace Slutprojekt.Models.Entities
 
         public int Id { get; set; }
         public string CategoryName { get; set; }
+        public string Img { get; set; }
 
         public virtual ICollection<Recipe2Category> Recipe2Category { get; set; }
     }
