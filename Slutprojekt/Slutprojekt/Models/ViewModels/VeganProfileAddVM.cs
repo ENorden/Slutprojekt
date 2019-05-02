@@ -11,7 +11,7 @@ namespace Slutprojekt.Models.ViewModels
     public class VeganProfileAddVM
     {
         public string Name { get; set; }
-        public List<string> Categories { get; set; }
+        public SelectListItem[] Categories { get; set; }
         public IFormFile Img { get; set; }
         public List<Ingredient> Ingredients { get; set; }
         public List<StepByStep> Steps { get; set; }

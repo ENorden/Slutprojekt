@@ -87,7 +87,11 @@ namespace Slutprojekt.Models
                     new SelectListItem { Value = "3", Text = "Tsk" },
                 }
             };
-            profile.Categories = new List<string> { "Lunch", "Dinner", "Dessert" };
+            profile.Categories = new SelectListItem[] {
+                    new SelectListItem { Value = "1", Text = "Lunch" },
+                    new SelectListItem { Value = "2", Text = "Dinner", Selected = true },
+                    new SelectListItem { Value = "3", Text = "Dessert" },
+                };
             return profile;
         }
 
@@ -104,6 +108,19 @@ namespace Slutprojekt.Models
             {
                 Img = filePath
             });
+            context.SaveChanges();
+        }
+
+        internal void SaveStepOne(string[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+            {
+                context.Category.Add(new Category
+                {
+                    CategoryName = array[i]
+                });
+            }
+
             context.SaveChanges();
         }
     }

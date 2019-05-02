@@ -27,6 +27,7 @@ namespace Slutprojekt.Controllers
 
         [HttpGet]
         [Route("profile/add")]
+        [Route("")]
         [AllowAnonymous]
         public IActionResult AddRecipe()//VeganProfileVM profile
         {
@@ -100,7 +101,7 @@ namespace Slutprojekt.Controllers
         }
 
         [HttpGet]
-        [Route("")]
+        //[Route("")]
         [Route("login")]
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
@@ -167,5 +168,20 @@ namespace Slutprojekt.Controllers
 
             return null;
         }
+                
+        [Route("Posting")]
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult PostToDatabase([FromBody] Foo viewModel)
+        {
+            //service.SaveStepOne(categoryArray);
+            return Ok();
+        }
+    }
+
+    public class Foo
+    {
+        public int Age { get; set; }
+        public int[] CategoryIDs { get; set; }
     }
 }

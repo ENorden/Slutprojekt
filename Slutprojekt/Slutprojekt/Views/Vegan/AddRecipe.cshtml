@@ -10,21 +10,21 @@
         item 1
 
         @*<label asp-for="Name"></label>
-        <input asp-for="Name" />
-        <span asp-validation-for="Name"></span>*@
+            <input asp-for="Name" />
+            <span asp-validation-for="Name"></span>*@
 
-        @*@foreach (string item in Model.Categories)
-            {
-                <input type="checkbox" value="@item">@item<br />
-            }*@
+        @foreach (var item in Model.Categories)
+        {
+            <input type="checkbox" name="ingredient" value="@item.Value" checked>@item.Text<br />
+        }
 
         <form method="post" enctype="multipart/form-data">
-        Select image to upload:
-        <input id="profilePic" name="picture" type="file" size="1" onchange="uploadFile('profilePic');" />
+            Select image to upload:
+            <input id="profilePic" name="picture" type="file" size="1" />
         </form>
 
 
-        <button data-item-to-show="2">Next</button>
+        <button onclick="uploadFile('profilePic');" data-item-to-show="2">Next</button>
 
     </div>
 
@@ -69,20 +69,43 @@
 
     <script>
         function uploadFile(inputId) {
-            var fileUpload = $("#" + inputId).get(0);
-            var files = fileUpload.files;
-            var formData = new FormData();
-            formData.append('file', files[0]);
+            var categoryIDs = [];
 
+            $.each($("input[name='ingredient']:checked"), function () {
+                categoryIDs.push($(this).val());
+            });
+            var ids = categoryIDs.join(",");
+            console.log("!");
             $.ajax({
-                url: '/Image/File',
+                url: '/Posting',
                 type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
+                contentType: "application/json",
+                data: JSON.stringify({ age: 10, categoryIDs: categoryIDs }),
+                //processData: false,
+                //contentType: false,
                 success: function (result) {
                 }
             });
-        }
+        };
+
+
+
+
+
+            //var fileUpload = $("#" + inputId).get(0);
+            //var files = fileUpload.files;
+            //var formData = new FormData();
+            //formData.append('file', files[0]);
+
+            //$.ajax({
+            //    url: '/Image/File',
+            //    type: 'POST',
+            //    data: formData,
+            //    processData: false,
+            //    contentType: false,
+            //    success: function (result) {
+            //    }
+            //});
+
     </script>
 }
