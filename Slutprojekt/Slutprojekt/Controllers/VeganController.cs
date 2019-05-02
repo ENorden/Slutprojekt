@@ -128,7 +128,7 @@ namespace Slutprojekt.Controllers
 
             // Redirect user
             if (string.IsNullOrWhiteSpace(viewModel.ReturnUrl))
-                return RedirectToAction(nameof(Register));
+                return RedirectToAction(nameof(Recipes));
             else
                 return Redirect(viewModel.ReturnUrl);
         }
@@ -141,11 +141,18 @@ namespace Slutprojekt.Controllers
             return RedirectToAction(nameof(Register));
         }
 
-        [HttpGet]
         [Route("recipes")]
+        [AllowAnonymous]
         public IActionResult Recipes()
         {
             return View(service.GetAllCategories());
+        }
+
+        [Route("recipes/{id}")]
+        [AllowAnonymous]
+        public IActionResult Category(int id)
+        {
+            return View(service.GetRecipesByCategory(id));
         }
 
         [HttpGet]

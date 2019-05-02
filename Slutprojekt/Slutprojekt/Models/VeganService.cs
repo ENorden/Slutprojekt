@@ -64,10 +64,32 @@ namespace Slutprojekt.Models
             //    .ToArray();
         }
 
-        public VeganRecipeVM GetAllCategories()
+        public VeganRecipeVM[] GetAllCategories()
         {
-            VeganRecipeVM test = new VeganRecipeVM();
-            return test;
+            return context.Category
+                .Select(c => new VeganRecipeVM
+                {
+                     Img = c.Img,
+                     CategoryName = c.CategoryName,
+                     Id = c.Id
+                })
+                .ToArray();
+        }
+
+        public VeganCategoryVM[] GetRecipesByCategory(int id)
+        {
+            var recipes = context.Category
+                .Where(c => c.Id == id)
+                .SelectMany(c => c.Recipe2Category.Select(r => new VeganCategoryVM
+                {
+                    Id = r.RecId,
+                    Img = r.Rec.Img,
+                    Title = r.Rec.Title,
+                    UserId = r.Rec.UserId
+                }))
+                .ToArray();
+
+            return recipes;
         }
 
         public string DisplayProfile(VeganProfileVM profile)

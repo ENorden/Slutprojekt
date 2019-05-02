@@ -1,0 +1,11 @@
+﻿@model VeganCategoryVM[]
+
+<h1>Category</h1>
+
+@foreach (var item in Model)
+{
+    <div>
+        <img src="@item.Img" style="width: 500px; height:auto" />
+        <a asp-controller="Vegan" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
+    </div>
+}
