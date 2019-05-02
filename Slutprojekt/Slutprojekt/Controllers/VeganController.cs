@@ -168,7 +168,8 @@ namespace Slutprojekt.Controllers
             // Always check content length
             if (file?.Length > 0)
             {
-                // work
+                service.SaveImgToDB(file);
+
             }
 
             return null;
