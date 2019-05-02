@@ -4,67 +4,68 @@
     Layout = "_ProfileLayout";
 }
 
-
-
-<div class="add-recipe-carousel">
-
-    <div id="carousel-item-1" class="carousel-item">
-        item 1
-
-
-        <button data-item-to-show="2">Next</button>
-
-    </div>
-
-    <div id="carousel-item-2" class="carousel-item hide">
-        item 2
-        <button data-item-to-show="1">Back</button>
-        <button data-item-to-show="3">Next</button>
-
-
-    </div>
-
-    <div id="carousel-item-3" class="carousel-item hide">
-        item 3
-        <button data-item-to-show="2">Back</button>
-        <button data-item-to-show="4">Next</button>
-
-
-    </div>
-
-    <div id="carousel-item-4" class="carousel-item hide">
-        item 4
-        <button data-item-to-show="3">Back</button>
-        <button>Publish</button>
-
-    </div>
-
-
-</div>
-
-<h1>Add recipe</h1>
-
 <form asp-controller="Home" asp-action="AddRecipe" enctype="multipart/form-data">
-    <label asp-for="Name"></label>
-    <input asp-for="Name" />
-    <span asp-validation-for="Name"></span>
 
-    @foreach (string item in Model.Categories)
-    {
-        <input type="checkbox" value="@item">@item<br />
-    }
+    <div class="add-recipe-carousel">
 
-    <label asp-for="Img"></label>
-    <input asp-for="Img" />
-    <span asp-validation-for="Img"></span>
+        <div id="carousel-item-1" class="carousel-item">
+            item 1
 
-    <label asp-for="MeasurementItems"></label>
-    <select asp-for="SelectedMeasurementValue"
-            asp-items="Model.MeasurementItems"></select>
-    <span asp-validation-for="SelectedMeasurementValue"></span>
+            <label asp-for="Name"></label>
+            <input asp-for="Name" />
+            <span asp-validation-for="Name"></span>
 
-    <input type="submit" value="Save Recipe" />
+            @foreach (string item in Model.Categories)
+            {
+                <input type="checkbox" value="@item">@item<br />
+            }
+
+            <label asp-for="Img"></label>
+            <input asp-for="Img" />
+            <span asp-validation-for="Img"></span>
+
+
+            <button data-item-to-show="2">Next</button>
+
+        </div>
+
+        <div id="carousel-item-2" class="carousel-item hide">
+            item 2
+
+            <label asp-for="MeasurementItems"></label>
+            <select asp-for="SelectedMeasurementValue"
+                    asp-items="Model.MeasurementItems"></select>
+            <span asp-validation-for="SelectedMeasurementValue"></span>
+
+            <button data-item-to-show="1">Back</button>
+            <button data-item-to-show="3">Next</button>
+
+
+        </div>
+
+        <div id="carousel-item-3" class="carousel-item hide">
+            item 3
+            <button data-item-to-show="2">Back</button>
+            <button data-item-to-show="4">Next</button>
+
+
+        </div>
+
+        <div id="carousel-item-4" class="carousel-item hide">
+            item 4
+            <button data-item-to-show="3">Back</button>
+            <button>Publish</button>
+
+            <input type="submit" value="Save Recipe" />
+
+
+        </div>
+
+
+    </div>
 </form>
+
+
 
 
 
