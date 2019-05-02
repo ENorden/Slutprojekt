@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Slutprojekt.Models.Entities;
 using Slutprojekt.Models.ViewModels;
@@ -88,5 +89,14 @@ namespace Slutprojekt.Models
             profile.Categories = new List<string> { "Lunch", "Dinner", "Dessert" };
             return profile;
         }
+
+        //internal void SaveImgToDB(IFormFile file, VeganProfileAddVM viewModel)
+        //{
+        //    context.Recipe.Add(new Recipe
+        //    {
+        //        Img = viewModel.Img,
+        //    });
+        //    context.SaveChangesAsync();
+        //}
     }
 }

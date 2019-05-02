@@ -161,7 +161,7 @@ namespace Slutprojekt.Controllers
             // Always check content length
             if (file?.Length > 0)
             {
-                //work
+                // work
             }
 
             return null;
