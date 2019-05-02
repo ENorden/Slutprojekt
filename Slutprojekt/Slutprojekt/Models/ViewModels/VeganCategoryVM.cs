@@ -11,5 +11,6 @@ namespace Slutprojekt.Models.ViewModels
         public string UserId { get; set; }
         public string Img { get; set; }
         public string Title { get; set; }
+        public string CategoryName { get; set; }
     }
 }

@@ -138,18 +138,16 @@ namespace Slutprojekt.Controllers
         public IActionResult LogOut()
         {
             service.TryLogOutAsync();
-            return RedirectToAction(nameof(Register));
+            return RedirectToAction(nameof(Login));
         }
 
         [Route("recipes")]
-        [AllowAnonymous]
         public IActionResult Recipes()
         {
             return View(service.GetAllCategories());
         }
 
         [Route("recipes/{id}")]
-        [AllowAnonymous]
         public IActionResult Category(int id)
         {
             return View(service.GetRecipesByCategory(id));
