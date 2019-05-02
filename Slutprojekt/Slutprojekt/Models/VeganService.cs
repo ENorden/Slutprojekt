@@ -5,6 +5,7 @@ using Slutprojekt.Models.Entities;
 using Slutprojekt.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -90,13 +91,20 @@ namespace Slutprojekt.Models
             return profile;
         }
 
-        //internal void SaveImgToDB(IFormFile file, VeganProfileAddVM viewModel)
-        //{
-        //    context.Recipe.Add(new Recipe
-        //    {
-        //        Img = viewModel.Img,
-        //    });
-        //    context.SaveChangesAsync();
-        //}
+        internal void SaveImgToDB(IFormFile file)
+        {
+            var fileName = Path.GetFileName(file.FileName);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\uploads", fileName);
+            using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+            {
+                file.CopyToAsync(fileSrteam);
+            }
+
+            context.Recipe.Add(new Recipe
+            {
+                Img = filePath
+            });
+            context.SaveChanges();
+        }
     }
 }

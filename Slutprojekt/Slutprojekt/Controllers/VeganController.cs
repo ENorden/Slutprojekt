@@ -161,12 +161,8 @@ namespace Slutprojekt.Controllers
             // Always check content length
             if (file?.Length > 0)
             {
-                var fileName = Path.GetFileName(file.FileName);
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\uploads", fileName);
-                using (var fileSrteam = new FileStream(filePath, FileMode.Create))
-                {
-                    file.CopyToAsync(fileSrteam);
-                }
+                service.SaveImgToDB(file);
+
             }
 
             return null;
