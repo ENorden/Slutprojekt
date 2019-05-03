@@ -121,7 +121,7 @@ namespace Slutprojekt.Models
             return profile;
         }
 
-        internal void SaveImgToDB(IFormFile file)
+        internal void SaveImgToDB(IFormFile file, int id)
         {
             var fileName = Path.GetFileName(file.FileName);
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\uploads", fileName);
@@ -130,24 +130,38 @@ namespace Slutprojekt.Models
                 file.CopyToAsync(fileSrteam);
             }
 
-            context.Recipe.Add(new Recipe
-            {
-                Img = filePath
-            });
-            context.SaveChanges();
+            //var temp = new Recipe
+            //{
+            //    Img = filePath
+            //};
+
+            //context.Recipe.Add(temp);
+            //context.SaveChanges();
+            //var id = temp.Id;
+
+            //return id;
         }
 
-        internal void SaveStepOne(string[] array)
+        internal int SetCategories(int[] array)
         {
+            var temp = new Recipe();
+            context.Recipe.Add(temp);
+            context.SaveChanges();
+            var id = temp.Id;
+
             for (int i = 0; i < array.Length; i++)
             {
-                context.Category.Add(new Category
+                context.Recipe2Category.Add(new Recipe2Category
                 {
-                    CategoryName = array[i]
+                    CatId = array[i],
+                    RecId = id
+                   
                 });
             }
 
             context.SaveChanges();
+
+            return id;
         }
     }
 }
