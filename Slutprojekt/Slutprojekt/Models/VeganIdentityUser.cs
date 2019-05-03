@@ -10,5 +10,8 @@ namespace Slutprojekt.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public string PictureUrl { get; set; }
+        public string Description { get; set; }
+
     }
 }
