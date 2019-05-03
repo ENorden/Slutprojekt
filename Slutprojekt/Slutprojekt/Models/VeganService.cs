@@ -16,16 +16,19 @@ namespace Slutprojekt.Models
         UserManager<VeganIdentityUser> userManager;
         SignInManager<VeganIdentityUser> signInManager;
         readonly SlutprojektContext context;
+        readonly IHttpContextAccessor accessor;
 
         public VeganService(
             UserManager<VeganIdentityUser> userManager,
             SignInManager<VeganIdentityUser> signInManager,
-            SlutprojektContext context
+            SlutprojektContext context,
+            IHttpContextAccessor accessor
             )
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.context = context;
+            this.accessor = accessor;
         }
 
         public async Task<IdentityResult> TryRegisterAsync(VeganRegisterVM viewModel)
@@ -51,17 +54,28 @@ namespace Slutprojekt.Models
             await signInManager.SignOutAsync();
         }
 
-        internal VeganFollowersVM[] GetAllFollowers(VeganFollowersVM followersVM)
+        internal async Task<VeganFollowersVM[]> GetAllFollowersAsync()
         {
-            return null;
-            //return context.Users
-            //    .Select(person => new VeganFollowersVM
-            //    {
-            //        Username = person.UserName,
-            //        FirstName = person.FirstName,
-            //        Posts = { "Hello", "My recipe" }
-            //    })
-            //    .ToArray();
+            // Hämta den inloggade användarens ID (från auth-cookie)
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+
+            var followers = context.Follower
+                .Where(u => u.UserId == userId)
+                    .Select(f => new VeganFollowersVM
+                    {
+                        Username = f.User.UserName,
+                        ProfileImg = f.User.PictureUrl,
+                        Posts = f.User.Recipe.Select(r => new PostItemVM
+                        {
+                            RecipeTitle = r.Title,
+                            RecipeImg = r.Img
+                        })
+                        .ToArray()
+                    })
+                .ToArray();
+
+            return followers;
+
         }
 
         public VeganRecipeVM[] GetAllCategories()
@@ -96,9 +110,26 @@ namespace Slutprojekt.Models
             return recipes;
         }
 
-        public string DisplayProfile(VeganProfileVM profile)
+        public VeganFollowersVM[] DisplayPosts()
         {
-            throw new NotImplementedException();
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+
+            var posts = context.Follower
+                .Where(u => u.UserId == userId)
+                    .Select(u => new VeganFollowersVM
+                    {
+                        Username = u.User.UserName,
+                        ProfileImg = u.User.PictureUrl,
+                        Posts = u.User.Recipe.Select(r => new PostItemVM
+                        {
+                            RecipeTitle = r.Title,
+                            RecipeImg = r.Img
+                        })
+                        .ToArray()
+                    })
+                .ToArray();
+
+            return posts;
         }
 
         public VeganProfileAddVM GetAddedRecipe()
@@ -119,6 +150,29 @@ namespace Slutprojekt.Models
                     new SelectListItem { Value = "3", Text = "Dessert" },
                 };
             return profile;
+        }
+
+        public async Task<VeganProfileVM> GetProfileInfoAsync()
+        {
+            // Hämta den inloggade användarens ID (från auth-cookie):
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+
+            VeganProfileVM viewModel = context.AspNetUsers
+                .Where(u => u.Id == userId)
+                .Select(u => new VeganProfileVM
+                {
+                    Description = u.Description,
+                    UserName = u.UserName,
+                    PictureURL = u.PictureUrl,
+                    Posts = u.Recipe.Count,
+                    Followers = u.FollowerFollowerNavigation.Count,
+                    Following = u.FollowerUser.Count
+
+                })
+                .SingleOrDefault();
+
+            return viewModel;
+
         }
 
         internal void SaveImgToDB(IFormFile file, int id)
@@ -149,6 +203,9 @@ namespace Slutprojekt.Models
             context.SaveChanges();
             var id = temp.Id;
 
+        
+
+        
             for (int i = 0; i < array.Length; i++)
             {
                 context.Recipe2Category.Add(new Recipe2Category

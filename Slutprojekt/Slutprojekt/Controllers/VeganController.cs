@@ -29,7 +29,6 @@ namespace Slutprojekt.Controllers
         [HttpGet]
         [Route("profile/add")]
         [Route("")]
-        [AllowAnonymous]
         public IActionResult AddRecipe()//VeganProfileVM profile
         {
             return View(service.GetAddedRecipe());//service.DisplayProfile(profile)
@@ -67,9 +66,9 @@ namespace Slutprojekt.Controllers
 
         [Route("profile/post")]
         [AllowAnonymous]
-        public IActionResult PostRecipe()//VeganProfileVM profile
+        public IActionResult PostRecipe()
         {
-            return View();//service.DisplayProfile(profile)
+            return View(service.DisplayPosts());
         }
 
         [HttpGet]
@@ -136,11 +135,12 @@ namespace Slutprojekt.Controllers
 
         [HttpGet]
         [Route("logout")]
-        public IActionResult LogOut()
+        public async Task<IActionResult> LogOut()
         {
-            service.TryLogOutAsync();
+            await service.TryLogOutAsync();
             return RedirectToAction(nameof(Login));
         }
+
 
         [Route("recipes")]
         public IActionResult Recipes()
@@ -156,9 +156,10 @@ namespace Slutprojekt.Controllers
 
         [HttpGet]
         [Route("followers")]
-        public IActionResult Followers(VeganFollowersVM followersVM)
+        [AllowAnonymous]
+        public async Task<IActionResult> Followers()
         {
-            return View();
+            return View(await service.GetAllFollowersAsync());
         }
 
         [Route("SetRecipeImg")]

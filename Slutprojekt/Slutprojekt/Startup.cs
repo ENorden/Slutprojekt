@@ -46,6 +46,8 @@ namespace Slutprojekt
 
             services.AddTransient<VeganService>();
             services.AddMvc();
+
+            services.AddHttpContextAccessor();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

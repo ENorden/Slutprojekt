@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace Slutprojekt.Models.Entities
 {
-    public partial class SavedRecipe
+    public partial class AspNetUserLogins
     {
-        public int Id { get; set; }
-        public int RecId { get; set; }
+        public string LoginProvider { get; set; }
+        public string ProviderKey { get; set; }
+        public string ProviderDisplayName { get; set; }
         public string UserId { get; set; }
 
-        public virtual Recipe Rec { get; set; }
         public virtual AspNetUsers User { get; set; }
     }
 }
