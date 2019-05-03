@@ -10,12 +10,12 @@
         item 1
 
         @*<label asp-for="Name"></label>
-            <input asp-for="Name" />
-            <span asp-validation-for="Name"></span>*@
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>*@
 
         @foreach (var item in Model.Categories)
         {
-            <input type="checkbox" name="ingredient" value="@item.Value" checked>@item.Text<br />
+        <input type="checkbox" name="ingredient" value="@item.Value" checked>@item.Text<br />
         }
 
         <form method="post" enctype="multipart/form-data">
@@ -65,105 +65,113 @@
 
 @section scripts
 {
-    <script src="~/Scripts/JavaScript.js" type="text/javascript"></script>
+<script src="~/Scripts/JavaScript.js" type="text/javascript"></script>
 
-    <script>
+<script>
 
-        function uploadFile() {
-            var categoryIDs = [];
+    var recepieId = 0;
 
-            $.each($("input[name='ingredient']:checked"), function () {
-                categoryIDs.push($(this).val());
-            });
+    function uploadFile() {
+        var categoryIDs = [];
 
+        $.each($("input[name='ingredient']:checked"), function () {
+            categoryIDs.push($(this).val());
+        });
 
-            $.ajax({
-                url: '/CreateRecipe',
-                type: 'POST',
-                contentType: "application/json",
-                data: JSON.stringify({ categoryIDs: categoryIDs }),
-                success: function (result) {
-                    var fileUpload = $("#profilePic").get(0);
-                    var files = fileUpload.files;
-                    var formData = new FormData();
-                    formData.append('file', files[0]);
+        var fileUpload = $("#profilePic").get(0);
+        var files = fileUpload.files;
+        var formData = new FormData();
+        formData.append('file', files[0]);
+        formData.append('categoryIDs', categoryIDs);
+        formData.append('recepieId', recepieId);
+        formData.append('title', 'Test title');
 
-                    var id = result.id;
-
-                    $.ajax({
-                        url: '/SetRecipeImg',
-                        type: 'POST',
-                        data: { formData: formData, id: id },
-                        processData: false,
-                        contentType: false,
-                        success: function (result) { }
-
-                    });
-
-
-                }
-
-            });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        };
-
-
-
-
-
-
-    //function uploadFile(inputId) {
-    //    var categoryIDs = [];
-
-    //    $.each($("input[name='ingredient']:checked"), function () {
-    //        categoryIDs.push($(this).val());
-    //    });
-    //    $.ajax({
-    //        url: '/Posting',
-    //        type: 'POST',
-    //        contentType: "application/json",
-    //        data: JSON.stringify({categoryIDs: categoryIDs }),
-    //        success: function (result) {
-    //        }
-    //    });
-    //};
-
-
-
-
-
-        //var fileUpload = $("#" + inputId).get(0);
-        //var files = fileUpload.files;
-        //var formData = new FormData();
-        //formData.append('file', files[0]);
+        $.ajax({
+            url: '/AddRecipieStep1',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                console.log("1")
+                console.log(result)
+                console.log("2")
+                recepieId = result;
+            }
+        });
 
         //$.ajax({
-        //    url: '/Image/File',
+        //    url: '/CreateRecipe',
         //    type: 'POST',
-        //    data: formData,
-        //    processData: false,
-        //    contentType: false,
+        //    contentType: "application/json",
+        //    data: JSON.stringify({ categoryIDs: categoryIDs }),
         //    success: function (result) {
+
+
+
         //    }
+
         //});
 
-    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    };
+
+
+
+
+
+
+//function uploadFile(inputId) {
+//    var categoryIDs = [];
+
+//    $.each($("input[name='ingredient']:checked"), function () {
+//        categoryIDs.push($(this).val());
+//    });
+//    $.ajax({
+//        url: '/Posting',
+//        type: 'POST',
+//        contentType: "application/json",
+//        data: JSON.stringify({categoryIDs: categoryIDs }),
+//        success: function (result) {
+//        }
+//    });
+//};
+
+
+
+
+
+    //var fileUpload = $("#" + inputId).get(0);
+    //var files = fileUpload.files;
+    //var formData = new FormData();
+    //formData.append('file', files[0]);
+
+    //$.ajax({
+    //    url: '/Image/File',
+    //    type: 'POST',
+    //    data: formData,
+    //    processData: false,
+    //    contentType: false,
+    //    success: function (result) {
+    //    }
+    //});
+
+</script>
 }

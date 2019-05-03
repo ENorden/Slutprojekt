@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Slutprojekt.Controllers;
 using Slutprojekt.Models.Entities;
 using Slutprojekt.Models.ViewModels;
 using System;
@@ -60,7 +61,7 @@ namespace Slutprojekt.Models
             string userId = userManager.GetUserId(accessor.HttpContext.User);
 
             var followers = context.Follower
-                .Where(u => u.UserId == userId)
+                .Where(u => u.FollowerId == userId)
                     .Select(f => new VeganFollowersVM
                     {
                         Username = f.User.UserName,
@@ -68,7 +69,9 @@ namespace Slutprojekt.Models
                         Posts = f.User.Recipe.Select(r => new PostItemVM
                         {
                             RecipeTitle = r.Title,
-                            RecipeImg = r.Img
+                            RecipeImg = r.Img,
+                            RecipeCategories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
+                            .ToArray()
                         })
                         .ToArray()
                     })
@@ -83,9 +86,9 @@ namespace Slutprojekt.Models
             return context.Category
                 .Select(c => new VeganRecipeVM
                 {
-                     Img = c.Img,
-                     CategoryName = c.CategoryName,
-                     Id = c.Id
+                    Img = c.Img,
+                    CategoryName = c.CategoryName,
+                    Id = c.Id
                 })
                 .ToArray();
         }
@@ -160,7 +163,7 @@ namespace Slutprojekt.Models
 
         public VeganProfileAddVM GetAddedRecipe()
         {
-            
+
             VeganProfileAddVM profile = new VeganProfileAddVM()
             {
                 MeasurementItems = new SelectListItem[]
@@ -170,11 +173,9 @@ namespace Slutprojekt.Models
                     new SelectListItem { Value = "3", Text = "Tsk" },
                 }
             };
-            profile.Categories = new SelectListItem[] {
-                    new SelectListItem { Value = "1", Text = "Lunch" },
-                    new SelectListItem { Value = "2", Text = "Dinner", Selected = true },
-                    new SelectListItem { Value = "3", Text = "Dessert" },
-                };
+            profile.Categories = context.Category
+                .Select(o => new SelectListItem { Value = o.Id.ToString(), Text = o.CategoryName })
+                .ToArray();
             return profile;
         }
 
@@ -201,50 +202,80 @@ namespace Slutprojekt.Models
 
         }
 
-        internal void SaveImgToDB(IFormFile file, int id)
+        //internal void SaveImgToDB(IFormFile file, int id)
+        //{
+        //    var fileName = Path.GetFileName(file.FileName);
+        //    var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\uploads", fileName);
+        //    using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+        //    {
+        //        file.CopyToAsync(fileSrteam);
+        //    }
+
+        //    VeganRecipeVM recipe = context.Recipe
+        //        .Where(r => r.Id == id)
+        //        .Select(r => new VeganRecipeVM
+        //        {
+        //            Img = filePath
+        //        })
+        //        .SingleOrDefault();
+
+        //    //var temp = new Recipe
+        //    //{
+        //    //    Img = filePath
+        //    //};
+
+        //    //context.Recipe.Add(temp);
+        //    //context.SaveChanges();
+        //    //var id = temp.Id;
+
+        //    //return id;
+        //}
+
+        public int AddRecipieStep1(AddRecepieVM viewModel)
         {
-            var fileName = Path.GetFileName(file.FileName);
+            Recipe recipe;
+
+            if (viewModel.RecepieId == 0)
+            {
+                string userId = userManager.GetUserId(accessor.HttpContext.User);
+                recipe = new Recipe();
+                recipe.UserId = userId;
+                recipe.Title = "Temp";
+                recipe.Img = "Temp";
+                context.Recipe.Add(recipe);
+                context.SaveChanges();
+                viewModel.RecepieId = recipe.Id;
+            }
+            else
+            {
+                recipe = context.Recipe.Find(viewModel.RecepieId);
+            }
+
+            var fileName = Path.GetFileName(viewModel.File.FileName);
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\uploads", fileName);
             using (var fileSrteam = new FileStream(filePath, FileMode.Create))
             {
-                file.CopyToAsync(fileSrteam);
+                viewModel.File.CopyToAsync(fileSrteam);
             }
 
-            //var temp = new Recipe
-            //{
-            //    Img = filePath
-            //};
+            recipe.Title = viewModel.Title;
+            recipe.Img = viewModel.File.FileName;
 
-            //context.Recipe.Add(temp);
-            //context.SaveChanges();
-            //var id = temp.Id;
+            recipe.Recipe2Category.Clear();
 
-            //return id;
-        }
-
-        internal int SetCategories(int[] array)
-        {
-            var temp = new Recipe();
-            context.Recipe.Add(temp);
-            context.SaveChanges();
-            var id = temp.Id;
-
-        
-
-        
+            var array = viewModel.CategoryIDs.Split(',');
             for (int i = 0; i < array.Length; i++)
             {
                 context.Recipe2Category.Add(new Recipe2Category
                 {
-                    CatId = array[i],
-                    RecId = id
-                   
+                    CatId = int.Parse(array[i]),
+                    RecId = viewModel.RecepieId
+
                 });
             }
 
             context.SaveChanges();
-
-            return id;
+            return viewModel.RecepieId;
         }
     }
 }

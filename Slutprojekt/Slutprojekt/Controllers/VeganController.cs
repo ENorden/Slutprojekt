@@ -159,18 +159,18 @@ namespace Slutprojekt.Controllers
             return View(await service.GetAllFollowersAsync());
         }
 
-        [Route("SetRecipeImg")]
-        [AllowAnonymous]
-        public IActionResult SetRecipeImg(IFormFile file, int id)
-        {
+        //[Route("SetRecipeImg")]
+        //[AllowAnonymous]
+        //public IActionResult SetRecipeImg(IFormFile file, int id)
+        //{
 
-            if (file?.Length > 0)
-            {
-              service.SaveImgToDB(file, id);
-            }
+        //    if (file?.Length > 0)
+        //    {
+        //      service.SaveImgToDB(file, id);
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
         //[Route("Posting")]
         //[HttpPost]
@@ -181,26 +181,24 @@ namespace Slutprojekt.Controllers
         //    return Ok();
         //}
 
-        [Route("CreateRecipe")]
+        [Route("AddRecipieStep1")]
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult CreateRecipe([FromBody] Foo viewModel)
+        public IActionResult AddRecipieStep1(AddRecepieVM viewModel)
         {
-            var temp = service.SetCategories(viewModel.CategoryIDs);
-
-            return Json(new { id = temp });
+            var recepieId = service.AddRecipieStep1(viewModel);
+            return Json(recepieId);
         }
     }
 
-    public class Foo
+    public class AddRecepieVM
     {
+        public int RecepieId { get; set; }
+        public string Title { get; set; }
+
         [Required(ErrorMessage ="You must choose at least one category")]
-        public int[] CategoryIDs { get; set; }
+        public string CategoryIDs { get; set; }
 
-    }
-
-    public class Bar
-    {
         [Required(ErrorMessage = "You must upload a picture")]
         public IFormFile File { get; set; }
     }

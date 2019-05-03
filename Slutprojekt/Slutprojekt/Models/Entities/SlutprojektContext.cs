@@ -164,13 +164,13 @@ namespace Slutprojekt.Models.Entities
                     .WithMany(p => p.FollowerFollowerNavigation)
                     .HasForeignKey(d => d.FollowerId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Follower__Follow__00200768");
+                    .HasConstraintName("FK__Follower__Follow__4316F928");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.FollowerUser)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Follower__UserID__7F2BE32F");
+                    .HasConstraintName("FK__Follower__UserID__4222D4EF");
             });
 
             modelBuilder.Entity<Ingredient>(entity =>
@@ -189,7 +189,7 @@ namespace Slutprojekt.Models.Entities
                     .WithMany(p => p.Ingredient)
                     .HasForeignKey(d => d.RecId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Ingredien__RecID__01142BA1");
+                    .HasConstraintName("FK__Ingredien__RecID__44FF419A");
             });
 
             modelBuilder.Entity<Recipe>(entity =>
@@ -198,14 +198,18 @@ namespace Slutprojekt.Models.Entities
 
                 entity.Property(e => e.Img).IsRequired();
 
+                entity.Property(e => e.Title).IsRequired();
+
                 entity.Property(e => e.UserId)
+                    .IsRequired()
                     .HasColumnName("UserID")
                     .HasMaxLength(450);
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Recipe)
                     .HasForeignKey(d => d.UserId)
-                    .HasConstraintName("FK__Recipe__UserID__14270015");
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__Recipe__UserID__6E01572D");
             });
 
             modelBuilder.Entity<Recipe2Category>(entity =>
@@ -220,13 +224,13 @@ namespace Slutprojekt.Models.Entities
                     .WithMany(p => p.Recipe2Category)
                     .HasForeignKey(d => d.CatId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recipe2Ca__CatID__7C4F7684");
+                    .HasConstraintName("FK__Recipe2Ca__CatID__46E78A0C");
 
                 entity.HasOne(d => d.Rec)
                     .WithMany(p => p.Recipe2Category)
                     .HasForeignKey(d => d.RecId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Recipe2Ca__RecID__7B5B524B");
+                    .HasConstraintName("FK__Recipe2Ca__RecID__45F365D3");
             });
 
             modelBuilder.Entity<SavedRecipe>(entity =>
@@ -244,13 +248,13 @@ namespace Slutprojekt.Models.Entities
                     .WithMany(p => p.SavedRecipe)
                     .HasForeignKey(d => d.RecId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__SavedReci__RecID__7D439ABD");
+                    .HasConstraintName("FK__SavedReci__RecID__47DBAE45");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.SavedRecipe)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__SavedReci__UserI__7E37BEF6");
+                    .HasConstraintName("FK__SavedReci__UserI__48CFD27E");
             });
 
             modelBuilder.Entity<StepByStep>(entity =>
@@ -265,7 +269,7 @@ namespace Slutprojekt.Models.Entities
                     .WithMany(p => p.StepByStep)
                     .HasForeignKey(d => d.RecId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__StepBySte__RecID__02FC7413");
+                    .HasConstraintName("FK__StepBySte__RecID__49C3F6B7");
             });
         }
     }
