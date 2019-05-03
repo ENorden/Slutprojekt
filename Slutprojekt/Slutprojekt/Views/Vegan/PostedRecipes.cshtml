@@ -1,16 +1,17 @@
-﻿@model VeganPostVM
+﻿@model VeganPostVM[]
 
 @{ ViewBag.Title = "Post";}
 @{
     Layout = "_ProfileLayout";
 }
 
-<h1>Post</h1>
+<h1>Your posts</h1>
 
 <div>
-    @foreach (var item in Model.Posts)
+    @foreach (var item in Model)
     {
         <p>@item.RecipeTitle</p>
+        <img src="@item.RecipeImg" style="width: 500px; height:auto"/>
 
         @foreach (var cat in item.RecipeCategories)
         {
@@ -19,7 +20,7 @@
 
     }
 
- 
+
 
 
 </div>

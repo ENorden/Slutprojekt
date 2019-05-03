@@ -1,9 +1,30 @@
-﻿
-
+﻿@model  VeganSavedVM[]
 @{ ViewBag.Title = "Save";}
 @{
     Layout = "_ProfileLayout";
 }
 
-<h1>Save</h1>
+<h1>Your saved recipes</h1>
+
+@if (Model.Length > 0)
+{
+    foreach (var post in Model)
+    {
+    <div>
+        <h5>@post.CreatorUsername</h5>
+        <img src="@post.CreatorProfileImg" />
+        <h6>@post.RecipeTitle</h6>
+        <img src="@post.RecipeImg" style="width: 500px; height:auto"/>
+
+        @foreach (var cat in post.RecipeCategories)
+        {
+            <p>@cat</p>
+        }
+    </div>
+    }
+}
+else
+{
+    <h5>You have no saved recipes yet</h5>
+}
 
