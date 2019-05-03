@@ -184,6 +184,14 @@ namespace Slutprojekt.Models
                 file.CopyToAsync(fileSrteam);
             }
 
+            VeganRecipeVM recipe = context.Recipe
+                .Where(r => r.Id == id)
+                .Select(r => new VeganRecipeVM
+                {
+                    Img = filePath
+                })
+                .SingleOrDefault();
+
             //var temp = new Recipe
             //{
             //    Img = filePath
@@ -202,9 +210,6 @@ namespace Slutprojekt.Models
             context.Recipe.Add(temp);
             context.SaveChanges();
             var id = temp.Id;
-
-        
-
         
             for (int i = 0; i < array.Length; i++)
             {

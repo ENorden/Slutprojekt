@@ -91,9 +91,9 @@
                     var id = result.id;
 
                     $.ajax({
-                        url: '/SetRecipeImg',
+                        url: '/SetRecipeImg/' + id,
                         type: 'POST',
-                        data: { formData: formData, id: id },
+                        data: formData,
                         processData: false,
                         contentType: false,
                         success: function (result) { }
