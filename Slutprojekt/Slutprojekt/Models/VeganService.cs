@@ -123,7 +123,9 @@ namespace Slutprojekt.Models
                         Posts = u.Recipe.Select(r => new PostItemVM2
                         {
                             RecipeTitle = r.Title,
-                            RecipeImg = r.Img
+                            RecipeImg = r.Img,
+                            RecipeCategories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
+                            .ToArray()
                         })
                         .ToArray()
                     })

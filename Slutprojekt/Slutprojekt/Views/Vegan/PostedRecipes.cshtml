@@ -10,8 +10,18 @@
 <div>
     @foreach (var item in Model.Posts)
     {
-        @item.RecipeTitle
+        <p>@item.RecipeTitle</p>
+
+        @foreach (var cat in item.RecipeCategories)
+        {
+            <p>@cat</p>
+        }
+
     }
+
+ 
+
+
 </div>
 
 
