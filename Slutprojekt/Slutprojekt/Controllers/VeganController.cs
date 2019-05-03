@@ -28,7 +28,6 @@ namespace Slutprojekt.Controllers
         [HttpGet]
         [Route("profile/add")]
         [Route("")]
-        [AllowAnonymous]
         public IActionResult AddRecipe()//VeganProfileVM profile
         {
             return View(service.GetAddedRecipe());//service.DisplayProfile(profile)

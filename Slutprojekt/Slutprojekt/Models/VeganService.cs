@@ -168,17 +168,24 @@ namespace Slutprojekt.Models
             context.SaveChanges();
         }
 
-        internal async Task<VeganProfileVM> GetProfileInfoAsync()
+        public async Task<VeganProfileVM> GetProfileInfoAsync()
         {
             // Hämta den inloggade användarens ID (från auth-cookie):
-            string userId = userManager.GetUserId(accessor.HttpContext.User);
+           string userId = userManager.GetUserId(accessor.HttpContext.User);
 
-            // Hämta en användare baserat på ID:
-            VeganIdentityUser user = await userManager.FindByIdAsync(userId);
+            VeganProfileVM viewModel = context.AspNetUsers
+                .Where(u => u.Id == userId)
+                .Select(u => new VeganProfileVM
+                {
+                    Description = u.Description,
+                    UserName = u.UserName,
+                    PictureURL = u.PictureUrl,
+                    Posts = u.Recipe.Count,
+                    Followers = u.FollowerFollowerNavigation.Count,
+                    Following = u.FollowerUser.Count
 
-            VeganProfileVM viewModel = new VeganProfileVM();
-            viewModel.UserName = user.UserName;
-            viewModel.Description = user.Description;
+                })
+                .SingleOrDefault();
 
             return viewModel;
 
@@ -196,5 +203,7 @@ namespace Slutprojekt.Models
 
             context.SaveChanges();
         }
+
+
     }
 }
