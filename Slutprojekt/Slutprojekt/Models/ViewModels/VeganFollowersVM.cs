@@ -7,8 +7,11 @@ namespace Slutprojekt.Models.ViewModels
 {
     public class VeganFollowersVM
     {
-        public string FirstName { get; set; }
         public string Username { get; set; }
-        public List<string> Posts { get; set; }
+        public string ProfileImg { get; set; }
+        public string RecipeTitle { get; set; }
+        public string RecipeCategory { get; set; }
+        public string Description { get; set; }
+        public bool IsSaved { get; set; }
     }
 }

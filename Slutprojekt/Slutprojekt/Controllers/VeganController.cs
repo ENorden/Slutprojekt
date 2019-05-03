@@ -155,9 +155,10 @@ namespace Slutprojekt.Controllers
 
         [HttpGet]
         [Route("followers")]
-        public IActionResult Followers(VeganFollowersVM followersVM)
+        [AllowAnonymous]
+        public IActionResult Followers()
         {
-            return View();
+            return View(service.GetAllFollowers());
         }
 
         [Route("Image/File")]

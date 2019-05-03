@@ -16,16 +16,19 @@ namespace Slutprojekt.Models
         UserManager<VeganIdentityUser> userManager;
         SignInManager<VeganIdentityUser> signInManager;
         readonly SlutprojektContext context;
+        readonly IHttpContextAccessor accessor;
 
         public VeganService(
             UserManager<VeganIdentityUser> userManager,
             SignInManager<VeganIdentityUser> signInManager,
-            SlutprojektContext context
+            SlutprojektContext context,
+            IHttpContextAccessor accessor
             )
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.context = context;
+            this.accessor = accessor;
         }
 
         public async Task<IdentityResult> TryRegisterAsync(VeganRegisterVM viewModel)
@@ -51,17 +54,15 @@ namespace Slutprojekt.Models
             await signInManager.SignOutAsync();
         }
 
-        internal VeganFollowersVM[] GetAllFollowers(VeganFollowersVM followersVM)
+        internal VeganFollowersVM[] GetAllFollowers()
         {
+            var follower = new VeganFollowersVM();
+            //var followers = context.
+            //    .Select(person => follower.Username = person.UserName)
+                //.ToArray();
+
             return null;
-            //return context.Users
-            //    .Select(person => new VeganFollowersVM
-            //    {
-            //        Username = person.UserName,
-            //        FirstName = person.FirstName,
-            //        Posts = { "Hello", "My recipe" }
-            //    })
-            //    .ToArray();
+
         }
 
         public VeganRecipeVM[] GetAllCategories()
