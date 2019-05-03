@@ -66,9 +66,9 @@ namespace Slutprojekt.Controllers
 
         [Route("profile/post")]
         [AllowAnonymous]
-        public IActionResult PostRecipe()//VeganProfileVM profile
+        public IActionResult PostRecipe()
         {
-            return View();//service.DisplayProfile(profile)
+            return View(service.DisplayPosts());
         }
 
         [HttpGet]
@@ -135,9 +135,9 @@ namespace Slutprojekt.Controllers
 
         [HttpGet]
         [Route("logout")]
-        public IActionResult LogOut()
+        public async Task<IActionResult> LogOut()
         {
-            service.TryLogOutAsync();
+            await service.TryLogOutAsync();
             return RedirectToAction(nameof(Login));
         }
 

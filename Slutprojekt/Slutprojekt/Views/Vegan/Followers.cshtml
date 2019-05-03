@@ -2,6 +2,14 @@
 @{ ViewBag.Title = "Followers";}
 
 <h4>My followers posts</h4>
+@foreach (var follower in Model)
+{
 <div>
-    <p>Posts here</p>
+    <div>
+        <h5>@follower.Username</h5>
+        <img src="@follower.ProfileImg" />
+        <h6>@follower.Posts[0].RecipeTitle</h6>
+        <img src="@follower.Posts[0].RecipeImg" />
+    </div>
 </div>
+}

@@ -61,20 +61,20 @@ namespace Slutprojekt.Models
 
             var followers = context.Follower
                 .Where(u => u.UserId == userId)
-                .Select(f => new VeganFollowersVM
-                {
-                    Username = f.User.UserName,
-                    ProfileImg = f.User.PictureUrl,
-                    Posts = f.User.Recipe.Select(r => new PostItemVM
+                    .Select(f => new VeganFollowersVM
                     {
-                        RecipeTitle = r.Title,
-                        RecipeImg = r.Img
+                        Username = f.User.UserName,
+                        ProfileImg = f.User.PictureUrl,
+                        Posts = f.User.Recipe.Select(r => new PostItemVM
+                        {
+                            RecipeTitle = r.Title,
+                            RecipeImg = r.Img
+                        })
+                        .ToArray()
                     })
-                    .ToArray()
-                })
                 .ToArray();
 
-            return null;
+            return followers;
 
         }
 
@@ -110,9 +110,26 @@ namespace Slutprojekt.Models
             return recipes;
         }
 
-        public string DisplayProfile(VeganProfileVM profile)
+        public VeganFollowersVM[] DisplayPosts()
         {
-            throw new NotImplementedException();
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+
+            var posts = context.Follower
+                .Where(u => u.UserId == userId)
+                    .Select(u => new VeganFollowersVM
+                    {
+                        Username = u.User.UserName,
+                        ProfileImg = u.User.PictureUrl,
+                        Posts = u.User.Recipe.Select(r => new PostItemVM
+                        {
+                            RecipeTitle = r.Title,
+                            RecipeImg = r.Img
+                        })
+                        .ToArray()
+                    })
+                .ToArray();
+
+            return posts;
         }
 
         public VeganProfileAddVM GetAddedRecipe()
