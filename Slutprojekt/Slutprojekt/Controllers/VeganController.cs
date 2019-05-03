@@ -58,14 +58,14 @@ namespace Slutprojekt.Controllers
 
         [Route("profile/save")]
         [AllowAnonymous]
-        public IActionResult SaveRecipe()//VeganProfileVM profile
+        public IActionResult SavedRecipes()//VeganProfileVM profile
         {
             return View();//service.DisplayProfile(profile)
         }
 
         [Route("profile/post")]
         [AllowAnonymous]
-        public IActionResult PostRecipe()
+        public IActionResult PostedRecipes()
         {
             return View(service.DisplayPosts());
         }

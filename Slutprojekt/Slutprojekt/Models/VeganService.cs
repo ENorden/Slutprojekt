@@ -110,24 +110,24 @@ namespace Slutprojekt.Models
             return recipes;
         }
 
-        public VeganFollowersVM[] DisplayPosts()
+        public VeganPostVM DisplayPosts()
         {
             string userId = userManager.GetUserId(accessor.HttpContext.User);
 
-            var posts = context.Follower
-                .Where(u => u.UserId == userId)
-                    .Select(u => new VeganFollowersVM
+            var posts = context.AspNetUsers
+                .Where(u => u.Id == userId)
+                    .Select(u => new VeganPostVM
                     {
-                        Username = u.User.UserName,
-                        ProfileImg = u.User.PictureUrl,
-                        Posts = u.User.Recipe.Select(r => new PostItemVM
+                        Username = u.UserName,
+                        ProfileImg = u.PictureUrl,
+                        Posts = u.Recipe.Select(r => new PostItemVM2
                         {
                             RecipeTitle = r.Title,
                             RecipeImg = r.Img
                         })
                         .ToArray()
                     })
-                .ToArray();
+                .SingleOrDefault();
 
             return posts;
         }
