@@ -60,7 +60,7 @@ namespace Slutprojekt.Models
             string userId = userManager.GetUserId(accessor.HttpContext.User);
 
             var followers = context.Follower
-                .Where(u => u.UserId == userId)
+                .Where(u => u.FollowerId == userId)
                     .Select(f => new VeganFollowersVM
                     {
                         Username = f.User.UserName,
@@ -68,7 +68,9 @@ namespace Slutprojekt.Models
                         Posts = f.User.Recipe.Select(r => new PostItemVM
                         {
                             RecipeTitle = r.Title,
-                            RecipeImg = r.Img
+                            RecipeImg = r.Img,
+                            RecipeCategories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
+                            .ToArray()
                         })
                         .ToArray()
                     })
