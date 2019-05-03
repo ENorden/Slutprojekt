@@ -134,6 +134,30 @@ namespace Slutprojekt.Models
             return posts;
         }
 
+        //public VeganSavedVM DisplaySavedRecipes()
+        //{
+        //    string userId = userManager.GetUserId(accessor.HttpContext.User);
+
+        //    var posts = context.SavedRecipe
+        //        .Where(u => u.UserId == userId)
+        //            .Select(u => new VeganSavedVM
+        //            {
+        //                Username = u.UserName,
+        //                ProfileImg = u.PictureUrl,
+        //                Posts = u.Recipe.Select(r => new PostItemVM3
+        //                {
+        //                    RecipeTitle = r.Title,
+        //                    RecipeImg = r.Img,
+        //                    RecipeCategories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
+        //                    .ToArray()
+        //                })
+        //                .ToArray()
+        //            })
+        //        .SingleOrDefault();
+
+        //    return posts;
+        //}
+
         public VeganProfileAddVM GetAddedRecipe()
         {
             
