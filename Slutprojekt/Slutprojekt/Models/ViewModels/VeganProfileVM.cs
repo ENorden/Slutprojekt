@@ -12,9 +12,6 @@ namespace Slutprojekt.Models.ViewModels
         public int Followers { get; set; }
         public int Following { get; set; }
         public string Description { get; set; }
-        public string PictureURL { get; set; }
-
-
-            
+        public string PictureURL { get; set; }           
     }
 }

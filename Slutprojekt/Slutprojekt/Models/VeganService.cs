@@ -138,6 +138,11 @@ namespace Slutprojekt.Models
             context.SaveChanges();
         }
 
+        internal string GetProfileInfo()
+        {
+            throw new NotImplementedException();
+        }
+
         internal void SaveStepOne(string[] array)
         {
             for (int i = 0; i < array.Length; i++)
