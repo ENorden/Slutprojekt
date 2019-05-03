@@ -152,26 +152,10 @@ namespace Slutprojekt.Models
             return profile;
         }
 
-        internal void SaveImgToDB(IFormFile file)
-        {
-            var fileName = Path.GetFileName(file.FileName);
-            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\uploads", fileName);
-            using (var fileSrteam = new FileStream(filePath, FileMode.Create))
-            {
-                file.CopyToAsync(fileSrteam);
-            }
-
-            context.Recipe.Add(new Recipe
-            {
-                Img = filePath
-            });
-            context.SaveChanges();
-        }
-
         public async Task<VeganProfileVM> GetProfileInfoAsync()
         {
             // Hämta den inloggade användarens ID (från auth-cookie):
-           string userId = userManager.GetUserId(accessor.HttpContext.User);
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
 
             VeganProfileVM viewModel = context.AspNetUsers
                 .Where(u => u.Id == userId)
@@ -191,19 +175,50 @@ namespace Slutprojekt.Models
 
         }
 
-        internal void SaveStepOne(string[] array)
+        internal void SaveImgToDB(IFormFile file, int id)
         {
+            var fileName = Path.GetFileName(file.FileName);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\uploads", fileName);
+            using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+            {
+                file.CopyToAsync(fileSrteam);
+            }
+
+            //var temp = new Recipe
+            //{
+            //    Img = filePath
+            //};
+
+            //context.Recipe.Add(temp);
+            //context.SaveChanges();
+            //var id = temp.Id;
+
+            //return id;
+        }
+
+        internal int SetCategories(int[] array)
+        {
+            var temp = new Recipe();
+            context.Recipe.Add(temp);
+            context.SaveChanges();
+            var id = temp.Id;
+
+        
+
+        
             for (int i = 0; i < array.Length; i++)
             {
-                context.Category.Add(new Category
+                context.Recipe2Category.Add(new Recipe2Category
                 {
-                    CategoryName = array[i]
+                    CatId = array[i],
+                    RecId = id
+                   
                 });
             }
 
             context.SaveChanges();
+
+            return id;
         }
-
-
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,10 +14,10 @@ using Slutprojekt.Models.ViewModels;
 namespace Slutprojekt.Controllers
 {
     [Authorize]
+
     public class VeganController : Controller
     {
         VeganService service;
-
         private IHostingEnvironment _Hostenv { get; }
 
         public VeganController(VeganService service, IHostingEnvironment _hostenv)
@@ -161,33 +162,49 @@ namespace Slutprojekt.Controllers
             return View(await service.GetAllFollowersAsync());
         }
 
-        [Route("Image/File")]
+        [Route("SetRecipeImg")]
         [AllowAnonymous]
-        public IActionResult FileUpload(IFormFile file)
+        public IActionResult SetRecipeImg(IFormFile file, int id)
         {
-            // Always check content length
+
             if (file?.Length > 0)
             {
-                service.SaveImgToDB(file);
-
+              service.SaveImgToDB(file, id);
             }
 
             return null;
         }
-                
-        [Route("Posting")]
+
+        //[Route("Posting")]
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public IActionResult PostToDatabase([FromBody] Foo viewModel)
+        //{
+        //    //service.SaveStepOne(categoryArray);
+        //    return Ok();
+        //}
+
+        [Route("CreateRecipe")]
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult PostToDatabase([FromBody] Foo viewModel)
+        public IActionResult CreateRecipe([FromBody] Foo viewModel)
         {
-            //service.SaveStepOne(categoryArray);
-            return Ok();
+            var temp = service.SetCategories(viewModel.CategoryIDs);
+
+            return Json(new { id = temp });
         }
     }
 
     public class Foo
     {
-        public int Age { get; set; }
+        [Required(ErrorMessage ="You must choose at least one category")]
         public int[] CategoryIDs { get; set; }
+
+    }
+
+    public class Bar
+    {
+        [Required(ErrorMessage = "You must upload a picture")]
+        public IFormFile File { get; set; }
     }
 }
