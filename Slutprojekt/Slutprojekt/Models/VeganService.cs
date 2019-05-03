@@ -61,7 +61,7 @@ namespace Slutprojekt.Models
             string userId = userManager.GetUserId(accessor.HttpContext.User);
 
             var followers = context.Follower
-                .Where(u => u.UserId == userId)
+                .Where(u => u.FollowerId == userId)
                     .Select(f => new VeganFollowersVM
                     {
                         Username = f.User.UserName,
@@ -69,7 +69,9 @@ namespace Slutprojekt.Models
                         Posts = f.User.Recipe.Select(r => new PostItemVM
                         {
                             RecipeTitle = r.Title,
-                            RecipeImg = r.Img
+                            RecipeImg = r.Img,
+                            RecipeCategories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
+                            .ToArray()
                         })
                         .ToArray()
                     })
@@ -111,24 +113,26 @@ namespace Slutprojekt.Models
             return recipes;
         }
 
-        public VeganFollowersVM[] DisplayPosts()
+        public VeganPostVM DisplayPosts()
         {
             string userId = userManager.GetUserId(accessor.HttpContext.User);
 
-            var posts = context.Follower
-                .Where(u => u.UserId == userId)
-                    .Select(u => new VeganFollowersVM
+            var posts = context.AspNetUsers
+                .Where(u => u.Id == userId)
+                    .Select(u => new VeganPostVM
                     {
-                        Username = u.User.UserName,
-                        ProfileImg = u.User.PictureUrl,
-                        Posts = u.User.Recipe.Select(r => new PostItemVM
+                        Username = u.UserName,
+                        ProfileImg = u.PictureUrl,
+                        Posts = u.Recipe.Select(r => new PostItemVM2
                         {
                             RecipeTitle = r.Title,
-                            RecipeImg = r.Img
+                            RecipeImg = r.Img,
+                            RecipeCategories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
+                            .ToArray()
                         })
                         .ToArray()
                     })
-                .ToArray();
+                .SingleOrDefault();
 
             return posts;
         }

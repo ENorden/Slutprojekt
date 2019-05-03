@@ -1,0 +1,27 @@
+﻿@model VeganPostVM
+
+@{ ViewBag.Title = "Post";}
+@{
+    Layout = "_ProfileLayout";
+}
+
+<h1>Post</h1>
+
+<div>
+    @foreach (var item in Model.Posts)
+    {
+        <p>@item.RecipeTitle</p>
+
+        @foreach (var cat in item.RecipeCategories)
+        {
+            <p>@cat</p>
+        }
+
+    }
+
+ 
+
+
+</div>
+
+
