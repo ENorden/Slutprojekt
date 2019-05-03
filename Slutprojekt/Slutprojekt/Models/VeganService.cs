@@ -151,9 +151,20 @@ namespace Slutprojekt.Models
             context.SaveChanges();
         }
 
-        internal string GetProfileInfo()
+        internal async Task<VeganProfileVM> GetProfileInfoAsync()
         {
-            throw new NotImplementedException();
+            // Hämta den inloggade användarens ID (från auth-cookie):
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+
+            // Hämta en användare baserat på ID:
+            VeganIdentityUser user = await userManager.FindByIdAsync(userId);
+
+            VeganProfileVM viewModel = new VeganProfileVM();
+            viewModel.UserName = user.UserName;
+            viewModel.Description = user.Description;
+
+            return viewModel;
+
         }
 
         internal void SaveStepOne(string[] array)

@@ -141,11 +141,6 @@ namespace Slutprojekt.Controllers
             return RedirectToAction(nameof(Login));
         }
 
-        [Route("profile")]
-        public IActionResult _ProfileLayout()
-        {
-            return View(service.GetProfileInfo());
-        }
 
         [Route("recipes")]
         public IActionResult Recipes()
