@@ -54,12 +54,25 @@ namespace Slutprojekt.Models
             await signInManager.SignOutAsync();
         }
 
-        internal VeganFollowersVM[] GetAllFollowers()
+        internal async Task<VeganFollowersVM[]> GetAllFollowersAsync()
         {
-            var follower = new VeganFollowersVM();
-            //var followers = context.
-            //    .Select(person => follower.Username = person.UserName)
-                //.ToArray();
+            // Hämta den inloggade användarens ID (från auth-cookie)
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+
+            var followers = context.Follower
+                .Where(u => u.UserId == userId)
+                .Select(f => new VeganFollowersVM
+                {
+                    Username = f.User.UserName,
+                    ProfileImg = f.User.PictureUrl,
+                    Posts = f.User.Recipe.Select(r => new PostItemVM
+                    {
+                        RecipeTitle = r.Title,
+                        RecipeImg = r.Img
+                    })
+                    .ToArray()
+                })
+                .ToArray();
 
             return null;
 

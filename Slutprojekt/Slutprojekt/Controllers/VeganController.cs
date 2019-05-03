@@ -162,9 +162,9 @@ namespace Slutprojekt.Controllers
         [HttpGet]
         [Route("followers")]
         [AllowAnonymous]
-        public IActionResult Followers()
+        public async Task<IActionResult> Followers()
         {
-            return View(service.GetAllFollowers());
+            return View(await service.GetAllFollowersAsync());
         }
 
         [Route("Image/File")]
