@@ -161,7 +161,7 @@ namespace Slutprojekt.Controllers
         [Route("followers")]
         public IActionResult Followers()
         {
-            return View(service.GetAllFollowersAsync());
+            return View(service.GetAllFollowers());
         }
 
         //[Route("SetRecipeImg")]

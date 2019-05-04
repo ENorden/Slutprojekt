@@ -55,7 +55,7 @@ namespace Slutprojekt.Models
             await signInManager.SignOutAsync();
         }
 
-        internal VeganFollowersVM[] GetAllFollowersAsync()
+        internal VeganFollowersVM[] GetAllFollowers()
         {
             // Hämta den inloggade användarens ID (från auth-cookie)
             string userId = userManager.GetUserId(accessor.HttpContext.User);
@@ -70,6 +70,7 @@ namespace Slutprojekt.Models
                         {
                             RecipeTitle = r.Title,
                             RecipeImg = r.Img,
+                            RecipeId = r.Id,
                             RecipeCategories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
                             .ToArray()
                         })
@@ -173,6 +174,7 @@ namespace Slutprojekt.Models
                 {
                     RecipeTitle = r.Title,
                     RecipeImg = r.Img,
+                    RecipeId = r.Id,
                     RecipeCategories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
                             .ToArray()
                 })
@@ -193,6 +195,7 @@ namespace Slutprojekt.Models
                     CreatorProfileImg = r.Rec.User.PictureUrl,
                     RecipeTitle = r.Rec.Title,
                     RecipeImg = r.Rec.Img,
+                    RecipeId = r.RecId,
                     RecipeCategories = r.Rec.Recipe2Category.Select(c => c.Cat.CategoryName)
                                 .ToArray()
                 })

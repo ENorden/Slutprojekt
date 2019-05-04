@@ -13,13 +13,17 @@
     <div>
         <h5>@post.CreatorUsername</h5>
         <img src="@post.CreatorProfileImg" />
-        <h6>@post.RecipeTitle</h6>
-        <img src="@post.RecipeImg" style="width: 500px; height:auto"/>
+
+        <a asp-controller="Vegan" asp-action="Details" asp-route-id="@post.RecipeId">
+            <h6>@post.RecipeTitle</h6>
+        </a>
 
         @foreach (var cat in post.RecipeCategories)
         {
             <p>@cat</p>
         }
+
+        <img src="@post.RecipeImg" style="width: 500px; height:auto"/>
     </div>
     }
 }

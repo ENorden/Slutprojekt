@@ -7,10 +7,14 @@
 <div>
     <div>
         <h5>@follower.Username</h5>
-        <img src="@follower.ProfileImg" style="width: 500px; height:auto"/>
-        <h6>@follower.Posts[0].RecipeTitle</h6>
-        <img src="@follower.Posts[0].RecipeImg" style="width: 500px; height:auto"/>
+        <img src="@follower.ProfileImg" style="width: 500px; height:auto" />
+
+        <a asp-controller="Vegan" asp-action="Details" asp-route-id="@follower.Posts[0].RecipeId">
+            <h6>@follower.Posts[0].RecipeTitle</h6>
+        </a>
         <p>@follower.Posts[0].RecipeCategories[0]</p>
+
+        <img src="@follower.Posts[0].RecipeImg" style="width: 500px; height:auto" />
     </div>
 </div>
 }
