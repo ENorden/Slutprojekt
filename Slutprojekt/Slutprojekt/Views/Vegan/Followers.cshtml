@@ -1,20 +1,28 @@
 ﻿@model VeganFollowersVM[]
 @{ ViewBag.Title = "Followers";}
 
-<h4>My followers posts</h4>
-@foreach (var follower in Model)
+<h4>Posts from people you follow</h4>
+
+@if (Model.Length > 0)
 {
-<div>
-    <div>
-        <h5>@follower.Username</h5>
-        <img src="@follower.ProfileImg" style="width: 500px; height:auto" />
+    @foreach (var follower in Model)
+    {
+        <div>
+            <div>
+                <h5>@follower.Username</h5>
+                <img src="@follower.ProfileImg" style="width: 500px; height:auto" />
 
-        <a asp-controller="Vegan" asp-action="Details" asp-route-id="@follower.Posts[0].RecipeId">
-            <h6>@follower.Posts[0].RecipeTitle</h6>
-        </a>
-        <p>@follower.Posts[0].RecipeCategories[0]</p>
+                <a asp-controller="Vegan" asp-action="Details" asp-route-id="@follower.Posts[0].RecipeId">
+                    <h6>@follower.Posts[0].RecipeTitle</h6>
+                </a>
+                <p>@follower.Posts[0].RecipeCategories[0]</p>
 
-        <img src="@follower.Posts[0].RecipeImg" style="width: 500px; height:auto" />
-    </div>
-</div>
+                <img src="@follower.Posts[0].RecipeImg" style="width: 500px; height:auto" />
+            </div>
+        </div>
+    }
+}
+else
+{
+    <h5>You are not following anyone yet</h5>
 }
