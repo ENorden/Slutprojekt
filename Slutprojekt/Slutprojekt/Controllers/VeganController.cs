@@ -69,6 +69,12 @@ namespace Slutprojekt.Controllers
             return View(service.DisplayPosts());
         }
 
+        [Route("details/{id}")]
+        public IActionResult Details(int id)
+        {
+            return View(service.GetRecipesById(id));
+        }
+
         [HttpGet]
         [Route("register")]
         [AllowAnonymous]
@@ -152,7 +158,6 @@ namespace Slutprojekt.Controllers
             return View(service.GetRecipesByCategory(id));
         }
 
-        [HttpGet]
         [Route("followers")]
         public IActionResult Followers()
         {

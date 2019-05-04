@@ -113,6 +113,56 @@ namespace Slutprojekt.Models
             return recipes;
         }
 
+        public VeganDetailsVM GetRecipesById(int id)
+        {
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+
+            bool isSaved = context.SavedRecipe
+                .Any(r => r.RecId == id
+                    && r.UserId == userId);
+
+            bool isUsersRecipe = context.Recipe
+                .Any(r => r.Id == id
+                    && r.UserId == userId);
+
+            //Blir fel
+            bool isFollowing = context.AspNetUsers
+                .Any(u => u.FollowerUser
+                        .Select(f => f.FollowerId).ToString() == userId
+                    && u.FollowerUser
+                        .Select(p => p.UserId).ToString() ==
+                       u.Recipe.Select(p => p.UserId).ToString());
+
+            var recipe = context.Recipe
+                .Where(r => r.Id == id)
+                .Select(r => new VeganDetailsVM
+                {
+                    Title = r.Title,
+                    RecImg = r.Img,
+                    IsSaved = isSaved,
+                    Categories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
+                        .ToArray(),
+                    Username = r.User.UserName,
+                    UserImg = r.User.PictureUrl,
+                    Ingredients = r.Ingredient.Select(i => new IngredientVM
+                    {
+                        Name = i.Name,
+                        Amount = i.Amount,
+                        Unit = i.Unit
+                    }).ToArray(),
+                    Steps = r.StepByStep.Select(s => new StepByStepVM
+                    {
+                        Instruction = s.Instruction,
+                        SortOrder = s.SortOrder
+                    }).OrderBy(s => s.SortOrder).ToArray(),
+                    IsFollowing = isFollowing,
+                    IsUsersRecipe = isUsersRecipe
+                })
+                .SingleOrDefault();
+
+            return recipe;
+        }
+
         public VeganPostVM[] DisplayPosts()
         {
             string userId = userManager.GetUserId(accessor.HttpContext.User);

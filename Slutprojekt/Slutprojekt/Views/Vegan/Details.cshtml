@@ -1,0 +1,56 @@
+﻿@model VeganDetailsVM
+@{ ViewBag.Title = "Recipe Details";}
+
+<div class="presentation">
+    <h3>@Model.Title</h3>
+
+    @foreach (var cat in Model.Categories)
+    {
+        <h6>@cat</h6>
+    }
+
+    @if (Model.IsSaved)
+    {
+        <button>UnSave</button>
+    }
+    else
+    {
+        <button>Save</button>
+    }
+    <br />
+    <img src="@Model.RecImg" alt="recipe-img" style="width:500px; height:auto"/>
+    
+    <div class="posted-by-user">
+        <img src="@Model.UserImg" alt="user-img" style="width:50px; height:auto" />
+        <h6>@Model.Username</h6>
+
+        @if (Model.IsFollowing)
+        {
+            <button>Unfollow</button>
+        }
+        else if (Model.IsUsersRecipe)
+        {
+            <p>This is your recipe!</p>
+        }
+        else
+        {
+            <button>Follow</button>
+        }
+    </div>
+</div>
+<div class="ingredients">
+    <h3>Ingredients</h3>
+    <ul>
+        @foreach (var ingr in Model.Ingredients)
+        {
+            <li>@ingr.Amount @ingr.Unit @ingr.Name</li>
+        }
+    </ul>
+</div>
+<div class="steps">
+    <h3>Step by Step</h3>
+    @foreach (var step in Model.Steps)
+    {
+        <input type="checkbox">@(step.SortOrder) @step.Instruction
+    }
+</div>
