@@ -11,9 +11,6 @@
         <label asp-for="Name"></label>
         <input id="input" />
 
-        @*<label asp-for="Name"></label>
-        <input asp-for="Name" />
-        <span asp-validation-for="Name"></span>*@
 
         @foreach (var item in Model.Categories)
         {
@@ -39,10 +36,10 @@
         <label>Amount</label>
         <input id="AmountInput" type="number" />
 
-        @*<label asp-for="MeasurementItems"></label>
+        <label asp-for="MeasurementItems"></label>
         <select asp-for="SelectedMeasurementValue"
-                asp-items="Model.MeasurementItems"></select>
-        <span asp-validation-for="SelectedMeasurementValue"></span>*@
+                asp-items="Model.MeasurementItems" id="valueofDD"></select>
+        <span asp-validation-for="SelectedMeasurementValue"></span>
 
         @*div med en loop som loopar över de ingredienser som finns*@
         
@@ -132,10 +129,13 @@
     function AddIngredients() {
         var IngredientName = $('#IngrInput').val();
         var IngredientAmount = $('#AmountInput').val();
+        var DDValue = $('#valueofDD').val();
 
         var formData = new FormData();
         formData.append('RecipeIngr', IngredientName);
         formData.append('RecipeAmount', IngredientAmount);
+        formData.append('DropDownVal', DDValue);
+
 
         $.ajax({
             url: '/AddRecipieStep2',
