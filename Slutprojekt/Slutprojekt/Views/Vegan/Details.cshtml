@@ -1,43 +1,43 @@
 ﻿@model VeganDetailsVM
 @{ ViewBag.Title = "Recipe Details";}
 
-<div class="presentation">
-    <h3>@Model.Title</h3>
+    <div class="presentation">
+        <h3>@Model.Title</h3>
 
-    @foreach (var cat in Model.Categories)
-    {
-        <h6>@cat</h6>
-    }
-
-    @if (Model.IsSaved)
-    {
-        <button>UnSave</button>
-    }
-    else
-    {
-        <button>Save</button>
-    }
-    <br />
-    <img src="@Model.RecImg" alt="recipe-img" style="width:500px; height:auto"/>
-    
-    <div class="posted-by-user">
-        <img src="@Model.UserImg" alt="user-img" style="width:50px; height:auto" />
-        <h6>@Model.Username</h6>
-
-        @if (Model.IsFollowing)
+        @foreach (var cat in Model.Categories)
         {
-            <button>Unfollow</button>
+            <h6>@cat</h6>
         }
-        else if (Model.IsUsersRecipe)
+
+        @if (Model.IsSaved)
         {
-            <p>This is your recipe!</p>
+            <input type="submit" id="btnSave" value="Unsave" />
         }
         else
         {
-            <button>Follow</button>
+            <input type="submit" id="btnSave" value="Save" />
         }
+        <br />
+        <img src="@Model.RecImg" alt="recipe-img" style="width:500px; height:auto" />
+
+        <div class="posted-by-user">
+            <img src="@Model.UserImg" alt="user-img" style="width:50px; height:auto" />
+            <h6>@Model.Username</h6>
+
+            @if (Model.IsFollowing)
+            {
+                <input type="submit" id="btnFollow" value="Unfollow" />
+            }
+            else if (Model.IsUsersRecipe)
+            {
+                <p>This is your recipe!</p>
+            }
+            else
+            {
+                <input type="submit" id="btnFollow" value="Follow" />
+            }
+        </div>
     </div>
-</div>
 <div class="ingredients">
     <h3>Ingredients</h3>
     <ul>
@@ -54,3 +54,34 @@
         <input type="checkbox">@(step.SortOrder) @step.Instruction
     }
 </div>
+
+@section scripts
+{
+    <script>
+        var id = @Model.RecId;
+        $("#btnSave").click(function () {
+            var isSaved = $('#btnSave').val() == "Unsave";
+            $.ajax({
+                url: (isSaved) ? "/Unsave/" + id : "/Save/" + id,
+                type: "GET",
+                success: function (result) {
+                    $('#btnSave').val(result);
+                }
+            });
+        });
+    </script>
+
+    <script>
+        var id = "@Model.UserId";
+        $("#btnFollow").click(function () {
+            var isFollowing = $('#btnFollow').val() == "Unfollow";
+            $.ajax({
+                url: (isFollowing) ? "/Unfollow/" + id : "/Follow/" + id,
+                type: "GET",
+                success: function (result) {
+                    $('#btnFollow').val(result);
+                }
+            });
+        });
+    </script>
+}
