@@ -230,8 +230,8 @@ namespace Slutprojekt.Models
                 string userId = userManager.GetUserId(accessor.HttpContext.User);
                 recipe = new Recipe();
                 recipe.UserId = userId;
-                recipe.Title = "Temp";
-                recipe.Img = "Temp";
+                recipe.Title = viewModel.Title;
+                recipe.Img = "temp";
                 context.Recipe.Add(recipe);
                 context.SaveChanges();
                 viewModel.RecepieId = recipe.Id;
