@@ -57,28 +57,26 @@ namespace Slutprojekt.Models
 
         internal VeganFollowersVM[] GetAllFollowers()
         {
-            // Hämta den inloggade användarens ID (från auth-cookie)
+            // Get current user's id
             string userId = userManager.GetUserId(accessor.HttpContext.User);
 
-            var followers = context.Follower
+            var followingPosts = context.Follower
                 .Where(u => u.FollowerId == userId)
-                    .Select(f => new VeganFollowersVM
-                    {
-                        Username = f.User.UserName,
-                        ProfileImg = f.User.PictureUrl,
-                        Posts = f.User.Recipe.Select(r => new PostItemVM
+                    .SelectMany(f => f.User.Recipe
+                        .Select(r => new VeganFollowersVM
                         {
+                            CreatorUsername = r.User.UserName,
+                            CreatorProfileImg = r.User.PictureUrl,
                             RecipeTitle = r.Title,
                             RecipeImg = r.Img,
                             RecipeId = r.Id,
                             RecipeCategories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
-                            .ToArray()
-                        })
-                        .ToArray()
-                    })
-                .ToArray();
+                                .ToArray()
+                        }))
+                        .OrderBy(r => r.RecipeId)
+                        .ToArray();
 
-            return followers;
+            return followingPosts;
 
         }
 

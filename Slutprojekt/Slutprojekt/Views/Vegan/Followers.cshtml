@@ -5,20 +5,23 @@
 
 @if (Model.Length > 0)
 {
-    @foreach (var follower in Model)
+    foreach (var post in Model)
     {
-        <div>
-            <div>
-                <h5>@follower.Username</h5>
-                <img src="@follower.ProfileImg" style="width: 500px; height:auto" />
+        <div class="poster-info">
+            <h5>@post.CreatorUsername</h5>
+            <img src="@post.CreatorProfileImg" style="width: 500px; height:auto" />
+        </div>
+        <div class="post-info">
+            <a asp-controller="Vegan" asp-action="Details" asp-route-id="@post.RecipeId">
+                <h6>@post.RecipeTitle</h6>
+            </a>
 
-                <a asp-controller="Vegan" asp-action="Details" asp-route-id="@follower.Posts[0].RecipeId">
-                    <h6>@follower.Posts[0].RecipeTitle</h6>
-                </a>
-                <p>@follower.Posts[0].RecipeCategories[0]</p>
+            @foreach (var cat in post.RecipeCategories)
+            {
+                <p>@cat</p>
+            }
 
-                <img src="@follower.Posts[0].RecipeImg" style="width: 500px; height:auto" />
-            </div>
+            <img src="@post.RecipeImg" style="width: 500px; height:auto" />
         </div>
     }
 }
