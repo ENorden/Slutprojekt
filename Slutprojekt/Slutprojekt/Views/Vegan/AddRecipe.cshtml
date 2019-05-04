@@ -8,6 +8,8 @@
 
     <div id="carousel-item-1" class="carousel-item">
         item 1
+        <label asp-for="Name"></label>
+        <input id="input" />
 
         @*<label asp-for="Name"></label>
         <input asp-for="Name" />
@@ -15,7 +17,7 @@
 
         @foreach (var item in Model.Categories)
         {
-        <input type="checkbox" name="ingredient" value="@item.Value" checked>@item.Text<br />
+            <input type="checkbox" name="ingredient" value="@item.Value" checked>@item.Text<br />
         }
 
         <form method="post" enctype="multipart/form-data">
@@ -29,12 +31,22 @@
     </div>
 
     <div id="carousel-item-2" class="carousel-item hide">
-        item 2
+        Step 2
+
+        <label>Ingredient</label>
+        <input id="IngrInput" />
+
+        <label>Amount</label>
+        <input id="AmountInput" />
 
         <label asp-for="MeasurementItems"></label>
         <select asp-for="SelectedMeasurementValue"
                 asp-items="Model.MeasurementItems"></select>
         <span asp-validation-for="SelectedMeasurementValue"></span>
+
+        @*div med en loop som loopar över de ingredienser som finns*@
+        
+        <button type="button"> Add ingredient</button>
 
         <button type="button" data-item-to-show="1">Back</button>
         <button type="button" data-item-to-show="3">Next</button>
@@ -78,13 +90,15 @@
             categoryIDs.push($(this).val());
         });
 
+        var DishName = $('#input').val();
+
         var fileUpload = $("#profilePic").get(0);
         var files = fileUpload.files;
         var formData = new FormData();
         formData.append('file', files[0]);
         formData.append('categoryIDs', categoryIDs);
         formData.append('recepieId', recepieId);
-        formData.append('title', 'Test title');
+        formData.append('title', DishName);
 
         $.ajax({
             url: '/AddRecipieStep1',
