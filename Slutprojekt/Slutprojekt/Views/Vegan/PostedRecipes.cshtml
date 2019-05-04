@@ -7,19 +7,25 @@
 
 <h1>Your posts</h1>
 
-<div>
-    @foreach (var item in Model)
-    {
-        <a asp-controller="Vegan" asp-action="Details" asp-route-id="@item.RecipeId">
-            <h3>@item.RecipeTitle</h3>
-        </a>
-        @foreach (var cat in item.RecipeCategories)
+@if (Model.Length > 0)
+{
+    <div>
+        @foreach (var item in Model)
         {
-            <p>@cat</p>
+            <a asp-controller="Vegan" asp-action="Details" asp-route-id="@item.RecipeId">
+                <h3>@item.RecipeTitle</h3>
+            </a>
+            @foreach (var cat in item.RecipeCategories)
+            {
+                <p>@cat</p>
+            }
+
+            <img src="@item.RecipeImg" style="width: 500px; height:auto" />
         }
-
-        <img src="@item.RecipeImg" style="width: 500px; height:auto" />
-    }
-</div>
-
+    </div>
+}
+else
+{
+    <h5>You have no posts yet</h5>
+}
 
