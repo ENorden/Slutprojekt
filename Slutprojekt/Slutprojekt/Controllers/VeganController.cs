@@ -57,9 +57,9 @@ namespace Slutprojekt.Controllers
 
 
         [Route("profile/save")]
-        public IActionResult SavedRecipes()//VeganProfileVM profile
+        public IActionResult SavedRecipes()
         {
-            return View();//service.DisplayProfile(profile)
+            return View(service.DisplaySavedRecipes());
         }
 
         [Route("profile")]
@@ -154,9 +154,9 @@ namespace Slutprojekt.Controllers
 
         [HttpGet]
         [Route("followers")]
-        public async Task<IActionResult> Followers()
+        public IActionResult Followers()
         {
-            return View(await service.GetAllFollowersAsync());
+            return View(service.GetAllFollowersAsync());
         }
 
         //[Route("SetRecipeImg")]

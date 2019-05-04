@@ -55,7 +55,7 @@ namespace Slutprojekt.Models
             await signInManager.SignOutAsync();
         }
 
-        internal async Task<VeganFollowersVM[]> GetAllFollowersAsync()
+        internal VeganFollowersVM[] GetAllFollowersAsync()
         {
             // Hämta den inloggade användarens ID (från auth-cookie)
             string userId = userManager.GetUserId(accessor.HttpContext.User);
@@ -113,53 +113,43 @@ namespace Slutprojekt.Models
             return recipes;
         }
 
-        public VeganPostVM DisplayPosts()
+        public VeganPostVM[] DisplayPosts()
         {
             string userId = userManager.GetUserId(accessor.HttpContext.User);
 
-            var posts = context.AspNetUsers
-                .Where(u => u.Id == userId)
-                    .Select(u => new VeganPostVM
-                    {
-                        Username = u.UserName,
-                        ProfileImg = u.PictureUrl,
-                        Posts = u.Recipe.Select(r => new PostItemVM2
-                        {
-                            RecipeTitle = r.Title,
-                            RecipeImg = r.Img,
-                            RecipeCategories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
+            var posts = context.Recipe
+                .Where(r => r.UserId == userId)
+                .Select(r => new VeganPostVM
+                {
+                    RecipeTitle = r.Title,
+                    RecipeImg = r.Img,
+                    RecipeCategories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
                             .ToArray()
-                        })
-                        .ToArray()
-                    })
-                .SingleOrDefault();
+                })
+                .ToArray();
 
             return posts;
         }
 
-        //public VeganSavedVM DisplaySavedRecipes()
-        //{
-        //    string userId = userManager.GetUserId(accessor.HttpContext.User);
+        public VeganSavedVM[] DisplaySavedRecipes()
+        {
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+            
+            var posts = context.SavedRecipe
+                .Where(u => u.UserId == userId)
+                .Select(r => new VeganSavedVM
+                {
+                    CreatorUsername = r.Rec.User.UserName,
+                    CreatorProfileImg = r.Rec.User.PictureUrl,
+                    RecipeTitle = r.Rec.Title,
+                    RecipeImg = r.Rec.Img,
+                    RecipeCategories = r.Rec.Recipe2Category.Select(c => c.Cat.CategoryName)
+                                .ToArray()
+                })
+                .ToArray();
 
-        //    var posts = context.SavedRecipe
-        //        .Where(u => u.UserId == userId)
-        //            .Select(u => new VeganSavedVM
-        //            {
-        //                Username = u.UserName,
-        //                ProfileImg = u.PictureUrl,
-        //                Posts = u.Recipe.Select(r => new PostItemVM3
-        //                {
-        //                    RecipeTitle = r.Title,
-        //                    RecipeImg = r.Img,
-        //                    RecipeCategories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
-        //                    .ToArray()
-        //                })
-        //                .ToArray()
-        //            })
-        //        .SingleOrDefault();
-
-        //    return posts;
-        //}
+            return posts;
+        }
 
         public VeganProfileAddVM GetAddedRecipe()
         {
