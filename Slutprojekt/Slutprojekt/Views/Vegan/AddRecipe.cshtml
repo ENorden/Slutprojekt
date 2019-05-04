@@ -39,14 +39,14 @@
         <label>Amount</label>
         <input id="AmountInput" type="number" />
 
-        <label asp-for="MeasurementItems"></label>
+        @*<label asp-for="MeasurementItems"></label>
         <select asp-for="SelectedMeasurementValue"
                 asp-items="Model.MeasurementItems"></select>
-        <span asp-validation-for="SelectedMeasurementValue"></span>
+        <span asp-validation-for="SelectedMeasurementValue"></span>*@
 
         @*div med en loop som loopar över de ingredienser som finns*@
         
-        <button type="button"> Add ingredient</button>
+        <button type="button" onclick="AddIngredients();" data-item-to-show="2"> Add ingredient</button>
 
         <button type="button" data-item-to-show="1">Back</button>
         <button type="button" data-item-to-show="3">Next</button>
@@ -127,27 +127,30 @@
 
         //});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     };
 
+    function AddIngredients() {
+        var IngredientName = $('#IngrInput').val();
+        var IngredientAmount = $('#AmountInput').val();
 
+        var formData = new FormData();
+        formData.append('RecipeIngr', IngredientName);
+        formData.append('RecipeAmount', IngredientAmount);
+
+        $.ajax({
+            url: '/AddRecipieStep2',
+            type: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                console.log("Du lyckades iaf komma hit");
+            }
+        });
+
+
+
+    }
 
 
 
