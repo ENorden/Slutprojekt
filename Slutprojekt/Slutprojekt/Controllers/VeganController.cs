@@ -194,6 +194,14 @@ namespace Slutprojekt.Controllers
             var recepieId = service.AddRecipieStep1(viewModel);
             return Json(recepieId);
         }
+
+        [Route("AddRecipieStep2")]
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult AddRecipieStep2(StepTwo stepTwo)
+        {
+            return Ok();
+        }
     }
 
     public class AddRecepieVM
@@ -206,5 +214,12 @@ namespace Slutprojekt.Controllers
 
         [Required(ErrorMessage = "You must upload a picture")]
         public IFormFile File { get; set; }
+    }
+
+    public class StepTwo
+    {
+        public string Ingredient { get; set; }
+        public double Amount { get; set; }
+
     }
 }
