@@ -116,23 +116,26 @@ namespace Slutprojekt.Models
 
         public VeganDetailsVM GetRecipesById(int id)
         {
+            // Get current users id
             string userId = userManager.GetUserId(accessor.HttpContext.User);
 
+            // Find out if current recipe is saved by the current user
             bool isSaved = context.SavedRecipe
                 .Any(r => r.RecId == id
                     && r.UserId == userId);
 
+            // Find out if current recipe is created by the current user
             bool isUsersRecipe = context.Recipe
                 .Any(r => r.Id == id
                     && r.UserId == userId);
 
-            //Blir fel
-            bool isFollowing = context.AspNetUsers
-                .Any(u => u.FollowerUser
-                        .Select(f => f.FollowerId).ToString() == userId
-                    && u.FollowerUser
-                        .Select(p => p.UserId).ToString() ==
-                       u.Recipe.Select(p => p.UserId).ToString());
+            // Get user that created current recipe
+            string creatorUserId = context.Recipe
+                .First(r => r.Id == id).UserId;
+
+            // Find if the recipe creator is followed by the current user
+            bool isFollowing = context.Follower
+                .Any(u => u.FollowerId == userId && u.UserId == creatorUserId);
 
             var recipe = context.Recipe
                 .Where(r => r.Id == id)
