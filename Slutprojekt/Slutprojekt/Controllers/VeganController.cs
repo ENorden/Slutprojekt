@@ -76,6 +76,34 @@ namespace Slutprojekt.Controllers
         }
 
         [HttpGet]
+        [Route("Unsave/{id}")]
+        public IActionResult Unsave(int id)
+        {
+            return Content(service.UnsaveRecipe(id));
+        }
+
+        [HttpGet]
+        [Route("Save/{id}")]
+        public IActionResult Save(int id)
+        {
+            return Content(service.SaveRecipe(id));
+        }
+
+        [HttpGet]
+        [Route("Unfollow/{id}")]
+        public IActionResult Unfollow(string id)
+        {
+            return Content(service.UnfollowPerson(id));
+        }
+
+        [HttpGet]
+        [Route("Follow/{id}")]
+        public IActionResult Follow(string id)
+        {
+            return Content(service.FollowPerson(id));
+        }
+
+        [HttpGet]
         [Route("register")]
         [AllowAnonymous]
         public IActionResult Register(string returnUrl)

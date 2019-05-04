@@ -141,11 +141,13 @@ namespace Slutprojekt.Models
                 {
                     Title = r.Title,
                     RecImg = r.Img,
+                    RecId = r.Id,
                     IsSaved = isSaved,
                     Categories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
                         .ToArray(),
                     Username = r.User.UserName,
                     UserImg = r.User.PictureUrl,
+                    UserId = r.User.Id,
                     Ingredients = r.Ingredient.Select(i => new IngredientVM
                     {
                         Name = i.Name,
@@ -163,6 +165,62 @@ namespace Slutprojekt.Models
                 .SingleOrDefault();
 
             return recipe;
+        }
+
+        public string UnsaveRecipe(int id)
+        {
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+
+            var savedRecipe = context.SavedRecipe
+                .Where(u => u.RecId == id && u.UserId == userId)
+                .Single();
+
+            context.SavedRecipe.Remove(savedRecipe);
+            context.SaveChanges();
+                
+            return "Save";
+        }
+
+        public string SaveRecipe(int id)
+        {
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+
+            context.SavedRecipe.Add(new SavedRecipe
+            {
+                RecId = id,
+                UserId = userId
+            });
+            context.SaveChanges();
+
+            return "Unsave";
+        }
+
+        public string UnfollowPerson(string id)
+        {
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+
+            var followedPerson = context.Follower
+                .Where(u => u.UserId == id && u.FollowerId == userId)
+                .Single();
+
+            context.Follower.Remove(followedPerson);
+            context.SaveChanges();
+
+            return "Follow";
+        }
+
+        public string FollowPerson(string id)
+        {
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+
+            context.Follower.Add(new Follower
+            {
+                UserId = id,
+                FollowerId = userId
+            });
+            context.SaveChanges();
+
+            return "Unfollow";
         }
 
         public VeganPostVM[] DisplayPosts()
