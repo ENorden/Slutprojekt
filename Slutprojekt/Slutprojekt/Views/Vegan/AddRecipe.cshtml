@@ -8,6 +8,8 @@
 
     <div id="carousel-item-1" class="carousel-item">
         item 1
+        <label asp-for="Name"></label>
+        <input id="input" />
 
         @*<label asp-for="Name"></label>
         <input asp-for="Name" />
@@ -15,7 +17,7 @@
 
         @foreach (var item in Model.Categories)
         {
-        <input type="checkbox" name="ingredient" value="@item.Value" checked>@item.Text<br />
+            <input type="checkbox" name="ingredient" value="@item.Value" checked>@item.Text<br />
         }
 
         <form method="post" enctype="multipart/form-data">
@@ -78,13 +80,15 @@
             categoryIDs.push($(this).val());
         });
 
+        var DishName = $('#input').val();
+
         var fileUpload = $("#profilePic").get(0);
         var files = fileUpload.files;
         var formData = new FormData();
         formData.append('file', files[0]);
         formData.append('categoryIDs', categoryIDs);
         formData.append('recepieId', recepieId);
-        formData.append('title', 'Test title');
+        formData.append('title', DishName);
 
         $.ajax({
             url: '/AddRecipieStep1',
