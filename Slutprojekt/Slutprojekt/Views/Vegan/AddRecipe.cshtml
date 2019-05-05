@@ -135,12 +135,13 @@
             var IngredientName = $('#IngrInput').val();
             var IngredientAmount = $('#AmountInput').val();
             var DDValue = $('#valueofDD').val();
+            var CurrentID = recepieId; 
 
             var formData = new FormData();
             formData.append('RecipeIngr', IngredientName);
             formData.append('RecipeAmount', IngredientAmount);
             formData.append('DropDownVal', DDValue);
-
+            formData.append('RecID', CurrentID);
 
             $.ajax({
                 url: '/AddRecipieStep2',
@@ -156,8 +157,11 @@
 
     function AddDescription() {
         var Description = $('#RecipeDescr').val();
+        var idOfRec = recepieId;
         var formData = new FormData();
         formData.append('TextBox', Description);
+        formData.append('RecID', idOfRec);
+
 
         $.ajax({
                 url: '/AddRecipieStep3',
