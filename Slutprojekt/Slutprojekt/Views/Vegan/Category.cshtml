@@ -1,6 +1,9 @@
 ﻿@model VeganCategoryVM[]
 @{ ViewBag.Title = "Recipe Category";}
 
+<partial name="~/Views/Shared/_Header.cshtml" />
+
+
 <h1>@Model[0].CategoryName</h1>
 
 @foreach (var item in Model)

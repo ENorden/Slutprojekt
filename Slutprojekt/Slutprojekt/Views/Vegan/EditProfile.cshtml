@@ -1,0 +1,21 @@
+﻿@model VeganProfileVM
+
+@{
+    Layout = null;
+}
+
+<partial name="~/Views/Shared/_Header.cshtml" />
+
+
+<h2>Edit Profile</h2>
+<form asp-controller="vegan" asp-action="editprofile" method="post">
+    <label asp-for="UserName"></label>
+    <input asp-for="UserName" />
+    <br />
+    <label asp-for="Description"></label>
+    <input asp-for="Description" />
+    <br />
+    @*img*@
+
+    <input type="submit" value="Update" />
+</form>

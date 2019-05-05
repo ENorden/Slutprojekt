@@ -1,6 +1,8 @@
 ﻿@model VeganRecipeVM[]
 @{ ViewBag.Title = "Recipes";}
 
+<partial name="~/Views/Shared/_Header.cshtml" />
+
 <h2>Recipe categories</h2>
 @foreach (var item in Model)
 {
@@ -9,6 +11,9 @@
         <a asp-controller="Vegan" asp-action="Category" asp-route-id="@item.Id">@item.CategoryName</a>
     </div>
 }
+
+
+
 
 
 

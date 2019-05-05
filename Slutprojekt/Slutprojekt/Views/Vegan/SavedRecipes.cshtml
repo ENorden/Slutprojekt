@@ -1,8 +1,11 @@
-﻿@model  VeganSavedVM[]
+﻿@model VeganSavedVM[]
 @{ ViewBag.Title = "Save";}
 @{
     Layout = "_ProfileLayout";
 }
+
+<partial name="~/Views/Shared/_Header.cshtml" />
+
 
 <h1>Your saved recipes</h1>
 
@@ -10,25 +13,25 @@
 {
     foreach (var post in Model)
     {
-    <div>
-        <h5>@post.CreatorUsername</h5>
-        <img src="@post.CreatorProfileImg" />
+<div>
+    <h5>@post.CreatorUsername</h5>
+    <img src="@post.CreatorProfileImg" />
 
-        <a asp-controller="Vegan" asp-action="Details" asp-route-id="@post.RecipeId">
-            <h6>@post.RecipeTitle</h6>
-        </a>
+    <a asp-controller="Vegan" asp-action="Details" asp-route-id="@post.RecipeId">
+        <h6>@post.RecipeTitle</h6>
+    </a>
 
-        @foreach (var cat in post.RecipeCategories)
+    @foreach (var cat in post.RecipeCategories)
         {
-            <p>@cat</p>
+    <p>@cat</p>
         }
 
-        <img src="@post.RecipeImg" style="width: 500px; height:auto"/>
-    </div>
+    <img src="@post.RecipeImg" style="width: 500px; height:auto" />
+</div>
     }
 }
 else
 {
-    <h5>You have no saved recipes yet</h5>
+<h5>You have no saved recipes yet</h5>
 }
 

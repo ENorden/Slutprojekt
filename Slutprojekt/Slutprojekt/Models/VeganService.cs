@@ -80,6 +80,22 @@ namespace Slutprojekt.Models
 
         }
 
+        public async Task UpdateUserProfileAsync(VeganProfileVM viewModel)
+        {
+            // Hämta den inloggade användarens ID (från auth-cookie)
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+
+            // Hämta en användare baserat på ID:
+            VeganIdentityUser user = await userManager.FindByIdAsync(userId);
+
+            // Uppdatera en befintlig användare:
+            user.UserName = viewModel.UserName;
+            user.Description = viewModel.Description;
+
+            await userManager.UpdateAsync(user);
+
+        }
+
         public VeganRecipeVM[] GetAllCategories()
         {
             return context.Category

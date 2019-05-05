@@ -69,6 +69,14 @@ namespace Slutprojekt.Controllers
             return View(service.DisplayPosts());
         }
 
+        [HttpPost]
+        [Route("editprofile")]
+        public async Task<IActionResult> EditProfile(VeganProfileVM viewModel)
+        {
+            await service.UpdateUserProfileAsync(viewModel);
+            return RedirectToAction(nameof(PostedRecipes));
+        }
+
         [Route("details/{id}")]
         public IActionResult Details(int id)
         {

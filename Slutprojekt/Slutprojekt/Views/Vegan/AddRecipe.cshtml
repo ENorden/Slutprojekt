@@ -4,6 +4,9 @@
     Layout = "_ProfileLayout";
 }
 
+<partial name="~/Views/Shared/_Header.cshtml" />
+
+
 <div class="add-recipe-carousel">
 
     <div id="carousel-item-1" class="carousel-item">
@@ -42,7 +45,7 @@
         <span asp-validation-for="SelectedMeasurementValue"></span>
 
         @*div med en loop som loopar över de ingredienser som finns*@
-        
+
         <button type="button" onclick="AddIngredients();" data-item-to-show="2"> Add ingredient</button>
 
         <button type="button" data-item-to-show="1">Back</button>
@@ -77,83 +80,83 @@
 
 @section scripts
 {
-<script src="~/Scripts/JavaScript.js" type="text/javascript"></script>
+    <script src="~/Scripts/JavaScript.js" type="text/javascript"></script>
 
-<script>
+    <script>
 
-    var recepieId = 0;
+        var recepieId = 0;
 
-    function uploadFile() {
-        var categoryIDs = [];
+        function uploadFile() {
+            var categoryIDs = [];
 
-        $.each($("input[name='ingredient']:checked"), function () {
-            categoryIDs.push($(this).val());
-        });
+            $.each($("input[name='ingredient']:checked"), function () {
+                categoryIDs.push($(this).val());
+            });
 
-        var DishName = $('#input').val();
+            var DishName = $('#input').val();
 
-        var fileUpload = $("#profilePic").get(0);
-        var files = fileUpload.files;
-        var formData = new FormData();
-        formData.append('file', files[0]);
-        formData.append('categoryIDs', categoryIDs);
-        formData.append('recepieId', recepieId);
-        formData.append('title', DishName);
+            var fileUpload = $("#profilePic").get(0);
+            var files = fileUpload.files;
+            var formData = new FormData();
+            formData.append('file', files[0]);
+            formData.append('categoryIDs', categoryIDs);
+            formData.append('recepieId', recepieId);
+            formData.append('title', DishName);
 
-        $.ajax({
-            url: '/AddRecipieStep1',
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (result) {
-                console.log("1")
-                console.log(result)
-                console.log("2")
-                recepieId = result;
-            }
-        });
+            $.ajax({
+                url: '/AddRecipieStep1',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                    console.log("1")
+                    console.log(result)
+                    console.log("2")
+                    recepieId = result;
+                }
+            });
 
-        //$.ajax({
-        //    url: '/CreateRecipe',
-        //    type: 'POST',
-        //    contentType: "application/json",
-        //    data: JSON.stringify({ categoryIDs: categoryIDs }),
-        //    success: function (result) {
-
-
-
-        //    }
-
-        //});
-
-    };
-
-    function AddIngredients() {
-        var IngredientName = $('#IngrInput').val();
-        var IngredientAmount = $('#AmountInput').val();
-        var DDValue = $('#valueofDD').val();
-
-        var formData = new FormData();
-        formData.append('RecipeIngr', IngredientName);
-        formData.append('RecipeAmount', IngredientAmount);
-        formData.append('DropDownVal', DDValue);
-
-
-        $.ajax({
-            url: '/AddRecipieStep2',
-            type: 'POST',
-            data: formData,
-            processData: false,
-            contentType: false,
-            success: function (result) {
-                console.log("Du lyckades iaf komma hit");
-            }
-        });
+            //$.ajax({
+            //    url: '/CreateRecipe',
+            //    type: 'POST',
+            //    contentType: "application/json",
+            //    data: JSON.stringify({ categoryIDs: categoryIDs }),
+            //    success: function (result) {
 
 
 
-    }
+            //    }
+
+            //});
+
+        };
+
+        function AddIngredients() {
+            var IngredientName = $('#IngrInput').val();
+            var IngredientAmount = $('#AmountInput').val();
+            var DDValue = $('#valueofDD').val();
+
+            var formData = new FormData();
+            formData.append('RecipeIngr', IngredientName);
+            formData.append('RecipeAmount', IngredientAmount);
+            formData.append('DropDownVal', DDValue);
+
+
+            $.ajax({
+                url: '/AddRecipieStep2',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                    console.log("Du lyckades iaf komma hit");
+                }
+            });
+
+
+
+        }
 
 
 
@@ -193,5 +196,5 @@
     //    }
     //});
 
-</script>
+    </script>
 }

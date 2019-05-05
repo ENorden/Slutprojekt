@@ -1,6 +1,8 @@
 ﻿@model VeganFollowersVM[]
 @{ ViewBag.Title = "Followers";}
 
+<partial name="~/Views/Shared/_Header.cshtml" />
+
 <h4>Posts from people you follow</h4>
 
 @if (Model.Length > 0)

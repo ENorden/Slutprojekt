@@ -1,43 +1,46 @@
 ﻿@model VeganDetailsVM
 @{ ViewBag.Title = "Recipe Details";}
 
-    <div class="presentation">
-        <h3>@Model.Title</h3>
+<partial name="~/Views/Shared/_Header.cshtml" />
 
-        @foreach (var cat in Model.Categories)
+
+<div class="presentation">
+    <h3>@Model.Title</h3>
+
+    @foreach (var cat in Model.Categories)
+    {
+        <h6>@cat</h6>
+    }
+
+    @if (Model.IsSaved)
+    {
+        <input type="submit" id="btnSave" value="Unsave" />
+    }
+    else
+    {
+        <input type="submit" id="btnSave" value="Save" />
+    }
+    <br />
+    <img src="@Model.RecImg" alt="recipe-img" style="width:500px; height:auto" />
+
+    <div class="posted-by-user">
+        <img src="@Model.UserImg" alt="user-img" style="width:50px; height:auto" />
+        <h6>@Model.Username</h6>
+
+        @if (Model.IsFollowing)
         {
-            <h6>@cat</h6>
+            <input type="submit" id="btnFollow" value="Unfollow" />
         }
-
-        @if (Model.IsSaved)
+        else if (Model.IsUsersRecipe)
         {
-            <input type="submit" id="btnSave" value="Unsave" />
+            <p>This is your recipe!</p>
         }
         else
         {
-            <input type="submit" id="btnSave" value="Save" />
+            <input type="submit" id="btnFollow" value="Follow" />
         }
-        <br />
-        <img src="@Model.RecImg" alt="recipe-img" style="width:500px; height:auto" />
-
-        <div class="posted-by-user">
-            <img src="@Model.UserImg" alt="user-img" style="width:50px; height:auto" />
-            <h6>@Model.Username</h6>
-
-            @if (Model.IsFollowing)
-            {
-                <input type="submit" id="btnFollow" value="Unfollow" />
-            }
-            else if (Model.IsUsersRecipe)
-            {
-                <p>This is your recipe!</p>
-            }
-            else
-            {
-                <input type="submit" id="btnFollow" value="Follow" />
-            }
-        </div>
     </div>
+</div>
 <div class="ingredients">
     <h3>Ingredients</h3>
     <ul>
