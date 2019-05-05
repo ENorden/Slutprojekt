@@ -38,5 +38,6 @@ namespace Slutprojekt.Models.ViewModels
             public string Instruction { get; set; }
         }
 
+     
     }
 }

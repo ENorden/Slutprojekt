@@ -238,6 +238,14 @@ namespace Slutprojekt.Controllers
         {
             return Ok();
         }
+
+        [Route("AddRecipieStep3")]
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult AddRecipieStep3(Textbox description)
+        {
+            return Ok();
+        }
     }
 
     public class AddRecepieVM
@@ -256,6 +264,12 @@ namespace Slutprojekt.Controllers
     {
         public string Ingredient { get; set; }
         public double Amount { get; set; }
+
+    }
+
+    public class Textbox
+    {
+        public string Description { get; set; }
 
     }
 }

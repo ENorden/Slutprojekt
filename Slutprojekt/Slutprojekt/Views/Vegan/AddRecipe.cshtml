@@ -59,7 +59,7 @@
         <label>Recipe description</label>
         <textarea id="RecipeDescr"></textarea>
         <button type="button" data-item-to-show="2">Back</button>
-        <button type="button" data-item-to-show="4">Next</button>
+        <button type="button" data-item-to-show="4" onclick="AddDescription();">Next</button>
 
 
     </div>
@@ -152,11 +152,24 @@
                     console.log("Du lyckades iaf komma hit");
                 }
             });
-
-
-
         }
 
+    function AddDescription() {
+        var Description = $('#RecipeDescr').val();
+        var formData = new FormData();
+        formData.append('TextBox', Description);
+
+        $.ajax({
+                url: '/AddRecipieStep3',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                    console.log("Funkar!!");
+                }
+            });
+    }
 
 
 
