@@ -261,8 +261,8 @@ namespace Slutprojekt.Controllers
         public IActionResult AddRecipieStep2(StepTwo stepTwo)
         {
 
-            service.AddRecipieStep2(stepTwo);
-            return Ok();
+            var ingrID = service.AddRecipieStep2(stepTwo);
+            return Json(ingrID); 
         }
 
         [Route("AddRecipieStep3")]
@@ -270,6 +270,17 @@ namespace Slutprojekt.Controllers
         [AllowAnonymous]
         public IActionResult AddRecipieStep3(Textbox description)
         {
+
+            service.AddRecipieStep3(description);
+            return Ok();
+        }
+
+        [Route("DeleteIngredient")]
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult DeleteIngredient(DeleteIng delete)
+        {
+            service.DeleteIngredient(delete);
             return Ok();
         }
     }
@@ -297,7 +308,14 @@ namespace Slutprojekt.Controllers
 
     public class Textbox
     {
-        public string Description { get; set; }
+        public string TextBox { get; set; }
+        public int RecID { get; set; }
+
+    }
+
+    public class DeleteIng
+    {
+        public int CurrentIngID { get; set; }
 
     }
 }

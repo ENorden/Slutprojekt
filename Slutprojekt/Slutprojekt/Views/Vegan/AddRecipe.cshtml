@@ -4,12 +4,16 @@
     Layout = "_ProfileLayout";
 }
 
+@section styles
+{
+    <link rel="stylesheet" type="text/css" href="~/Styles/Addrecipe.css">
+}
 
 
 <div class="add-recipe-carousel">
 
     <div id="carousel-item-1" class="carousel-item">
-        item 1
+        Step 1
         <label asp-for="Name"></label>
         <input id="input" />
         
@@ -43,18 +47,17 @@
                 asp-items="Model.MeasurementItems" id="valueofDD"></select>
         <span asp-validation-for="SelectedMeasurementValue"></span>
 
-        @*div med en loop som loopar över de ingredienser som finns*@
-
         <button type="button" onclick="AddIngredients();" data-item-to-show="2"> Add ingredient</button>
         <div id="ingredientContainer">
-        <ul id="ingredientsList">
-            <li>Tillagda ingredienser: </li>
-        </ul>
-        
+            <ul id="ingredientsList">
+                <li>Tillagda ingredienser: </li>
+            </ul>
+
         </div>
 
         <button type="button" data-item-to-show="1">Back</button>
         <button type="button" data-item-to-show="3">Next</button>
+
 
 
     </div>
@@ -63,7 +66,10 @@
         Step 3
 
         <label>Recipe description</label>
+        </br>
         <textarea id="RecipeDescr"></textarea>
+        </br>
+
         <button type="button" data-item-to-show="2">Back</button>
         <button type="button" data-item-to-show="4" onclick="AddDescription();">Next</button>
 
@@ -71,7 +77,7 @@
     </div>
 
     <div id="carousel-item-4" class="carousel-item hide">
-        item 4
+        Preview
         <button type="button" data-item-to-show="3">Back</button>
         <input type="submit" value="Publish" />
 
@@ -142,7 +148,7 @@
             var IngredientName = $('#IngrInput').val();
             var IngredientAmount = $('#AmountInput').val();
             var DDValue = $('#valueofDD').val();
-            var CurrentID = recepieId; 
+            var CurrentID = recepieId;
 
             var formData = new FormData();
             formData.append('RecipeIngr', IngredientName);
@@ -157,19 +163,23 @@
                 processData: false,
                 contentType: false,
                 success: function (result) {
-                    $("#ingredientContainer ul li:last").after('<li>' + IngredientName + " " + IngredientAmount + " " +'<a href="javascript:deleteIngredient(IngID)">Radera</a>' + '</li>');
+                    IngID = result;
+                    $("#ingredientContainer ul li:last").after('<li id="' + IngID + '">' + IngredientName + " " + IngredientAmount + " " + '<a href="javascript:deleteIngredient(' + IngID + ')">Radera</a>' + '</li>');
+                    $("#IngrInput").val("");
+                    $("#AmountInput").val("");
+
                 }
             });
     }
 
-    function AddDescription() {
-        var Description = $('#RecipeDescr').val();
-        var idOfRec = recepieId;
-        var formData = new FormData();
-        formData.append('TextBox', Description);
-        formData.append('RecID', idOfRec);
+        function AddDescription() {
+            var Description = $('#RecipeDescr').val();
+            var idOfRec = recepieId;
+            var formData = new FormData();
+            formData.append('TextBox', Description);
+            formData.append('RecID', idOfRec);
 
-        $.ajax({
+            $.ajax({
                 url: '/AddRecipieStep3',
                 type: 'POST',
                 data: formData,
@@ -179,7 +189,7 @@
                     console.log("Funkar!!");
                 }
             });
-    }
+        }
 
 
 
@@ -220,6 +230,21 @@
 
     function deleteIngredient(IngID) {
         console.log("Den går rätt");
+        var formData = new FormData();
+        formData.append('CurrentIngID', IngID);
+
+         $.ajax({
+                url: '/DeleteIngredient',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                }
+         });
+
+        $('#'+IngID).remove();
+
     }
 
     </script>
