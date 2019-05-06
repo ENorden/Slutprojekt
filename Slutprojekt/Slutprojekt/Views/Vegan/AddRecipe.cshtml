@@ -4,6 +4,10 @@
     Layout = "_ProfileLayout";
 }
 
+@section styles
+{
+    <link rel="stylesheet" type="text/css" href="~/Styles/Addrecipe.css">
+}
 
 
 <div class="add-recipe-carousel">
@@ -47,10 +51,10 @@
 
         <button type="button" onclick="AddIngredients();" data-item-to-show="2"> Add ingredient</button>
         <div id="ingredientContainer">
-        <ul id="ingredientsList">
-            <li>Tillagda ingredienser: </li>
-        </ul>
-        
+            <ul id="ingredientsList">
+                <li>Tillagda ingredienser: </li>
+            </ul>
+
         </div>
 
         <button type="button" data-item-to-show="1">Back</button>
@@ -141,7 +145,7 @@
             var IngredientName = $('#IngrInput').val();
             var IngredientAmount = $('#AmountInput').val();
             var DDValue = $('#valueofDD').val();
-            var CurrentID = recepieId; 
+            var CurrentID = recepieId;
 
             var formData = new FormData();
             formData.append('RecipeIngr', IngredientName);
@@ -165,14 +169,14 @@
             });
         }
 
-    function AddDescription() {
-        var Description = $('#RecipeDescr').val();
-        var idOfRec = recepieId;
-        var formData = new FormData();
-        formData.append('TextBox', Description);
-        formData.append('RecID', idOfRec);
+        function AddDescription() {
+            var Description = $('#RecipeDescr').val();
+            var idOfRec = recepieId;
+            var formData = new FormData();
+            formData.append('TextBox', Description);
+            formData.append('RecID', idOfRec);
 
-        $.ajax({
+            $.ajax({
                 url: '/AddRecipieStep3',
                 type: 'POST',
                 data: formData,
@@ -182,7 +186,7 @@
                     console.log("Funkar!!");
                 }
             });
-    }
+        }
 
 
 
