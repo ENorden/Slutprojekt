@@ -80,6 +80,25 @@ namespace Slutprojekt.Models
 
         }
 
+        public async Task<VeganProfileVM> GetUserAsync()
+        {
+            // Hämta den inloggade användarens ID (från auth-cookie)
+            string userId = userManager.GetUserId(accessor.HttpContext.User);
+
+            // Hämta en användare baserat på ID:
+            VeganIdentityUser user = await userManager.FindByIdAsync(userId);
+
+            VeganProfileVM userVM = new VeganProfileVM()
+            {
+                UserName = user.UserName,
+                Description = user.Description,
+                PictureURL = user.PictureUrl
+
+            };
+
+            return userVM;
+        }
+
         public async Task UpdateUserProfileAsync(VeganProfileVM viewModel)
         {
             // Hämta den inloggade användarens ID (från auth-cookie)
@@ -91,6 +110,7 @@ namespace Slutprojekt.Models
             // Uppdatera en befintlig användare:
             user.UserName = viewModel.UserName;
             user.Description = viewModel.Description;
+            user.PictureUrl = viewModel.PictureURL;
 
             await userManager.UpdateAsync(user);
 
