@@ -1,42 +1,55 @@
 ﻿@model VeganRegisterVM
 @{ ViewBag.Title = "Register";}
+@section styles
+{<link rel="stylesheet" type="text/css" href="~/styles/signin.css" />}
+<div class="container">
+    <div>
+        <img src="~/Uploads/Herbivore.jpg" alt="Herbivore" />
+    </div>
+    <div class="border" id="box">
+        <form asp-controller="Home" asp-action="Register" class="form-signin">
+            <h1 class="h3 mb-3 font-weight-normal">Register</h1>
 
-<h3>Register</h3>
-<form asp-controller="Home" asp-action="Register">
-    <label asp-for="Email"></label>
-    <input asp-for="Email" />
-    <span asp-validation-for="Email"></span>
-
-    <label asp-for="FirstName"></label>
-    <input asp-for="FirstName" />
-    <span asp-validation-for="FirstName"></span>
-
-    <label asp-for="LastName"></label>
-    <input asp-for="LastName" />
-    <span asp-validation-for="LastName"></span>
-
-    <label asp-for="Username"></label>
-    <input asp-for="Username" />
-    <span asp-validation-for="Username"></span>
-
-    <label asp-for="Password"></label>
-    <input asp-for="Password" />
-    <span asp-validation-for="Password"></span>
-
-    <label asp-for="PasswordRepeat"></label>
-    <input asp-for="PasswordRepeat" />
-    <span asp-validation-for="PasswordRepeat"></span>
-    <br />
-    <input type="submit" value="Register" />
-</form>
-<div asp-validation-summary="All"></div>
-
-<div>
-    <h4>Do you have an account? <a asp-controller="Vegan" asp-action="Login">Log in </a></h4>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" id="inputField" class="form-control" />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FirstName"></label>
+                <input asp-for="FirstName" id="inputField" class="form-control" />
+                <span asp-validation-for="FirstName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName"></label>
+                <input asp-for="LastName" id="inputField" class="form-control" />
+                <span asp-validation-for="LastName"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" id="inputField" class="form-control" />
+                <span asp-validation-for="Username"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" id="inputField" class="form-control" />
+                <span asp-validation-for="Password"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PasswordRepeat"></label>
+                <input asp-for="PasswordRepeat" id="inputField" class="form-control" />
+                <span asp-validation-for="PasswordRepeat"></span>
+            </div>
+            <button type="submit" class="btn btn-success">Register</button>
+            <br /><br />
+            <h1 class="h6 mb-3 font-weight-normal">Do you have an account? <a asp-controller="Vegan" asp-action="Login">Log in </a></h1>
+        </form>
+    </div>
+    
 </div>
 
-@section scripts
+    @section scripts
 {
-    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
-}
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
+    }
