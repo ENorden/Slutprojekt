@@ -7,14 +7,12 @@ using System.Threading.Tasks;
 
 namespace Slutprojekt.Models.ViewModels
 {
-    public class VeganProfileVM
+    public class VeganEditProfileVM
     {
         public string UserName { get; set; }
-        public int Posts { get; set; }
-        public int Followers { get; set; }
-        public int Following { get; set; }
         public string Description { get; set; }
-        public string PictureURL { get; set; }
 
+        [Display(Name = "Profile picture")]
+        public IFormFile PictureURL { get; set; }
     }
 }

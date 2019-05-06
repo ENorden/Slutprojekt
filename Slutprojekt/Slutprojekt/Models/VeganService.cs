@@ -80,7 +80,7 @@ namespace Slutprojekt.Models
 
         }
 
-        public async Task<VeganProfileVM> GetUserAsync()
+        public async Task<VeganEditProfileVM> GetUserAsync()
         {
             // Hämta den inloggade användarens ID (från auth-cookie)
             string userId = userManager.GetUserId(accessor.HttpContext.User);
@@ -88,18 +88,18 @@ namespace Slutprojekt.Models
             // Hämta en användare baserat på ID:
             VeganIdentityUser user = await userManager.FindByIdAsync(userId);
 
-            VeganProfileVM userVM = new VeganProfileVM()
+
+            VeganEditProfileVM userVM = new VeganEditProfileVM()
             {
                 UserName = user.UserName,
-                Description = user.Description,
-                PictureURL = user.PictureUrl
+                Description = user.Description,               
 
             };
 
             return userVM;
         }
 
-        public async Task UpdateUserProfileAsync(VeganProfileVM viewModel)
+        public async Task UpdateUserProfileAsync(VeganEditProfileVM viewModel)
         {
             // Hämta den inloggade användarens ID (från auth-cookie)
             string userId = userManager.GetUserId(accessor.HttpContext.User);
@@ -107,10 +107,19 @@ namespace Slutprojekt.Models
             // Hämta en användare baserat på ID:
             VeganIdentityUser user = await userManager.FindByIdAsync(userId);
 
+
+            // Hämta bild
+            var fileName = Path.GetFileName(viewModel.PictureURL.FileName);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\uploads", fileName);
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await viewModel.PictureURL.CopyToAsync(fileStream);
+            }
+
             // Uppdatera en befintlig användare:
             user.UserName = viewModel.UserName;
             user.Description = viewModel.Description;
-            user.PictureUrl = viewModel.PictureURL;
+            user.PictureUrl = viewModel.PictureURL.FileName;
 
             await userManager.UpdateAsync(user);
 
@@ -391,9 +400,9 @@ namespace Slutprojekt.Models
 
             var fileName = Path.GetFileName(viewModel.File.FileName);
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\uploads", fileName);
-            using (var fileSrteam = new FileStream(filePath, FileMode.Create))
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
-                viewModel.File.CopyToAsync(fileSrteam);
+                viewModel.File.CopyToAsync(fileStream);
             }
 
             recipe.Title = viewModel.Title;

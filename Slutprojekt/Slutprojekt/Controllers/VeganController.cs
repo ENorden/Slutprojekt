@@ -79,8 +79,21 @@ namespace Slutprojekt.Controllers
 
         [Route("editprofile")]
         [HttpPost]
-        public async Task<IActionResult> EditProfile(VeganProfileVM viewModel)
+        public async Task<IActionResult> EditProfile(VeganEditProfileVM viewModel)
         {
+            if (viewModel.PictureURL?.Length > 0)
+            {
+                // IHostingEnvironment was injected into the controller
+                var filePath = Path.Combine(_Hostenv.WebRootPath,
+                    "Uploads", viewModel.PictureURL.FileName);
+
+                // Save file to disk
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    viewModel.PictureURL.CopyTo(fileStream);
+                }
+            }
+
             if (!ModelState.IsValid)
                 return View(viewModel);
 
