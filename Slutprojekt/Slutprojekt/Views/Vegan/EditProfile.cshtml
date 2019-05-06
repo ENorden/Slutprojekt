@@ -1,21 +1,25 @@
-﻿@model VeganProfileVM
+﻿@model VeganEditProfileVM
 
+@{ ViewBag.Title = "Edit Profile";}
 @{
-    Layout = null;
+    Layout = "_Layout";
 }
 
 <partial name="~/Views/Shared/_Header.cshtml" />
 
 
 <h2>Edit Profile</h2>
-<form asp-controller="vegan" asp-action="editprofile" method="post">
+<form asp-controller="vegan" asp-action="editprofile" method="post" enctype="multipart/form-data">
     <label asp-for="UserName"></label>
     <input asp-for="UserName" />
     <br />
     <label asp-for="Description"></label>
     <input asp-for="Description" />
     <br />
-    @*img*@
+    <label asp-for="PictureURL"></label>
+    <input asp-for="PictureURL" />
+    <span asp-validation-for="PictureURL"></span>
+
 
     <input type="submit" value="Update" />
 </form>
