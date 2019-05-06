@@ -1,5 +1,7 @@
 ﻿@model VeganCategoryVM[]
 @{ ViewBag.Title = "Recipe Category";}
+@section styles
+{<link rel="stylesheet" type="text/css" href="~/styles/category.css" />}
 
 <partial name="~/Views/Shared/_Header.cshtml" />
 
@@ -8,8 +10,16 @@
 
 @foreach (var item in Model)
 {
-    <div>
-        <img src="@item.Img" style="width: 500px; height:auto" />
-        <a asp-controller="Vegan" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
+<div class="container">
+    <div class="row" id="box-search">
+        <div class="thumbnail text-center">
+            <img src="@item.Img" alt="category" class="img-fluid">
+            <div class="caption">
+                <h2 class="h4 mb-3 font-weight-bold">
+                    <a asp-controller="Vegan" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
+                </h2>
+            </div>
+        </div>
     </div>
+</div>
 }
