@@ -425,7 +425,7 @@ namespace Slutprojekt.Models
             return viewModel.RecepieId;
         }
 
-        public void AddRecipieStep2(StepTwo secondStep)
+        public int AddRecipieStep2(StepTwo secondStep)
         {
 
             Ingredient ingredient = new Ingredient();
@@ -437,6 +437,28 @@ namespace Slutprojekt.Models
 
             context.SaveChanges();
 
+            return ingredient.Id;
+
+        }
+
+        public void DeleteIngredient(DeleteIng delete)
+        {
+            Ingredient ingredient;
+
+            ingredient = context.Ingredient.Find(delete.CurrentIngID);
+            context.Ingredient.Remove(ingredient);
+            context.SaveChanges();
+
+
+        }
+
+        public void AddRecipieStep3(Textbox description)
+        {
+            StepByStep stepByStep = new StepByStep();
+            stepByStep.Instruction = description.TextBox;
+            stepByStep.RecId = description.RecID;
+            context.StepByStep.Add(stepByStep);
+            context.SaveChanges();
         }
     }
 }
