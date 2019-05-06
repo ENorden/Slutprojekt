@@ -1,20 +1,25 @@
 ﻿@model VeganLoginVM
 @{ ViewBag.Title = "Log in to Herbivore Society";}
+@section styles
+{<link rel="stylesheet" type="text/css" href="~/styles/signin.css" />}
 
-<h3>Herbivore Society</h3>
-<div>
-    <form asp-controller="Vegan" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
-        <label asp-for="Username"></label>
-        <input asp-for="Username" />
-        <span asp-validation-for="Username"></span>
+<div class="text-center">
+    <form asp-controller="Vegan" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl" class="form-signin">
+        <h1 class="h3 mb-3 font-weight-normal">Herbivore Society</h1>
 
-        <label asp-for="Password"></label>
-        <input asp-for="Password" />
-        <span asp-validation-for="Password"></span>
+        <div class="form-group">
+            <label asp-for="Username"  class="sr-only"></label>
+            <input asp-for="Username" id="inputEmail" class="form-control"  placeholder="Email address" required autofocus/>
+            <span asp-validation-for="Username"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="sr-only"></label>
+            <input asp-for="Password" id="inputPassword" class="form-control" placeholder="Password" required />
+            <span asp-validation-for="Password"></span>
+        </div>
         <br />
-        <input type="submit" value="Log In" />
+        <button type="submit" class="btn btn-success">Sign in</button>
     </form>
-    <div asp-validation-summary="All"></div>
 </div>
 <div>
     <h4>Not a member? <a asp-controller="Vegan" asp-action="Register">Register here</a></h4>
