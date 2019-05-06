@@ -12,7 +12,7 @@
         item 1
         <label asp-for="Name"></label>
         <input id="input" />
-
+        
 
         @foreach (var item in Model.Categories)
         {
@@ -89,7 +89,8 @@
 
     <script>
 
-        var recepieId = 0;
+    var recepieId = 0;
+    var IngID = 0;
 
         function uploadFile() {
             var categoryIDs = [];
@@ -156,14 +157,10 @@
                 processData: false,
                 contentType: false,
                 success: function (result) {
-                    console.log("Du lyckades");
-                    //$("#ingredientsList")
-
-                    $("#ingredientContainer ul li:last").after('<li> "hej"</li>');
-
+                    $("#ingredientContainer ul li:last").after('<li>' + IngredientName + " " + IngredientAmount + " " +'<a href="javascript:deleteIngredient(IngID)">Radera</a>' + '</li>');
                 }
             });
-        }
+    }
 
     function AddDescription() {
         var Description = $('#RecipeDescr').val();
@@ -220,6 +217,10 @@
     //    success: function (result) {
     //    }
     //});
+
+    function deleteIngredient(IngID) {
+        console.log("Den går rätt");
+    }
 
     </script>
 }
