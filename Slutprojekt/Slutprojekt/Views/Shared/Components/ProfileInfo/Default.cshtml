@@ -11,7 +11,7 @@
                 <h2>@Model.UserName</h2>
             </div>
 
-            <table  class="table table-sm">
+            <table class="table table-sm">
                 <thead>
                     <tr>
                         <th scope="col">@Model.Posts Posts</th>
@@ -25,11 +25,14 @@
                 @Model.Description
             </div>
         </div>
+        <span>
+            <i class="fas fa-user-cog"></i>
+        </span>
         <button><a asp-controller="vegan" asp-action="editprofile">Edit Profile</a></button>
 
 
-        </span>
     </div>
+
 
 
 
