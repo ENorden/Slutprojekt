@@ -9,7 +9,7 @@
 <div class="add-recipe-carousel">
 
     <div id="carousel-item-1" class="carousel-item">
-        item 1
+        Step 1
         <label asp-for="Name"></label>
         <input id="input" />
         
@@ -43,8 +43,6 @@
                 asp-items="Model.MeasurementItems" id="valueofDD"></select>
         <span asp-validation-for="SelectedMeasurementValue"></span>
 
-        @*div med en loop som loopar över de ingredienser som finns*@
-
         <button type="button" onclick="AddIngredients();" data-item-to-show="2"> Add ingredient</button>
         <div id="ingredientContainer">
         <ul id="ingredientsList">
@@ -57,13 +55,17 @@
         <button type="button" data-item-to-show="3">Next</button>
 
 
+
     </div>
 
     <div id="carousel-item-3" class="carousel-item hide">
         Step 3
 
         <label>Recipe description</label>
+        </br>
         <textarea id="RecipeDescr"></textarea>
+        </br>
+
         <button type="button" data-item-to-show="2">Back</button>
         <button type="button" data-item-to-show="4" onclick="AddDescription();">Next</button>
 
@@ -71,7 +73,7 @@
     </div>
 
     <div id="carousel-item-4" class="carousel-item hide">
-        item 4
+        Preview
         <button type="button" data-item-to-show="3">Back</button>
         <input type="submit" value="Publish" />
 
@@ -157,7 +159,11 @@
                 processData: false,
                 contentType: false,
                 success: function (result) {
-                    $("#ingredientContainer ul li:last").after('<li>' + IngredientName + " " + IngredientAmount + " " +'<a href="javascript:deleteIngredient(IngID)">Radera</a>' + '</li>');
+                    IngID = result;
+                    $("#ingredientContainer ul li:last").after('<li id="' + IngID + '">' + IngredientName + " " + IngredientAmount + " " + '<a href="javascript:deleteIngredient(' + IngID + ')">Radera</a>' + '</li>');
+                    $("#IngrInput").val("");
+                    $("#AmountInput").val("");
+
                 }
             });
     }
@@ -220,6 +226,21 @@
 
     function deleteIngredient(IngID) {
         console.log("Den går rätt");
+        var formData = new FormData();
+        formData.append('CurrentIngID', IngID);
+
+         $.ajax({
+                url: '/DeleteIngredient',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (result) {
+                }
+         });
+
+        $('#'+IngID).remove();
+
     }
 
     </script>
