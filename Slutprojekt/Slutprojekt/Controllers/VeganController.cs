@@ -236,6 +236,8 @@ namespace Slutprojekt.Controllers
         [AllowAnonymous]
         public IActionResult AddRecipieStep2(StepTwo stepTwo)
         {
+
+            service.AddRecipieStep2(stepTwo);
             return Ok();
         }
 
@@ -262,8 +264,10 @@ namespace Slutprojekt.Controllers
 
     public class StepTwo
     {
-        public string Ingredient { get; set; }
-        public double Amount { get; set; }
+        public string RecipeIngr { get; set; }
+        public double RecipeAmount { get; set; }
+        public string DropDownVal { get; set; }
+        public int RecID { get; set; }
 
     }
 
