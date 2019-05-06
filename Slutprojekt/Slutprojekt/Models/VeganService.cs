@@ -424,5 +424,19 @@ namespace Slutprojekt.Models
             context.SaveChanges();
             return viewModel.RecepieId;
         }
+
+        public void AddRecipieStep2(StepTwo secondStep)
+        {
+
+            Ingredient ingredient = new Ingredient();
+            ingredient.RecId = secondStep.RecID;
+            ingredient.Name = secondStep.RecipeIngr;
+            ingredient.Unit = secondStep.DropDownVal;
+            ingredient.Amount = secondStep.RecipeAmount;
+            context.Ingredient.Add(ingredient);
+
+            context.SaveChanges();
+
+        }
     }
 }
