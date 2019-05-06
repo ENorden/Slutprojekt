@@ -3,26 +3,23 @@
 @section styles
 {<link rel="stylesheet" type="text/css" href="~/styles/signin.css" />}
 
-<div class="body">
-    <div class="box">
-        <form asp-controller="Vegan" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl" class="form-signin">
-            <h1 class="h3 mb-3 font-weight-normal">Herbivore Society</h1>
+<div id="box" class="border">
+    <form asp-controller="Vegan" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl" class="form-signin">
+        <h1 class="h3 mb-3 font-weight-normal">Herbivore Society</h1>
 
-            <div class="form-group">
-                <label asp-for="Username" class="sr-only"></label>
-                <input asp-for="Username" id="inputUsername" class="form-control" placeholder="Username" required autofocus />
-                <span asp-validation-for="Username"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="sr-only"></label>
-                <input asp-for="Password" id="inputPassword" class="form-control" placeholder="Password" required />
-                <span asp-validation-for="Password"></span>
-            </div>
-            <br />
-            <button type="submit" class="btn btn-success">Sign in</button>
-        </form>
-    </div>
-    <div class="box">
+        <div class="form-group">
+            <label asp-for="Username" class="sr-only"></label>
+            <input asp-for="Username" id="inputUsername" class="form-control" placeholder="Username" required autofocus />
+            <span asp-validation-for="Username"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="sr-only"></label>
+            <input asp-for="Password" id="inputPassword" class="form-control" placeholder="Password" required />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <br />
+        <button type="submit" class="btn btn-success">Sign in</button>
+        <br /><br />
         <h2 class="h6 mb-3 font-weight-normal">Not a member? <a asp-controller="Vegan" asp-action="Register">Register here</a></h2>
+    </form>
     </div>
-</div>
