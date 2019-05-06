@@ -1,11 +1,24 @@
 ﻿@model VeganProfileVM
 
 <div>
-    @Model.UserName
-    @Model.PictureURL
-    @Model.Posts 
-    @Model.Followers
-    @Model.Following
+    <div>
+        <h2>@Model.UserName</h2>
+    </div>
+
+    <div>
+        <img src="~/Uploads/@Model.PictureURL" style="width: auto; height: 150px;" class="rounded-circle" alt="Cinque Terre"/>
+    </div>
+
+    <div>
+        @Model.Posts 
+    </div>
+
+    <div>
+        @Model.Followers
+    </div>
+    <div>
+        @Model.Following
+    </div>
 
 </div>
 
