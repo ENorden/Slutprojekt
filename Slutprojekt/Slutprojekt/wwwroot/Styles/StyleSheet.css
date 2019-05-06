@@ -1,5 +1,7 @@
-﻿body {
+﻿html,
+body {
     font-family: 'Segoe UI';
+    height: 100%;
 }
 
 .add-recipe-carousel {

@@ -1,6 +1,9 @@
-html,
-body {
-  height: 100%;
+.container {
+    display:flex;
+    align-items:center;
+    height:100%; 
+    padding-top: 60px; 
+    padding-bottom: 60px;
 }
 
 #box {
@@ -31,4 +34,10 @@ body {
 .form-signin #inputPassword {
   margin-bottom: 10px;
   border-radius: 4px;
+}
+
+img {
+    margin: 40px;
+    width:500px; 
+    height:auto;
 }
