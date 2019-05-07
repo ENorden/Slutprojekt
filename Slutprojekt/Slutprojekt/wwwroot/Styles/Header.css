@@ -7,8 +7,18 @@
 
 }
 
-
 .nav-item {
     margin: 0 30px;
 
+}
+
+/*Här börjar deafult*/
+
+.profile-info {
+    width: 500px;
+    margin-left: 55px;
+}
+
+.fa-user-cog {
+    font-size: large;
 }
