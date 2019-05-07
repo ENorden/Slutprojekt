@@ -7,11 +7,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">*@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.1/css/all.css" />
-        <link rel="stylesheet" type="text/css" href="~/Styles/Header.css">
+    <link rel="stylesheet" type="text/css" href="~/Styles/Header.css">
 
     @RenderSection("styles", false)
 </head>
-<body>
+<body style="position: relative">
     <div>
         @RenderBody()
     </div>
@@ -21,3 +21,10 @@
     @RenderSection("scripts", false)
 </body>
 </html>
+<footer class="page-footer font-small bg-light styyle">
+
+    <div class="footer-copyright text-center py-3" style="color: gray;">
+        <p>© 2019 Copyright: Herbivore Society</p>
+    </div>
+
+</footer>
