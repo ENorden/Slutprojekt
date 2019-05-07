@@ -3,33 +3,43 @@
 @{
     Layout = "_ProfileLayout";
 }
+@section styles
+{<link rel="stylesheet" type="text/css" href="~/styles/posts.css" />}
 
-
-<h1>Your saved recipes</h1>
 
 @if (Model.Length > 0)
 {
-    foreach (var post in Model)
-    {
-<div>
-    <h5>@post.CreatorUsername</h5>
-    <img src="@post.CreatorProfileImg" />
+<h1 class="h2 mb-3 font-weight-normal text-center">Your saved recipes</h1>
 
-    <a asp-controller="Vegan" asp-action="Details" asp-route-id="@post.RecipeId">
-        <h6>@post.RecipeTitle</h6>
-    </a>
-
-    @foreach (var cat in post.RecipeCategories)
+    <div class="container">
+        @foreach (var post in Model)
         {
-    <p>@cat</p>
-        }
+        <div class="border thumbnail row">
+            <a asp-controller="Vegan" asp-action="Details" asp-route-id="@post.RecipeId">
 
-    <img src="@post.RecipeImg" style="width: 500px; height:auto" />
-</div>
-    }
+                <div class="container-header">
+                    <img src="~/Uploads/@post.CreatorProfileImg" alt="category" class="rounded-circle img-fluid">
+                    <h2>@post.CreatorUsername</h2>
+                </div>
+                <div class="container-img">
+                    <img src="~/Uploads/@post.RecipeImg" alt="category" class="img-fluid">
+                </div>
+                <div class="container-details">
+                    <h2 class="h4 mb-3">
+                        @post.RecipeTitle
+                    </h2>
+                    @foreach (var cat in post.RecipeCategories)
+                    {
+                        <p>@cat</p>
+                    }
+                </div>
+            </a>
+        </div>
+        }
+    </div>
 }
 else
 {
-<h5>You have no saved recipes yet</h5>
+<h1 class="h4 mb-3 font-weight-normal text-center">You have no saved recipes yet</h1>
 }
 
