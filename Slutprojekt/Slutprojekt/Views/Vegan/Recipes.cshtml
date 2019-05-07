@@ -9,12 +9,15 @@
 <div class="container">
     @foreach (var item in Model)
     {
-    <div class="thumbnail text-center">
         <a asp-controller="Vegan" asp-action="Category" asp-route-id="@item.Id">
-            <img src="~/Uploads/@item.Img" alt="category">
-            <h2 class="h4 mb-3 font-weight-bold caption">@item.CategoryName</h2>
+            <div class="thumbnail text-center">
+                <img src="~/Uploads/@item.Img" alt="category" class="img-fluid">
+                <div class="caption">
+                    <h2 class="h1 mb-3">@item.CategoryName</h2>
+                </div>
+            </div>
         </a>
-    </div>
+
     }
 </div>
 

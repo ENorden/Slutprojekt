@@ -31,8 +31,8 @@
 .container-header {
     display: flex;
     align-items: center;
-    height:15%;
-    padding-bottom:10px;
+    height: 15%;
+    padding-bottom: 10px;
 }
 
 .container-header img{
