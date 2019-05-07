@@ -1,36 +1,32 @@
 ﻿@model VeganProfileVM
 
-    <div class="d-flex justify-content-center" border="">
+    <div class="d-flex justify-content-center" style="margin-top: 50px;">
 
         <div>
             <img src="~/Uploads/@Model.PictureURL" style="width: auto; height: 150px;" class="rounded-circle" alt="Cinque Terre" />
         </div>
 
-        <div>
-            <div>
-                <h2>@Model.UserName</h2>
+        <div class="profile-info">
+            <div class="d-flex justify-content-">
+                <h3>@Model.UserName</h3>
+                <span>
+                    <i class="fas fa-user-cog"></i>
+                </span>
+                <a class="btn btn-default" asp-controller="vegan" asp-action="editprofile">Edit Profile</a>
             </div>
 
-            <table class="table table-sm">
-                <thead>
-                    <tr>
-                        <th scope="col">@Model.Posts Posts</th>
-                        <th>@Model.Followers Followers</th>
-                        <th scope="col">@Model.Following Following</th>
-                    </tr>
-                </thead>
-            </table>
+            <div class="d-flex">
+                <div><b>@Model.Posts</b>Posts</div>
+                <div><b>@Model.Followers</b> Followers</div>
+                <div><b>@Model.Following</b> Following</div>
+            </div>
 
             <div>
                 @Model.Description
             </div>
         </div>
-        <span>
-            <i class="fas fa-user-cog"></i>
-        </span>
-        <button><a asp-controller="vegan" asp-action="editprofile">Edit Profile</a></button>
 
-
+ 
     </div>
 
 
