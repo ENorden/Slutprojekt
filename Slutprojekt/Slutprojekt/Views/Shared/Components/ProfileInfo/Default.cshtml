@@ -1,33 +1,38 @@
 ﻿@model VeganProfileVM
 
-    <div class="d-flex justify-content-center" style="margin-top: 50px;">
+@*@section styles
+ {
+    <link rel="stylesheet" type="text/css" href="~/Styles/Default.css">
+}*@
+
+<div class="d-flex justify-content-center" style="margin-top: 50px;">
+
+    <div>
+        <img src="~/Uploads/@Model.PictureURL" style="width: auto; height: 150px;" class="rounded-circle" alt="Cinque Terre" />
+    </div>
+
+    <div class="profile-info">
+        <div class="d-flex justify-content-">
+            <h3>@Model.UserName</h3>
+            <span>
+                <i class="fas fa-user-cog"></i>
+            </span>
+            <a class="btn btn-default" asp-controller="vegan" asp-action="editprofile">Edit Profile</a>
+        </div>
+
+        <div class="d-flex">
+            <div><b>@Model.Posts</b>Posts</div>
+            <div><b>@Model.Followers</b> Followers</div>
+            <div><b>@Model.Following</b> Following</div>
+        </div>
 
         <div>
-            <img src="~/Uploads/@Model.PictureURL" style="width: auto; height: 150px;" class="rounded-circle" alt="Cinque Terre" />
+            @Model.Description
         </div>
-
-        <div class="profile-info">
-            <div class="d-flex justify-content-">
-                <h3>@Model.UserName</h3>
-                <span>
-                    <i class="fas fa-user-cog"></i>
-                </span>
-                <a class="btn btn-default" asp-controller="vegan" asp-action="editprofile">Edit Profile</a>
-            </div>
-
-            <div class="d-flex">
-                <div><b>@Model.Posts</b>Posts</div>
-                <div><b>@Model.Followers</b> Followers</div>
-                <div><b>@Model.Following</b> Following</div>
-            </div>
-
-            <div>
-                @Model.Description
-            </div>
-        </div>
-
- 
     </div>
+
+
+</div>
 
 
 
