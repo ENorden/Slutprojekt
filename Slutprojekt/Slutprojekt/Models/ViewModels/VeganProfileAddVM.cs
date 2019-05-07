@@ -10,6 +10,7 @@ namespace Slutprojekt.Models.ViewModels
 {
     public class VeganProfileAddVM
     {
+        [Display(Name = "Name of dish:")]
         public string Name { get; set; }
         public SelectListItem[] Categories { get; set; }
         public IFormFile Img { get; set; }

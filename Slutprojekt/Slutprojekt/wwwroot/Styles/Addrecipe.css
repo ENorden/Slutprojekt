@@ -4,19 +4,46 @@ body {
     height: 100%;
 }
 
-.add-recipe-carousel {
-    border: solid yellow 2px;
+.add-recipe-loop {
+    border: 2px;
     width: 500px;
-    height: 500px;
-
+    height: 400px;
+    text-align:left;
 }
 
-.carousel-item {
+.RecipeLoop-item {
     border: solid lightgrey 2px;
     height: 100%;
     border-radius: 15px;
+    padding-left: 2%;
+    padding-right: 2%;
 }
+
+
+#btnPosition {
+    position: absolute;
+    bottom: 4%;
+    right: 4%;
+}
+
+#btnLeft {
+    position: absolute;
+    bottom: 4%;
+    left: 4%;
+}
+
+.paddingForBtn {
+    padding-top: 2%;
+}
+
 
 .hide {
     display: none;
+}
+
+.contentRec {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }

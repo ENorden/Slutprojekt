@@ -2,20 +2,32 @@
     Layout = "_Layout";
 }
 
-@section styles {@RenderSection("styles", false)}
+@section styles {
+    <link rel="stylesheet" type="text/css" href="~/Styles/Default.css">
+    @RenderSection("styles", false)
+
+}
 
 
 <partial name="~/Views/Shared/_Header.cshtml" />
-
 
 <div>
     @await Component.InvokeAsync("ProfileInfo")
 </div>
 
-<div>
-    <a href="/profile/post">Posts</a>
-    <a href="/profile/save">Saved Recipes</a>
-    <a href="/profile/add">Add Recipe</a>
+<div class="post-saved-add d-flex">
+    <div>
+        <i class="fas fa-th"></i>
+        <a href="/profile/post">Posts</a>
+    </div>
+    <div>
+        <i class="far fa-bookmark"></i>
+        <a href="/profile/save">Saved Recipes</a>
+    </div>
+    <div>
+        <i class="fas fa-plus"></i>
+        <a href="/profile/add">Add Recipe</a>
+    </div>
 </div>
 
 <div>

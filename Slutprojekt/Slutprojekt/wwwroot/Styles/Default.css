@@ -1,3 +1,7 @@
-﻿h2 {
-    color: red;
+﻿
+.post-saved-add {
+    justify-content: center;
+    border-top: solid;
+    border-color: lightgray;
+    align-content: center;
 }
