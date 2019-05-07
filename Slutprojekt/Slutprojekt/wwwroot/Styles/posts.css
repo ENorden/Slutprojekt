@@ -1,0 +1,15 @@
+﻿.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.thumbnail {
+    position: relative;
+    margin: 40px;
+    padding: 10px;
+    width: 300px;
+    height: 400px;
+    background-color: #f5f5f5;
+}
