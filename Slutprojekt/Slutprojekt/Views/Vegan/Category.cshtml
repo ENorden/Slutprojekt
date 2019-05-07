@@ -1,25 +1,35 @@
 ﻿@model VeganCategoryVM[]
 @{ ViewBag.Title = "Recipe Category";}
 @section styles
-{<link rel="stylesheet" type="text/css" href="~/styles/category.css" />}
+{<link rel="stylesheet" type="text/css" href="~/styles/posts.css" />}
 
 <partial name="~/Views/Shared/_Header.cshtml" />
 
 
-<h1>@Model[0].CategoryName</h1>
+<h1 class="h2 mb-3 font-weight-normal text-center">@Model[0].CategoryName</h1>
 
-@foreach (var item in Model)
-{
 <div class="container">
-    <div class="row" id="box-search">
-        <div class="thumbnail text-center">
-            <img src="@item.Img" alt="category" class="img-fluid">
-            <div class="caption">
-                <h2 class="h4 mb-3 font-weight-bold">
-                    <a asp-controller="Vegan" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
-                </h2>
+    @foreach (var item in Model)
+    {
+    <div class="border thumbnail row">
+        <a asp-controller="Vegan" asp-action="Details" asp-route-id="@item.Id">
+            <div class="container-header">
+                <img src="~/Uploads/@item.UserImg" alt="category" class="rounded-circle img-fluid">
+                <h2>@item.Username</h2>
             </div>
-        </div>
+            <div class="container-img">
+                <img src="~/Uploads/@item.Img" alt="category" class="img-fluid">
+            </div>
+            <div class="container-details">
+                    <h2 class="h4 mb-3">
+                        @item.Title
+                    </h2>
+                @foreach (var cat in item.CategoryName)
+                {
+                        <p>@cat</p>
+                }
+            </div>
+        </a>
     </div>
+    }
 </div>
-}

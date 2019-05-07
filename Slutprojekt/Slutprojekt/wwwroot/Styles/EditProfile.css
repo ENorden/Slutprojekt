@@ -1,0 +1,29 @@
+﻿.edit-profile-form {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+/*input[type="file"]{
+    display: none;
+}
+
+.custom-file-upload {
+
+}*/
+
+input[type="file"] {
+    display: none;
+}
+
+.custom-file-upload {
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
+    padding: 10px;
+    width: 400px;
+    text-align:center;
+}

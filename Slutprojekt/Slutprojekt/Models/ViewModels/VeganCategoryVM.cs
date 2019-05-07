@@ -9,8 +9,11 @@ namespace Slutprojekt.Models.ViewModels
     {
         public int Id { get; set; }
         public string UserId { get; set; }
+        public string UserImg { get; set; }
+        public string Username { get; set; }
+
         public string Img { get; set; }
         public string Title { get; set; }
-        public string CategoryName { get; set; }
+        public string[] CategoryName { get; set; }
     }
 }

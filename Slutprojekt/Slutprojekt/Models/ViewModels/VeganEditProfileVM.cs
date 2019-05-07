@@ -14,5 +14,7 @@ namespace Slutprojekt.Models.ViewModels
 
         [Display(Name = "Profile picture")]
         public IFormFile PictureURL { get; set; }
+
+
     }
 }

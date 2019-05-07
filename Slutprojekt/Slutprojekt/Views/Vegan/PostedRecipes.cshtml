@@ -4,28 +4,42 @@
 @{
     Layout = "_ProfileLayout";
 }
+@section styles
+{<link rel="stylesheet" type="text/css" href="~/styles/posts.css" />}
 
-<h1>Your posts</h1>
 
 @if (Model.Length > 0)
 {
-    <div>
+    <h1 class="h2 mb-3 font-weight-normal text-center">Your posts</h1>
+
+    <div class="container">
         @foreach (var item in Model)
         {
+        <div class="border thumbnail row">
             <a asp-controller="Vegan" asp-action="Details" asp-route-id="@item.RecipeId">
-                <h3>@item.RecipeTitle</h3>
+                <div class="container-header">
+                    <img src="~/Uploads/@item.UserImg" alt="category" class="rounded-circle img-fluid">
+                    <h2>@item.Username</h2>
+                </div>
+                <div class="container-img">
+                    <img src="~/Uploads/@item.RecipeImg" alt="category" class="img-fluid">
+                </div>
+                <div class="container-details">
+                    <h2 class="h4 mb-3">
+                        @item.RecipeTitle
+                    </h2>
+                    @foreach (var cat in item.RecipeCategories)
+                    {
+                        <p>@cat</p>
+                    }
+                </div>
             </a>
-            @foreach (var cat in item.RecipeCategories)
-            {
-                <p>@cat</p>
-            }
-
-            <img src="@item.RecipeImg" style="width: 500px; height:auto" />
+        </div>
         }
     </div>
 }
 else
 {
-    <h5>You have no posts yet</h5>
+    <h1 class="h4 mb-3 font-weight-normal text-center">You have no posts yet</h1>
 }
 
