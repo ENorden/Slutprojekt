@@ -12,20 +12,24 @@
     @foreach (var item in Model)
     {
     <div class="border thumbnail row">
-        <div class="container-header">
-            <img src="~/Uploads/@item.Img" alt="category" class="rounded-circle img-fluid">
-            <h2>Username</h2>
-        </div>
-        <div class="container-img">
-            <img src="~/Uploads/@item.Img" alt="category" class="img-fluid">
-        </div>
-        <div class="container-details">
-            <a asp-controller="Vegan" asp-action="Details" asp-route-id="@item.Id">
-                <h2 class="h4 mb-3 font-weight-bold">
-                    @item.Title
-                </h2>
-            </a>
-        </div>
+        <a asp-controller="Vegan" asp-action="Details" asp-route-id="@item.Id">
+            <div class="container-header">
+                <img src="~/Uploads/@item.UserImg" alt="category" class="rounded-circle img-fluid">
+                <h2>@item.Username</h2>
+            </div>
+            <div class="container-img">
+                <img src="~/Uploads/@item.Img" alt="category" class="img-fluid">
+            </div>
+            <div class="container-details">
+                    <h2 class="h4 mb-3">
+                        @item.Title
+                    </h2>
+                @foreach (var cat in item.CategoryName)
+                {
+                        <p>@cat</p>
+                }
+            </div>
+        </a>
     </div>
     }
 </div>

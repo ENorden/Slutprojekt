@@ -11,6 +11,9 @@ namespace Slutprojekt.Models.ViewModels
         public string[] RecipeCategories { get; set; }
         public string RecipeImg { get; set; }
         public int RecipeId { get; set; }
+        public string UserImg { get; set; }
+        public string Username { get; set; }
+
     }
 
 }
