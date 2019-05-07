@@ -73,7 +73,7 @@ namespace Slutprojekt.Models
                             RecipeCategories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
                                 .ToArray()
                         }))
-                        .OrderBy(r => r.RecipeId)
+                        .OrderByDescending(r => r.RecipeId)
                         .ToArray();
 
             return followingPosts;
