@@ -23,16 +23,18 @@
             <input class="form-control">
         </div>
         <div class="form-group">
-            <label asp-for="Description"></label>
-            <input class="form-control"  asp-for="Description" />
+            <label style="text-align: center; " asp-for="Description"></label>
+            <textarea rows="4" class="form-control"  asp-for="Description" >
+            </textarea>
         </div>
         <div>
-            <label asp-for="PictureURL"></label>
+            <label class="custom-file-upload" asp-for="PictureURL"></label>
             <input class="btn btn-default" asp-for="PictureURL" />
             <span asp-validation-for="PictureURL"></span>
+
         </div>
         
-        <input class="btn btn-primary btn-block" style="margin-top: 20px; "type="submit" value="Update" />
+        <input class="btn btn-success btn-block" style="margin-top: 20px; "type="submit" value="Update" />
 
     </form>
 </div>
