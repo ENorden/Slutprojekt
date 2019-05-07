@@ -101,7 +101,7 @@ namespace Slutprojekt.Controllers
             return RedirectToAction(nameof(PostedRecipes));
         }
 
-        [Route("details/{id}")]
+        [Route("details/{id:int}")]
         public IActionResult Details(int id)
         {
             return View(service.GetRecipesById(id));

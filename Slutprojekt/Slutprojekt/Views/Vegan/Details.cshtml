@@ -61,11 +61,11 @@
 @section scripts
 {
     <script>
-        var id = @Model.RecId;
+        var recId = @Model.RecId;
         $("#btnSave").click(function () {
             var isSaved = $('#btnSave').val() == "Unsave";
             $.ajax({
-                url: (isSaved) ? "/Unsave/" + id : "/Save/" + id,
+                url: (isSaved) ? "/Unsave/" + recId : "/Save/" + recId,
                 type: "GET",
                 success: function (result) {
                     $('#btnSave').val(result);
