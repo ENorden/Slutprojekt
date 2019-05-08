@@ -381,7 +381,7 @@ namespace Slutprojekt.Models
         //    //return id;
         //}
 
-        public int AddRecipieStep1(AddRecepieVM viewModel)
+        public async Task<int> AddRecipieStep1(AddRecepieVM viewModel)
         {
             Recipe recipe;
 
@@ -405,7 +405,7 @@ namespace Slutprojekt.Models
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\uploads", fileName);
             using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
-                viewModel.File.CopyToAsync(fileStream);
+                await viewModel.File.CopyToAsync(fileStream);
             }
 
             recipe.Title = viewModel.Title;

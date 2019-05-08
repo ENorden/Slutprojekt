@@ -249,9 +249,9 @@ namespace Slutprojekt.Controllers
         [Route("AddRecipieStep1")]
         [HttpPost]
         [AllowAnonymous]
-        public IActionResult AddRecipieStep1(AddRecepieVM viewModel)
+        public async Task<IActionResult> AddRecipieStep1Async(AddRecepieVM viewModel)
         {
-            var recepieId = service.AddRecipieStep1(viewModel);
+            var recepieId = await service.AddRecipieStep1(viewModel);
             return Json(recepieId);
         }
 
