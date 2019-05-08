@@ -257,7 +257,7 @@ namespace Slutprojekt.Controllers
         [HttpPost]
         public IActionResult AddRecipieStep1(AddRecepieVM viewModel)
         {
-            var recepieId = service.AddRecipieStep1(viewModel);
+            var recepieId = await service.AddRecipieStep1(viewModel);
             return Json(recepieId);
         }
 

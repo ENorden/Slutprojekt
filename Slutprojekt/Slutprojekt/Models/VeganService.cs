@@ -340,11 +340,13 @@ namespace Slutprojekt.Models
             {
                 MeasurementItems = new SelectListItem[]
                 {
-                    new SelectListItem { Value = "dl", Text = "dl" },
-                    new SelectListItem { Value = "l", Text = "l" },
-                    new SelectListItem { Value = "msk", Text = "msk", Selected = true },
-                    new SelectListItem { Value = "tsk", Text = "tsk" },
-                    new SelectListItem { Value = "g", Text = "g" },
+                    new SelectListItem { Value = "cups", Text = "cups" },
+                    new SelectListItem { Value = "L", Text = "L" },
+                    new SelectListItem { Value = "tbsp", Text = "tbsp", Selected = true },
+                    new SelectListItem { Value = "tsp", Text = "tsp" },
+                    new SelectListItem { Value = "ml", Text = "ml" },
+                    new SelectListItem { Value = "grams", Text = "grams" },
+                    new SelectListItem { Value = "-", Text = "-" },
                 }
             };
             profile.Categories = context.Category
@@ -405,7 +407,7 @@ namespace Slutprojekt.Models
         //    //return id;
         //}
 
-        public int AddRecipieStep1(AddRecepieVM viewModel)
+        public async Task<int> AddRecipieStep1(AddRecepieVM viewModel)
         {
             Recipe recipe;
 
@@ -429,7 +431,7 @@ namespace Slutprojekt.Models
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot\\uploads", fileName);
             using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
-                viewModel.File.CopyToAsync(fileStream);
+                await viewModel.File.CopyToAsync(fileStream);
             }
 
             recipe.Title = viewModel.Title;

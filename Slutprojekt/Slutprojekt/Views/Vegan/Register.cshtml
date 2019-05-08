@@ -2,50 +2,76 @@
 @{ ViewBag.Title = "Register";}
 @section styles
 {<link rel="stylesheet" type="text/css" href="~/styles/signin.css" />}
-<div class="container">
-    <div>
-        <img src="~/Uploads/Herbivore.jpg" alt="Herbivore" />
-    </div>
-    <div class="border" id="box">
-        <form asp-controller="Home" asp-action="Register" class="form-signin">
-            <h1 class="h3 mb-3 font-weight-normal">Register</h1>
 
-            <div class="form-group">
-                <label asp-for="Email"></label>
-                <input asp-for="Email" id="inputField" class="form-control" />
-                <span asp-validation-for="Email"></span>
+
+
+<div class="container-fluid">
+    <div class="row no-gutter">
+        <div>
+            <img src="~/Uploads/loginHB.png" alt="Herbivore" />
+        </div>
+        <div class="col-md-8 col-lg-6">
+            <div class="login d-flex align-items-center py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 col-lg-8 mx-auto">
+                            <h3 class="login-heading mb-4">Register</h3>
+                            <form asp-controller="Home" asp-action="Register" class="form-signin">
+
+                                <div class="form-label-group">
+                                    <label asp-for="Email"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email"></span>
+                                </div>
+
+
+                                <div class="form-label-group">
+                                    <label asp-for="FirstName"></label>
+                                    <input asp-for="FirstName" class="form-control" />
+                                    <span asp-validation-for="FirstName"></span>
+                                </div>
+
+
+                                <div class="form-label-group">
+                                    <label asp-for="LastName"></label>
+                                    <input asp-for="LastName" class="form-control" />
+                                    <span asp-validation-for="LastName"></span>
+                                </div>
+
+
+                                <div class="form-label-group">
+                                    <label asp-for="Email"></label>
+                                    <input asp-for="Email" class="form-control" />
+                                    <span asp-validation-for="Email"></span>
+                                </div>
+
+                                <div class="form-label-group">
+                                    <label asp-for="Username"></label>
+                                    <input asp-for="Username" class="form-control" />
+                                    <span asp-validation-for="Username"></span>
+                                </div>
+
+                                <div class="form-label-group">
+                                    <label asp-for="Password"></label>
+                                    <input asp-for="Password" class="form-control" />
+                                    <span asp-validation-for="Password"></span>
+                                </div>
+                                <div class="form-label-group">
+                                    <label asp-for="PasswordRepeat"></label>
+                                    <input asp-for="PasswordRepeat" class="form-control" />
+                                    <span asp-validation-for="PasswordRepeat"></span>
+                                </div>
+                                    <button class="btn btn-lg btn-success btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Register</button>
+
+                                    <h1 class="h6 mb-3 font-weight-normal">Do you have an account? <a asp-controller="Vegan" asp-action="Login">Log in </a></h1>
+
+</form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="FirstName"></label>
-                <input asp-for="FirstName" id="inputField" class="form-control" />
-                <span asp-validation-for="FirstName"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName"></label>
-                <input asp-for="LastName" id="inputField" class="form-control" />
-                <span asp-validation-for="LastName"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" id="inputField" class="form-control" />
-                <span asp-validation-for="Username"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" id="inputField" class="form-control" />
-                <span asp-validation-for="Password"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PasswordRepeat"></label>
-                <input asp-for="PasswordRepeat" id="inputField" class="form-control" />
-                <span asp-validation-for="PasswordRepeat"></span>
-            </div>
-            <button type="submit" class="btn btn-success">Register</button>
-            <br /><br />
-            <h1 class="h6 mb-3 font-weight-normal">Do you have an account? <a asp-controller="Vegan" asp-action="Login">Log in </a></h1>
-        </form>
+        </div>
     </div>
-    
 </div>
 
     @section scripts
