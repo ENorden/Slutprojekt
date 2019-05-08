@@ -317,9 +317,10 @@ namespace Slutprojekt.Models
             {
                 MeasurementItems = new SelectListItem[]
                 {
-                    new SelectListItem { Value = "1", Text = "Dl" },
-                    new SelectListItem { Value = "2", Text = "Msk", Selected = true },
-                    new SelectListItem { Value = "3", Text = "Tsk" },
+                    new SelectListItem { Value = "1", Text = "dl" },
+                    new SelectListItem { Value = "2", Text = "msk", Selected = true },
+                    new SelectListItem { Value = "3", Text = "tsk" },
+                    new SelectListItem { Value = "3", Text = "g" },
                 }
             };
             profile.Categories = context.Category
