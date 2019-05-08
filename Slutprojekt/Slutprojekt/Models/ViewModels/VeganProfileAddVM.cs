@@ -21,7 +21,7 @@ namespace Slutprojekt.Models.ViewModels
         public SelectListItem[] MeasurementItems { get; set; }
 
         [Range(1, 5)]
-        public int SelectedMeasurementValue { get; set; }
+        public string SelectedMeasurementValue { get; set; }
 
 
 
