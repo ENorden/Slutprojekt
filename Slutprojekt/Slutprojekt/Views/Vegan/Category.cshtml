@@ -5,31 +5,37 @@
 
 <partial name="~/Views/Shared/_Header.cshtml" />
 
+@if (Model.Length > 0)
+{
+    <h1 class="h2 mb-3 font-weight-normal text-center">@Model[0].CategoryName[0]</h1>
 
-<h1 class="h2 mb-3 font-weight-normal text-center">@Model[0].CategoryName[0]</h1>
-
-<div class="container">
-    @foreach (var item in Model)
-    {
-    <div class="border thumbnail row">
-        <a asp-controller="Vegan" asp-action="Details" asp-route-id="@item.Id">
-            <div class="container-header">
-                <img src="~/Uploads/@item.UserImg" alt="category" class="rounded-circle img-fluid">
-                <h2>@item.Username</h2>
+    <div class="container">
+        @foreach (var item in Model)
+        {
+            <div class="border thumbnail row">
+                <a asp-controller="Vegan" asp-action="Details" asp-route-id="@item.Id">
+                    <div class="container-header">
+                        <img src="~/Uploads/@item.UserImg" alt="category" class="rounded-circle img-fluid">
+                        <h2>@item.Username</h2>
+                    </div>
+                    <div class="container-img">
+                        <img src="~/Uploads/@item.Img" alt="category" class="img-fluid">
+                    </div>
+                    <div class="container-details">
+                        <h2 class="h4 mb-3">
+                            @item.Title
+                        </h2>
+                        @foreach (var cat in item.CategoryName)
+                        {
+                            <p>@cat</p>
+                        }
+                    </div>
+                </a>
             </div>
-            <div class="container-img">
-                <img src="~/Uploads/@item.Img" alt="category" class="img-fluid">
-            </div>
-            <div class="container-details">
-                    <h2 class="h4 mb-3">
-                        @item.Title
-                    </h2>
-                @foreach (var cat in item.CategoryName)
-                {
-                        <p>@cat</p>
-                }
-            </div>
-        </a>
+        }
     </div>
-    }
-</div>
+}
+else
+{
+    <h1 class="h2 mb-3 font-weight-normal text-center">There is no recipes in this category</h1>
+}
