@@ -223,7 +223,7 @@ namespace Slutprojekt.Models
             context.SavedRecipe.Remove(savedRecipe);
             context.SaveChanges();
                 
-            return "Save";
+            return "<i id=\"symbol\" class=\"far fa-bookmark\"></i>";
         }
 
         public string SaveRecipe(int id)
@@ -237,7 +237,7 @@ namespace Slutprojekt.Models
             });
             context.SaveChanges();
 
-            return "Unsave";
+            return "<i id=\"symbol\" class=\"fas fa-bookmark\"></i>";
         }
 
         public string UnfollowPerson(string id)
