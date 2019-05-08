@@ -17,10 +17,14 @@
         {
         <div id="@item.RecipeId" class="border thumbnail row">
             <div class="container-header">
-                <img src="~/Uploads/@item.UserImg" alt="category" class="rounded-circle img-fluid">
-                <h2>@item.Username</h2>
+                <div>
+                    <img src="~/Uploads/@item.UserImg" alt="category" class="rounded-circle img-fluid">
+                    <h2>@item.Username</h2>
+                </div>
+                <div>
+                    <a href="javascript:deletePost('@item.RecipeId')"><i class="fas fa-trash-alt"></i></a>
+                </div>
 
-                <a href="javascript:deletePost('@item.RecipeId')"><i class="fas fa-trash-alt"></i></a>
             </div>
 
             <div class="container-img">
@@ -34,7 +38,7 @@
                     <div class="category">
                         @foreach (var cat in item.RecipeCategories)
                         {
-                            @cat
+                            <p>@cat</p>
                         }
                     </div>
                 </div>
