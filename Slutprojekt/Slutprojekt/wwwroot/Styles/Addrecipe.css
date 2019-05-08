@@ -43,7 +43,7 @@ body {
 
 .contentRec {
     position: absolute;
-    top: 50%;
+    top: 82%;
     left: 50%;
     transform: translate(-50%,-50%);
 }
@@ -51,4 +51,13 @@ body {
 #ingredientContainer {
     padding-top: 20%;
     font-size: small;
+}
+
+a {
+    color: black;
+}
+
+a:hover {
+    color: black;
+    text-decoration: none;
 }

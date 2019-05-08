@@ -15,10 +15,12 @@
 /*Här börjar deafult*/
 
 .profile-info {
-    width: 500px;
+    width: 400px;
     margin-left: 55px;
 }
 
 .fa-user-cog {
-    font-size: large;
+    font-size: x-large;
 }
+
+
