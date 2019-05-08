@@ -20,7 +20,7 @@ namespace Slutprojekt.Models.ViewModels
         [Display(Name = "Measure")]
         public SelectListItem[] MeasurementItems { get; set; }
 
-        [Range(1, 3)]
+        [Range(1, 5)]
         public int SelectedMeasurementValue { get; set; }
 
 
