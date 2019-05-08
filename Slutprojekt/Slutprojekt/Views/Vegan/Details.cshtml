@@ -19,11 +19,14 @@
             <div>
                 @if (Model.IsSaved)
                 {
-                    <input type="submit" id="btnSave" value="Unsave" />
+                    <input type="submit" id="btnSave" value="Unsave" class="btn btn-outline-warning" />
+                }
+                else if (Model.IsUsersRecipe)
+                {
                 }
                 else
                 {
-                    <input type="submit" id="btnSave" value="Save" />
+                    <input type="submit" id="btnSave" value="Save" class="btn btn-outline-warning" />
                 }
             </div>
         </div>
@@ -35,15 +38,14 @@
                 <h2 class="h5 mb-3 font-weight-normal">@Model.Username</h2>
                 @if (Model.IsFollowing)
                 {
-                    <input type="submit" id="btnFollow" value="Unfollow" />
+                    <input type="submit" id="btnFollow" value="Unfollow" class="btn btn-outline-warning" />
                 }
                 else if (Model.IsUsersRecipe)
                 {
-                    <p>This is your recipe!</p>
                 }
                 else
                 {
-                    <input type="submit" id="btnFollow" value="Follow" />
+                    <input type="submit" id="btnFollow" value="Follow" class="btn btn-outline-warning"/>
                 }
         </div>
     </div>
@@ -60,7 +62,7 @@
         <h4 class="h2 mb-3 font-weight-normal">Step by Step</h4>
         @foreach (var step in Model.Steps)
         {
-            <input type="checkbox"> <div>@step.Instruction</div>
+            <input type="checkbox" id="CbInstruct" onclick="GrayText()"> <div id="text">@step.Instruction</div>
         }
     </div>
 
@@ -92,6 +94,19 @@
                 }
             });
         });
+        </script>
+        <script>
+        function GrayText() {
+            var checkBox = document.getElementById("CbInstruct");
+            var text = document.getElementById("text");
+              if (checkBox.checked == true){
+                  text.style.color = "gray";
+                  text.style.textDecoration = "line-through";
+              } else {
+                  text.style.color = "black";
+                  text.style.textDecoration = "none";
+              }
+        } 
         </script>
     }
 </div>
