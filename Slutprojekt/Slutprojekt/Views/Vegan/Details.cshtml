@@ -19,14 +19,14 @@
             <div>
                 @if (Model.IsSaved)
                 {
-                    <input type="submit" id="btnSave" value="Unsave" class="btn btn-outline-warning" />
+                    <a id="btnSave"><i id="symbol" class="fas fa-bookmark"></i></a>
                 }
                 else if (Model.IsUsersRecipe)
                 {
                 }
                 else
                 {
-                    <input type="submit" id="btnSave" value="Save" class="btn btn-outline-warning" />
+                    <a id="btnSave"><i id="symbol" class="far fa-bookmark"></i></a>
                 }
             </div>
         </div>
@@ -70,13 +70,13 @@
 {
         <script>
         var recId = @Model.RecId;
-        $("#btnSave").click(function () {
-            var isSaved = $('#btnSave').val() == "Unsave";
+        $('#btnSave').click(function () {
+            var isSaved = $('#btnSave').html() == '<i id="symbol" class="fas fa-bookmark"></i>';
             $.ajax({
                 url: (isSaved) ? "/Unsave/" + recId : "/Save/" + recId,
                 type: "GET",
                 success: function (result) {
-                    $('#btnSave').val(result);
+                    $('#symbol').replaceWith(result);
                 }
             });
         });
