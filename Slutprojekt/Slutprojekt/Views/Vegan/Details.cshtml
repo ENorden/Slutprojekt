@@ -1,66 +1,72 @@
 ﻿@model VeganDetailsVM
 @{ ViewBag.Title = "Recipe Details";}
+@section styles
+{<link rel="stylesheet" type="text/css" href="~/styles/Details.css" />}
 
 <partial name="~/Views/Shared/_Header.cshtml" />
 
+<div class="container">
+    <div class="presentation">
+        <div class="p-header">
+            <div>
+                <h1 class="h2 mb-3 font-weight-normal">@Model.Title</h1>
 
-<div class="presentation">
-    <h3>@Model.Title</h3>
-
-    @foreach (var cat in Model.Categories)
-    {
-        <h6>@cat</h6>
-    }
-
-    @if (Model.IsSaved)
-    {
-        <input type="submit" id="btnSave" value="Unsave" />
-    }
-    else
-    {
-        <input type="submit" id="btnSave" value="Save" />
-    }
-    <br />
-    <img src="@Model.RecImg" alt="recipe-img" style="width:500px; height:auto" />
-
-    <div class="posted-by-user">
-        <img src="@Model.UserImg" alt="user-img" style="width:50px; height:auto" />
-        <h6>@Model.Username</h6>
-
-        @if (Model.IsFollowing)
+                @foreach (var cat in Model.Categories)
+                {
+                    <p>@cat</p>
+                }
+            </div>
+            <div>
+                @if (Model.IsSaved)
+                {
+                    <input type="submit" id="btnSave" value="Unsave" />
+                }
+                else
+                {
+                    <input type="submit" id="btnSave" value="Save" />
+                }
+            </div>
+        </div>
+        <div class="p-main">
+            <img src="~/Uploads/@Model.RecImg" alt="recipe-img" class="img-fluid" />
+        </div>
+        <div class="p-footer">
+                <img src="~/Uploads/@Model.UserImg" alt="user-img" />
+                <h2 class="h5 mb-3 font-weight-normal">@Model.Username</h2>
+                @if (Model.IsFollowing)
+                {
+                    <input type="submit" id="btnFollow" value="Unfollow" />
+                }
+                else if (Model.IsUsersRecipe)
+                {
+                    <p>This is your recipe!</p>
+                }
+                else
+                {
+                    <input type="submit" id="btnFollow" value="Follow" />
+                }
+        </div>
+    </div>
+    <div class="ingredients">
+        <h3 class="h2 mb-3 font-weight-normal">Ingredients</h3>
+        <ul>
+            @foreach (var ingr in Model.Ingredients)
+            {
+                <li>@ingr.Amount @ingr.Unit @ingr.Name</li>
+            }
+        </ul>
+    </div>
+    <div class="steps">
+        <h4 class="h2 mb-3 font-weight-normal">Step by Step</h4>
+        @foreach (var step in Model.Steps)
         {
-            <input type="submit" id="btnFollow" value="Unfollow" />
-        }
-        else if (Model.IsUsersRecipe)
-        {
-            <p>This is your recipe!</p>
-        }
-        else
-        {
-            <input type="submit" id="btnFollow" value="Follow" />
+            <input type="checkbox"> <div>@step.Instruction</div>
         }
     </div>
-</div>
-<div class="ingredients">
-    <h3>Ingredients</h3>
-    <ul>
-        @foreach (var ingr in Model.Ingredients)
-        {
-            <li>@ingr.Amount @ingr.Unit @ingr.Name</li>
-        }
-    </ul>
-</div>
-<div class="steps">
-    <h3>Step by Step</h3>
-    @foreach (var step in Model.Steps)
-    {
-        <input type="checkbox">@(step.SortOrder) @step.Instruction
-    }
-</div>
 
-@section scripts
+    @section scripts
 {
-    <script>
+        <script>
         var recId = @Model.RecId;
         $("#btnSave").click(function () {
             var isSaved = $('#btnSave').val() == "Unsave";
@@ -72,9 +78,9 @@
                 }
             });
         });
-    </script>
+        </script>
 
-    <script>
+        <script>
         var id = "@Model.UserId";
         $("#btnFollow").click(function () {
             var isFollowing = $('#btnFollow').val() == "Unfollow";
@@ -86,5 +92,6 @@
                 }
             });
         });
-    </script>
-}
+        </script>
+    }
+</div>
