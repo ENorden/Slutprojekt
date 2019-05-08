@@ -53,8 +53,6 @@ else
     <script>
         
         function deletePost(id) {
-            
-            console.log(id);
             $.ajax({
                 url: "/DeletePost/" + id,
                 type: "GET",
