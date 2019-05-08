@@ -135,6 +135,13 @@ namespace Slutprojekt.Controllers
             return Content(service.FollowPerson(id));
         }
 
+        [Route("DeletePost/{id:int}")]
+        public IActionResult DeletePost(int id)
+        {
+            service.DeletePost(id);
+            return Ok();
+        }
+
         [HttpGet]
         [Route("register")]
         [AllowAnonymous]
@@ -248,7 +255,6 @@ namespace Slutprojekt.Controllers
 
         [Route("AddRecipieStep1")]
         [HttpPost]
-        [AllowAnonymous]
         public IActionResult AddRecipieStep1(AddRecepieVM viewModel)
         {
             var recepieId = service.AddRecipieStep1(viewModel);
@@ -257,7 +263,6 @@ namespace Slutprojekt.Controllers
 
         [Route("AddRecipieStep2")]
         [HttpPost]
-        [AllowAnonymous]
         public IActionResult AddRecipieStep2(StepTwo stepTwo)
         {
 
@@ -267,7 +272,6 @@ namespace Slutprojekt.Controllers
 
         [Route("AddRecipieStep3")]
         [HttpPost]
-        [AllowAnonymous]
         public IActionResult AddRecipieStep3(Textbox description)
         {
 
@@ -277,7 +281,6 @@ namespace Slutprojekt.Controllers
 
         [Route("DeleteIngredient")]
         [HttpPost]
-        [AllowAnonymous]
         public IActionResult DeleteIngredient(DeleteIng delete)
         {
             service.DeleteIngredient(delete);

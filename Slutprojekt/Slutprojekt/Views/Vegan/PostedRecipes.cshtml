@@ -15,23 +15,28 @@
     <div class="container">
         @foreach (var item in Model)
         {
-        <div class="border thumbnail row">
+        <div id="@item.RecipeId" class="border thumbnail row">
+            <div class="container-header">
+                <img src="~/Uploads/@item.UserImg" alt="category" class="rounded-circle img-fluid">
+                <h2>@item.Username</h2>
+
+                <a href="javascript:deletePost('@item.RecipeId')"><i class="fas fa-trash-alt"></i></a>
+            </div>
+
+            <div class="container-img">
+                <img src="~/Uploads/@item.RecipeImg" alt="category" class="img-fluid">
+            </div>
             <a asp-controller="Vegan" asp-action="Details" asp-route-id="@item.RecipeId">
-                <div class="container-header">
-                    <img src="~/Uploads/@item.UserImg" alt="category" class="rounded-circle img-fluid">
-                    <h2>@item.Username</h2>
-                </div>
-                <div class="container-img">
-                    <img src="~/Uploads/@item.RecipeImg" alt="category" class="img-fluid">
-                </div>
                 <div class="container-details">
                     <h2 class="h4 mb-3">
                         @item.RecipeTitle
                     </h2>
-                    @foreach (var cat in item.RecipeCategories)
-                    {
-                        <p>@cat</p>
-                    }
+                    <div class="category">
+                        @foreach (var cat in item.RecipeCategories)
+                        {
+                            @cat
+                        }
+                    </div>
                 </div>
             </a>
         </div>
@@ -43,3 +48,21 @@ else
     <h1 class="h4 mb-3 font-weight-normal text-center">You have no posts yet</h1>
 }
 
+@section scripts
+{
+    <script>
+        
+        function deletePost(id) {
+            
+            console.log(id);
+            $.ajax({
+                url: "/DeletePost/" + id,
+                type: "GET",
+                success: function (result) {
+                    console.log("success");
+                }
+            });
+            $('#' + id).remove();
+        };
+    </script>
+}

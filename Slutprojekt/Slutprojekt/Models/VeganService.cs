@@ -268,6 +268,29 @@ namespace Slutprojekt.Models
             return "Unfollow";
         }
 
+        public void DeletePost(int id)
+        {
+            var ingredients = context.Ingredient.Where(i => i.RecId == id);
+            context.Ingredient.RemoveRange(ingredients);
+            context.SaveChanges();
+
+            var steps = context.StepByStep.Where(i => i.RecId == id);
+            context.StepByStep.RemoveRange(steps);
+            context.SaveChanges();
+
+            var savedRec = context.SavedRecipe.Where(i => i.RecId == id);
+            context.SavedRecipe.RemoveRange(savedRec);
+            context.SaveChanges();
+
+            var cats = context.Recipe2Category.Where(i => i.RecId == id);
+            context.Recipe2Category.RemoveRange(cats);
+            context.SaveChanges();
+
+            var recipe = context.Recipe.Find(id);
+            context.Recipe.Remove(recipe);
+            context.SaveChanges();
+        }
+
         public VeganPostVM[] DisplayPosts()
         {
             string userId = userManager.GetUserId(accessor.HttpContext.User);
