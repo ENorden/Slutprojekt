@@ -139,6 +139,7 @@ namespace Slutprojekt.Models
 
         public VeganCategoryVM[] GetRecipesByCategory(int id)
         {
+            var currCat = context.Category.Where(c => c.Id == id).Single().CategoryName;
             var recipes = context.Category
                 .Where(c => c.Id == id)
                 .SelectMany(c => c.Recipe2Category.Select(r => new VeganCategoryVM
@@ -146,6 +147,7 @@ namespace Slutprojekt.Models
                     Id = r.RecId,
                     Img = r.Rec.Img,
                     Title = r.Rec.Title,
+                    CurrentCategory = currCat,
                     UserId = r.Rec.UserId,
                     UserImg = r.Rec.User.PictureUrl,
                     Username = r.Rec.User.UserName,
@@ -488,11 +490,12 @@ namespace Slutprojekt.Models
         {
             string myStr = description.TextBox;
             string[] stringToDB = myStr.Split('*');
+            string[] clearedString = stringToDB.Skip(1).ToArray();
 
-            for (int i = 0; i < stringToDB.Length; i++)
+            for (int i = 0; i < clearedString.Length; i++)
             {
                 StepByStep stepByStep = new StepByStep();
-                stepByStep.Instruction = stringToDB[i];
+                stepByStep.Instruction = clearedString[i];
                 stepByStep.RecId = description.RecID;
                 context.StepByStep.Add(stepByStep);
                 context.SaveChanges();
