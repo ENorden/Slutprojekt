@@ -16,56 +16,87 @@
                     <div class="row">
                         <div class="col-md-9 col-lg-8 mx-auto">
                             <h3 class="login-heading mb-4">Register</h3>
-                            <form asp-controller="Home" asp-action="Register" class="form-signin">
+                            @*<form asp-controller="Home" asp-action="Register" class="form-signin">
 
-                                <div class="form-label-group">
-                                    <label asp-for="Email"></label>
-                                    <input asp-for="Email" class="form-control" />
-                                    <span asp-validation-for="Email"></span>
-                                </div>
-
-
-                                <div class="form-label-group">
-                                    <label asp-for="FirstName"></label>
-                                    <input asp-for="FirstName" class="form-control" />
-                                    <span asp-validation-for="FirstName"></span>
-                                </div>
+        <div class="form-label-group">
+            <label asp-for="Email"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email"></span>
+        </div>
 
 
-                                <div class="form-label-group">
-                                    <label asp-for="LastName"></label>
-                                    <input asp-for="LastName" class="form-control" />
-                                    <span asp-validation-for="LastName"></span>
-                                </div>
+        <div class="form-label-group">
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName"></span>
+        </div>
 
 
-                                <div class="form-label-group">
-                                    <label asp-for="Email"></label>
-                                    <input asp-for="Email" class="form-control" />
-                                    <span asp-validation-for="Email"></span>
-                                </div>
+        <div class="form-label-group">
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName"></span>
+        </div>
 
-                                <div class="form-label-group">
-                                    <label asp-for="Username"></label>
-                                    <input asp-for="Username" class="form-control" />
-                                    <span asp-validation-for="Username"></span>
-                                </div>
 
-                                <div class="form-label-group">
-                                    <label asp-for="Password"></label>
-                                    <input asp-for="Password" class="form-control" />
-                                    <span asp-validation-for="Password"></span>
-                                </div>
-                                <div class="form-label-group">
-                                    <label asp-for="PasswordRepeat"></label>
-                                    <input asp-for="PasswordRepeat" class="form-control" />
-                                    <span asp-validation-for="PasswordRepeat"></span>
-                                </div>
-                                    <button class="btn btn-lg btn-success btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Register</button>
+        <div class="form-label-group">
+            <label asp-for="Username"></label>
+            <input asp-for="Username" class="form-control" />
+            <span asp-validation-for="Username"></span>
+        </div>
 
-                                    <h1 class="h6 mb-3 font-weight-normal">Do you have an account? <a asp-controller="Vegan" asp-action="Login">Log in </a></h1>
+        <div class="form-label-group">
+            <label asp-for="Password"></label>
+            <input asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password"></span>
+        </div>
+        <div class="form-label-group">
+            <label asp-for="PasswordRepeat"></label>
+            <input asp-for="PasswordRepeat" class="form-control" />
+            <span asp-validation-for="PasswordRepeat"></span>
+        </div>
+            <button class="btn btn-lg btn-success btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Register</button>
 
-</form>
+            <h1 class="h6 mb-3 font-weight-normal">Do you have an account? <a asp-controller="Vegan" asp-action="Login">Log in </a></h1>*@
+
+                            @*</form>*@
+
+                        <form asp-controller="Home" asp-action="Register" class="form-signin">
+                            <div class="form-label-group">
+                                <input asp-for="Email" class="form-control" placeholder="E-mail" autofocus>
+                                <label asp-for="Email" for="Email"></label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input asp-for="FirstName" class="form-control" placeholder="First Name" >
+                                <label asp-for="FirstName" for="FirstName"></label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input asp-for="LastName" class="form-control" placeholder="Last Name" >
+                                <label asp-for="LastName" for="LastName"></label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input asp-for="Username" class="form-control" placeholder="User Name" >
+                                <label asp-for="Username" for="Username"></label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input asp-for="Password" type="password" class="form-control" placeholder="Password" >
+                                <label asp-for="Password" for="Password"></label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input asp-for="PasswordRepeat" type="password" class="form-control" placeholder="Password Repeat">
+                                <label asp-for="PasswordRepeat" for="PasswordRepeat"></label>
+                            </div>
+
+                            <button class="btn btn-lg btn-success btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Register</button>
+                            <label>Do you have an account? <a asp-controller="Vegan" asp-action="Login">Log in </a></label>
+
+                        </form>
+
                         </div>
                     </div>
                 </div>
