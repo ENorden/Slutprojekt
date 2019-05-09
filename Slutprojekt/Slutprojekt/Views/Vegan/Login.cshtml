@@ -39,24 +39,38 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-9 col-lg-8 mx-auto">
-                            <h3 class="login-heading mb-4">Welcome back!</h3>
-                            <form asp-controller="Vegan" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
-                                <div class="form-label-group">
-                                    <label asp-for="Username"></label>
-                                    <input asp-for="Username" class="form-control" required autofocus />
-                                    <span asp-validation-for="Username"></span>
-                                </div>
+                            <h3 class="login-heading mb-4">Welcome!</h3>
+                            @*<form asp-controller="Vegan" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
+            <div class="form-label-group">
+                <label asp-for="Username"></label>
+                <input asp-for="Username" class="form-control" required autofocus />
+                <span asp-validation-for="Username"></span>
+            </div>
 
-                                <div class="form-label-group">
-                                    <label asp-for="Password"></label>
-                                    <input asp-for="Password" class="form-control" />
-                                    <span asp-validation-for="Password"></span>
-                                </div>
+            <div class="form-label-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password"></span>
+            </div>
 
-                                <button class="btn btn-lg btn-success btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
-                                <h2 class="h6 mb-3 font-weight-normal" style="justify-content: center;">Not a member? <a asp-controller="Vegan" asp-action="Register">Register here</a></h2>
+            <button class="btn btn-lg btn-success btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
+            <h2 class="h6 mb-3 font-weight-normal" style="justify-content: center;">Not a member? <a asp-controller="Vegan" asp-action="Register">Register here</a></h2>
 
-                            </form>
+        </form>*@
+                        <form asp-controller="Vegan" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl" class="form-signin">
+                            <div class="form-label-group">
+                                <input asp-for="Username" class="form-control" placeholder="User Name" required autofocus>
+                                <label asp-for="Username" for="Username"></label>
+                            </div>
+
+                            <div class="form-label-group">
+                                <input asp-for="Password" type="password" class="form-control" placeholder="Password">
+                                <label asp-for="Password" for="Password"></label>
+                            </div>
+
+                            <button class="btn btn-lg btn-success btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
+                            <label>Not a member? <a asp-controller="Vegan" asp-action="Register">Register here</a></label>
+                        </form>
                         </div>
                     </div>
                 </div>
@@ -65,7 +79,7 @@
     </div>
 </div>
 
-@section scripts  {
+@*@section scripts  {
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/mvc/5.2.3/jquery.validate.unobtrusive.min.js"></script>
-}
+}*@
