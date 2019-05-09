@@ -483,11 +483,19 @@ namespace Slutprojekt.Models
 
         public void AddRecipieStep3(Textbox description)
         {
-            StepByStep stepByStep = new StepByStep();
-            stepByStep.Instruction = description.TextBox;
-            stepByStep.RecId = description.RecID;
-            context.StepByStep.Add(stepByStep);
-            context.SaveChanges();
+            string myStr = description.TextBox;
+            string[] stringToDB = myStr.Split('*');
+
+            for (int i = 0; i < stringToDB.Length; i++)
+            {
+                StepByStep stepByStep = new StepByStep();
+                stepByStep.Instruction = stringToDB[i];
+                stepByStep.RecId = description.RecID;
+                context.StepByStep.Add(stepByStep);
+                context.SaveChanges();
+            }
+
+           
         }
     }
 }
