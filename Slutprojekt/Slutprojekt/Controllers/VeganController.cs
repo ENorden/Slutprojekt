@@ -28,7 +28,6 @@ namespace Slutprojekt.Controllers
 
         [HttpGet]
         [Route("profile/add")]
-        [Route("")]
         public IActionResult AddRecipe()//VeganProfileVM profile
         {
             return View(service.GetAddedRecipe());//service.DisplayProfile(profile)
@@ -214,6 +213,7 @@ namespace Slutprojekt.Controllers
 
 
         [Route("recipes")]
+        [Route("")]
         public IActionResult Recipes()
         {
             return View(service.GetAllCategories());

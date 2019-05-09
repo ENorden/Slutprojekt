@@ -10,11 +10,12 @@
         <div class="p-header">
             <div>
                 <h1 class="h2 mb-3 font-weight-normal">@Model.Title</h1>
-
-                @foreach (var cat in Model.Categories)
-                {
-                    <p>@cat</p>
-                }
+                <div class="category">
+                    @foreach (var cat in Model.Categories)
+                    {
+                        <p>@cat</p>
+                    }
+                </div>
             </div>
             <div>
                 @if (Model.IsSaved)
@@ -59,10 +60,10 @@
         </ul>
     </div>
     <div class="steps">
-        <h4 class="h2 mb-3 font-weight-normal">Step by Step</h4>
+        <h4 class="h2 mb-3 font-weight-normal">Step by step</h4>
         @foreach (var step in Model.Steps)
         {
-            <input type="checkbox" id="CbInstruct" onclick="GrayText()"> <div id="text">@step.Instruction</div>
+            <div id="@step.StepId"><input type="checkbox" class="check" onclick="GrayText('@step.StepId')"> <div id="text">@step.Instruction</div></div>
         }
     </div>
 
@@ -96,13 +97,15 @@
         });
         </script>
         <script>
-        function GrayText() {
-            var checkBox = document.getElementById("CbInstruct");
-            var text = document.getElementById("text");
+    function GrayText(id) {
+        var checkBox = document.getElementById(id).firstChild;
+        var text = document.getElementById(id);
+
               if (checkBox.checked == true){
                   text.style.color = "gray";
                   text.style.textDecoration = "line-through";
-              } else {
+              }
+              else {
                   text.style.color = "black";
                   text.style.textDecoration = "none";
               }
