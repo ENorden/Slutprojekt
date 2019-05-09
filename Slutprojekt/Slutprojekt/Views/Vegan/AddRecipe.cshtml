@@ -13,17 +13,17 @@
     <div class="add-recipe-loop">
 
         <div id="RecipeLoop-item-1" class="RecipeLoop-item">
-            <h3>Step 1 </h3> </br>
+            <h3 id="h3">Step 1 </h3> </br>
 
             <label asp-for="Name" for="input"></label>
             </br>
-            <input id="input" class="form-control" type="text" />
+            <input id="input" class="form-control form-rounded" type="text" />
             </br>
 
             @foreach (var item in Model.Categories)
             {
                 <div class="form-check form-check-inline">
-                    <input type="checkbox" name="ingredient" value="@item.Value" checked>@item.Text<br />
+                    <input type="checkbox" name="ingredient" value="@item.Value">@item.Text<br />
                 </div>
             }
 
@@ -34,23 +34,27 @@
 
                 <input id="profilePic" name="picture" type="file" size="1" />
             </form>
+            
+            
             <button id="btnPosition" onclick="uploadFile();" data-item-to-show="2" class="btn btn-outline-success">Next</button>
         </div>
 
 
         <div id="RecipeLoop-item-2" class="RecipeLoop-item hide">
+            <h3 id="h3">Step 2</h3> </br>
+
             <div class="d-flex flex-row">
+
                 <div class="ContainerforMuch">
-                    <h3>Step 2</h3> </br>
 
                     <label>Ingredient</label>
                     </br>
-                    <input id="IngrInput" />
+                    <input class="form-control form-rounded" id="IngrInput" />
 
                     </br>
                     <label>Amount</label>
                     </br>
-                    <input id="AmountInput" type="number" />
+                    <input class="form-control form-rounded" id="AmountInput" type="number" />
 
                     @*<label asp-for="MeasurementItems"></label>*@
                     <select asp-for="SelectedMeasurementValue"
@@ -64,7 +68,7 @@
                 </div>
                 <div id="ingredientContainer">
                     <ul id="ingredientsList">
-                        <li>Tillagda ingredienser: </li>
+                        <li>Added Ingredients: </li>
                     </ul>
 
                 </div>
@@ -78,11 +82,11 @@
         </div>
 
         <div id="RecipeLoop-item-3" class="RecipeLoop-item hide">
-            <h3>Step 3</h3>
+            <h3 id="h3">Step 3</h3>
             <div class="form-group shadow-textarea">
                 <label>Recipe description</label>
                 </br>
-                <textarea id="RecipeDescr" class="form-control z-depth-1" rows="13" placeholder="Write something here..."></textarea>
+                <textarea id="RecipeDescr" class="form-control z-depth-1" rows="13" placeholder="Please write your steps like this: *Step 1 * Step 2"></textarea>
                 </br>
             </div>
 
