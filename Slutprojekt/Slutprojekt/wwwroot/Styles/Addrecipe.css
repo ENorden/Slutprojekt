@@ -61,8 +61,10 @@ body {
 }
 
 #ingredientContainer {
-    padding-top: 20%;
+    padding-top: 2%;
     font-size: small;
+    width: 480px;
+    flex-wrap: wrap;
 }
 
 a {
@@ -123,4 +125,37 @@ input[type="file"] {
 
 #containerName{
     text-align: center;
+    display: flex;
+    align-items: flex-end;
+}
+
+#hideThis {
+    display: none;
+}
+
+#miniDivs {
+    padding-right: 10px;
+    padding-bottom: 0px;
+    bottom: 0%;
+}
+
+#addBtn {
+    width: 280px;
+}
+
+#paragraph1 {
+    font-size: 15px;
+}
+
+#valueofDD {
+    height: 38px;
+}
+
+#ingredientsList {
+    font-size: 15px;
+    font-weight: normal;
+}
+
+li {
+    padding-right: 16px;
 }

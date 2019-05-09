@@ -69,25 +69,27 @@
                     <input class="form-control form-rounded" id="IngrInput" />
                     </br>
                     <div id="containerName" class="d-flex flex-row justify-content-center">
-                        @*<label>Amount</label>*@
-                        </br>
-                        <input class="form-control form-rounded" id="AmountInput" type="number" />
-
-                        @*<label asp-for="MeasurementItems"></label>*@
-                        <select asp-for="SelectedMeasurementValue"
-                                asp-items="Model.MeasurementItems" id="valueofDD"></select>
-                        <span asp-validation-for="SelectedMeasurementValue"></span>
-                        </br>
-                        <div class="paddingForBtn">
-                            <button type="button" onclick="AddIngredients();" data-item-to-show="2" class="btn btn-success"> Add ingredient</button>
+                        <div id="miniDivs">
+                            @*<label>Amount</label>*@
+                            
+                            <input class="form-control form-rounded" id="AmountInput" type="number" />
+                        </div>
+                        <div id="miniDivs">
+                            @*<label asp-for="MeasurementItems"></label>*@
+                            <select asp-for="SelectedMeasurementValue"
+                                    asp-items="Model.MeasurementItems" id="valueofDD"></select>
+                            <span asp-validation-for="SelectedMeasurementValue"></span>
+                        </div>
+                        <div id="miniDivs" class="paddingForBtn">
+                            <button type="button" onclick="AddIngredients();" data-item-to-show="2" class="btn btn-success" id="addBtn"> Add ingredient</button>
                         </div>
 
                     </div>
-
                 </div>
                 <div id="ingredientContainer">
-                    <ul id="ingredientsList">
-                        <li>Added Ingredients: </li>
+                    <p id="paragraph1">Added ingredients: </p>
+                    <ul id="ingredientsList" class="d-flex flex-wrap">
+                        <li id="hideThis">Added Ingredients: </li>
                     </ul>
 
                 </div>
