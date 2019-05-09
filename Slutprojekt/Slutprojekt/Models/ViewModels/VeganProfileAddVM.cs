@@ -17,6 +17,7 @@ namespace Slutprojekt.Models.ViewModels
         [Required]
         public SelectListItem[] Categories { get; set; }
 
+        [Display(Name="Choose File:")]
         [Required]
         public IFormFile Img { get; set; }
 
