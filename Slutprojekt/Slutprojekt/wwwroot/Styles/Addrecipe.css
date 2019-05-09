@@ -30,9 +30,17 @@ body {
     /*right: 4%;*/
 }
 
+#btnPositionSec {
+    position: absolute;
+    bottom: 4%;
+    width: 150px;
+    right: 4%;
+}
+
 #btnLeft {
     position: absolute;
     bottom: 4%;
+    width: 150px;
     left: 4%;
 }
 
@@ -104,3 +112,15 @@ input[type="file"] {
     font-weight: bold;
 }
 
+#RecipeLoop-item-2 {
+    text-align: center;
+    font-weight: bold;
+}
+
+#AmountInput {
+    width: 100px;
+}
+
+#containerName{
+    text-align: center;
+}

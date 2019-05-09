@@ -67,19 +67,21 @@
 
                     <label>Ingredient</label>
                     <input class="form-control form-rounded" id="IngrInput" />
+                    </br>
+                    <div id="containerName" class="d-flex flex-row justify-content-center">
+                        @*<label>Amount</label>*@
+                        </br>
+                        <input class="form-control form-rounded" id="AmountInput" type="number" />
 
-                    </br>
-                    <label>Amount</label>
-                    </br>
-                    <input class="form-control form-rounded" id="AmountInput" type="number" />
+                        @*<label asp-for="MeasurementItems"></label>*@
+                        <select asp-for="SelectedMeasurementValue"
+                                asp-items="Model.MeasurementItems" id="valueofDD"></select>
+                        <span asp-validation-for="SelectedMeasurementValue"></span>
+                        </br>
+                        <div class="paddingForBtn">
+                            <button type="button" onclick="AddIngredients();" data-item-to-show="2" class="btn btn-success"> Add ingredient</button>
+                        </div>
 
-                    @*<label asp-for="MeasurementItems"></label>*@
-                    <select asp-for="SelectedMeasurementValue"
-                            asp-items="Model.MeasurementItems" id="valueofDD"></select>
-                    <span asp-validation-for="SelectedMeasurementValue"></span>
-                    </br>
-                    <div class="paddingForBtn">
-                        <button type="button" onclick="AddIngredients();" data-item-to-show="2" class="btn btn-success"> Add ingredient</button>
                     </div>
 
                 </div>
@@ -92,7 +94,7 @@
             </div>
 
             <button type="button" data-item-to-show="1" class="btn btn-outline-secondary" id="btnLeft">Back</button>
-            <button type="button" data-item-to-show="3" class="btn btn-outline-success" id="btnPosition">Next</button>
+            <button type="button" data-item-to-show="3" class="btn btn-outline-success" id="btnPositionSec">Next</button>
 
 
 
