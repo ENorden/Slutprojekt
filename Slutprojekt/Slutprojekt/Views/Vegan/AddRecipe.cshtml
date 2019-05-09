@@ -24,8 +24,8 @@
             </br>
 
             <form method="post" enctype="multipart/form-data">
-                <label class="custom-file-upload" asp-for="Img"></label>
-                <input class="btn btn-default" asp-for="Img" />
+                <label class="custom-file-upload" asp-for="Img" for="profilePic"></label>
+                <input id="profilePic" class="btn btn-default" asp-for="Img" />
                 <span asp-validation-for="Img"></span>
 
             </form>
