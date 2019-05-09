@@ -488,11 +488,12 @@ namespace Slutprojekt.Models
         {
             string myStr = description.TextBox;
             string[] stringToDB = myStr.Split('*');
+            string[] clearedString = stringToDB.Skip(1).ToArray();
 
-            for (int i = 0; i < stringToDB.Length; i++)
+            for (int i = 0; i < clearedString.Length; i++)
             {
                 StepByStep stepByStep = new StepByStep();
-                stepByStep.Instruction = stringToDB[i];
+                stepByStep.Instruction = clearedString[i];
                 stepByStep.RecId = description.RecID;
                 context.StepByStep.Add(stepByStep);
                 context.SaveChanges();
