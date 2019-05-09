@@ -87,18 +87,18 @@
             </div>
 
             <button type="button" data-item-to-show="2" class="btn btn-outline-secondary" id="btnLeft">Back</button>
-            <button type="button" data-item-to-show="3" onclick="AddDescription();" class="btn btn-outline-success" id="btnPosition">Publish</button>
+            <button type="button" data-item-to-show="4" onclick="AddDescription();" class="btn btn-outline-success" id="btnPosition">Publish</button>
 
 
         </div>
 
-        @*<div id="RecipeLoop-item-4" class="RecipeLoop-item hide">
-                Preview
+        <div id="RecipeLoop-item-4" class="RecipeLoop-item hide">
+            <h2>Your Recipe is now saved!</h2>
                 <button type="button" data-item-to-show="3" class="btn btn-outline-secondary" id="btnLeft">Back</button>
-                <input type="submit" value="Publish" />
+                @*<input type="submit" value="Publish" />*@
 
 
-            </div>*@
+            </div>
 
 
     </div>
@@ -144,19 +144,6 @@
                     recepieId = result;
                 }
             });
-
-            //$.ajax({
-            //    url: '/CreateRecipe',
-            //    type: 'POST',
-            //    contentType: "application/json",
-            //    data: JSON.stringify({ categoryIDs: categoryIDs }),
-            //    success: function (result) {
-
-
-
-            //    }
-
-            //});
 
         };
 
@@ -204,48 +191,9 @@
                 processData: false,
                 contentType: false,
                 success: function (result) {
-                    alert("Recipe is now saved");
                 }
             });
         }
-
-
-
-        //function uploadFile(inputId) {
-        //    var categoryIDs = [];
-
-        //    $.each($("input[name='ingredient']:checked"), function () {
-        //        categoryIDs.push($(this).val());
-        //    });
-        //    $.ajax({
-        //        url: '/Posting',
-        //        type: 'POST',
-        //        contentType: "application/json",
-        //        data: JSON.stringify({categoryIDs: categoryIDs }),
-        //        success: function (result) {
-        //        }
-        //    });
-        //};
-
-
-
-
-
-        //var fileUpload = $("#" + inputId).get(0);
-        //var files = fileUpload.files;
-        //var formData = new FormData();
-        //formData.append('file', files[0]);
-
-        //$.ajax({
-        //    url: '/Image/File',
-        //    type: 'POST',
-        //    data: formData,
-        //    processData: false,
-        //    contentType: false,
-        //    success: function (result) {
-        //    }
-        //});
-
         function deleteIngredient(IngID) {
             var formData = new FormData();
             formData.append('CurrentIngID', IngID);
