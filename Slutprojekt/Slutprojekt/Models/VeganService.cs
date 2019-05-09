@@ -151,7 +151,8 @@ namespace Slutprojekt.Models
                     Username = r.Rec.User.UserName,
                     CategoryName = r.Rec.Recipe2Category.Select(rc => rc.Cat.CategoryName)
                         .ToArray()
-                }))
+                })
+                .OrderByDescending(r => r.Id))
                 .ToArray();
 
             return recipes;
