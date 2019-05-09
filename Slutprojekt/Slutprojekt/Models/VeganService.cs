@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using Slutprojekt.Controllers;
 using Slutprojekt.Models.Entities;
 using Slutprojekt.Models.ViewModels;
@@ -415,6 +416,7 @@ namespace Slutprojekt.Models
         public async Task<int> AddRecipieStep1(AddRecepieVM viewModel)
         {
             Recipe recipe;
+            Recipe2Category cat;
 
             if (viewModel.RecepieId == 0)
             {
@@ -429,7 +431,10 @@ namespace Slutprojekt.Models
             }
             else
             {
-                recipe = context.Recipe.Find(viewModel.RecepieId);
+                recipe = context.Recipe.Include(o => o.Recipe2Category).Single(o => o.Id == viewModel.RecepieId);
+                cat = context.Recipe2Category.Find(viewModel.RecepieId);
+            //    currentCategories = context.Recipe2Category
+            //        .Where(r => r.RecId == viewModel.RecepieId).Select(r => r.Cat.Id.ToString()).ToArray();
             }
 
             var fileName = Path.GetFileName(viewModel.File.FileName);
@@ -447,10 +452,9 @@ namespace Slutprojekt.Models
             var array = viewModel.CategoryIDs.Split(',');
             for (int i = 0; i < array.Length; i++)
             {
-                context.Recipe2Category.Add(new Recipe2Category
+                recipe.Recipe2Category.Add(new Recipe2Category
                 {
-                    CatId = int.Parse(array[i]),
-                    RecId = viewModel.RecepieId
+                    CatId = int.Parse(array[i])
 
                 });
             }
