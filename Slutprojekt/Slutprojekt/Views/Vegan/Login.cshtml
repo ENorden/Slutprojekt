@@ -3,31 +3,7 @@
 @section styles
 {<link rel="stylesheet" type="text/css" href="~/styles/signin.css" />}
 
-@*<div class="container" >
-    <div >
-        <img style="width: auto; height: 500px;" src="~/Uploads/loginHB.png" alt="Herbivore" />
-    </div>
-    <div class="border"  id="box">
-        <form asp-controller="Vegan" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl" class="form-signin">
-            <h1 class="h3 mb-3 font-weight-normal">Herbivore Society</h1>
 
-            <div class="form-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" id="inputField" class="form-control" autofocus />
-                <span asp-validation-for="Username"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" id="inputField" class="form-control" />
-                <span asp-validation-for="Password"></span>
-            </div>
-            <br />
-            <button type="submit" class="btn btn-success">Sign in</button>
-            <br /><br />
-            <h2 class="h6 mb-3 font-weight-normal">Not a member? <a asp-controller="Vegan" asp-action="Register">Register here</a></h2>
-        </form>
-    </div>
-</div>*@
 
 <div class="container-fluid">
     <div class="row no-gutter">
@@ -36,27 +12,11 @@
         </div>
         <div class="col-md-8 col-lg-6">
             <div class="login d-flex align-items-center py-5">
-                <div class="container">
-                    <div class="row">
+                <div class="container" id="con-login">
+                    <div class="row" id="row-login">
                         <div class="col-md-9 col-lg-8 mx-auto">
                             <h3 class="login-heading mb-4">Welcome!</h3>
-                            @*<form asp-controller="Vegan" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl">
-            <div class="form-label-group">
-                <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" required autofocus />
-                <span asp-validation-for="Username"></span>
-            </div>
-
-            <div class="form-label-group">
-                <label asp-for="Password"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password"></span>
-            </div>
-
-            <button class="btn btn-lg btn-success btn-block btn-login text-uppercase font-weight-bold mb-2" type="submit">Sign in</button>
-            <h2 class="h6 mb-3 font-weight-normal" style="justify-content: center;">Not a member? <a asp-controller="Vegan" asp-action="Register">Register here</a></h2>
-
-        </form>*@
+              
                         <form asp-controller="Vegan" asp-action="Login" asp-route-returnUrl="@Model.ReturnUrl" class="form-signin">
                             <div class="form-label-group">
                                 <input asp-for="Username" class="form-control" placeholder="User Name" required autofocus>
