@@ -42,3 +42,30 @@
     padding-bottom: 20px;
     padding-top: 10px;
 }
+
+.category {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.category p {
+        padding-right: 10px;
+    }
+
+ul {
+    padding-left: 20px;
+}
+
+.steps div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.steps #text {
+    padding: 10px;
+}
+
+.check {
+    margin-top: 18px;
+}

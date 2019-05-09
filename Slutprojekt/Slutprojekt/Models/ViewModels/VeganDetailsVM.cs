@@ -32,6 +32,6 @@ namespace Slutprojekt.Models.ViewModels
     public class StepByStepVM
     {
         public string Instruction { get; set; }
-        public int SortOrder { get; set; }
+        public int StepId { get; set; }
     }
 }

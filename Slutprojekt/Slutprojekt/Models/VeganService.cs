@@ -203,8 +203,8 @@ namespace Slutprojekt.Models
                     Steps = r.StepByStep.Select(s => new StepByStepVM
                     {
                         Instruction = s.Instruction,
-                        SortOrder = s.SortOrder
-                    }).OrderBy(s => s.SortOrder).ToArray(),
+                        StepId = s.Id
+                    }).OrderBy(s => s.StepId).ToArray(),
                     IsFollowing = isFollowing,
                     IsUsersRecipe = isUsersRecipe
                 })
