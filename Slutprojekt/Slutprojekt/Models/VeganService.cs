@@ -151,7 +151,8 @@ namespace Slutprojekt.Models
                     Username = r.Rec.User.UserName,
                     CategoryName = r.Rec.Recipe2Category.Select(rc => rc.Cat.CategoryName)
                         .ToArray()
-                }))
+                })
+                .OrderByDescending(r => r.Id))
                 .ToArray();
 
             return recipes;
@@ -307,6 +308,7 @@ namespace Slutprojekt.Models
                     RecipeCategories = r.Recipe2Category.Select(c => c.Cat.CategoryName)
                             .ToArray()
                 })
+                .OrderByDescending(r => r.RecipeId)
                 .ToArray();
 
             return posts;
@@ -328,6 +330,7 @@ namespace Slutprojekt.Models
                     RecipeCategories = r.Rec.Recipe2Category.Select(c => c.Cat.CategoryName)
                                 .ToArray()
                 })
+                .OrderByDescending(r => r.RecipeId)
                 .ToArray();
 
             return posts;

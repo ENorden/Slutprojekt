@@ -15,23 +15,27 @@
         @foreach (var post in Model)
         {
         <div class="border thumbnail row">
-            <a asp-controller="Vegan" asp-action="Details" asp-route-id="@post.RecipeId">
 
-                <div class="container-header">
+            <div class="container-header">
+                <div>
                     <img src="~/Uploads/@post.CreatorProfileImg" alt="category" class="rounded-circle img-fluid">
                     <h2>@post.CreatorUsername</h2>
                 </div>
-                <div class="container-img">
-                    <img src="~/Uploads/@post.RecipeImg" alt="category" class="img-fluid">
-                </div>
+            </div>
+            <div class="container-img">
+                <img src="~/Uploads/@post.RecipeImg" alt="category" class="img-fluid">
+            </div>
+            <a asp-controller="Vegan" asp-action="Details" asp-route-id="@post.RecipeId">
                 <div class="container-details">
                     <h2 class="h4 mb-3">
                         @post.RecipeTitle
                     </h2>
-                    @foreach (var cat in post.RecipeCategories)
-                    {
-                        <p>@cat</p>
-                    }
+                    <div class="category">
+                        @foreach (var cat in post.RecipeCategories)
+                        {
+                            <p>@cat</p>
+                        }
+                        </div>
                 </div>
             </a>
         </div>
